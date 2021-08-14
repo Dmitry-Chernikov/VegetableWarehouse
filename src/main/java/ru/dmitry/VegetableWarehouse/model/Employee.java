@@ -9,12 +9,12 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "EMPLOYEE")
-@Builder
+//@Builder
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Employee extends BaseEntity {
-    private static final long serialVersionUID = -5906746073194722902L;
+    private static final long serialVersionUID = 8281530488380256469L;
 
     /**
      * ФИО сотрудника

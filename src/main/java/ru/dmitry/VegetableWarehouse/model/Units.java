@@ -8,7 +8,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "UNITS")
-@Builder
+//@Builder
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

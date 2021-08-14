@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "CLIENTS")
-@Builder
+//@Builder
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

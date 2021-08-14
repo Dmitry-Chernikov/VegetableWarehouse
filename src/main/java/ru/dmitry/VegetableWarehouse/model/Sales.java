@@ -10,7 +10,7 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "SALES")
-@Builder
+//@Builder
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

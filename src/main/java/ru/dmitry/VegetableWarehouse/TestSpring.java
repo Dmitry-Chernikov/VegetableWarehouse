@@ -1,4 +1,4 @@
-package ru.dmitry.VegetableWarehouse;
+/*package ru.dmitry.VegetableWarehouse;
 
 public class TestSpring {
     private String name;
@@ -14,4 +14,4 @@ public class TestSpring {
     public void setName(String name) {
         this.name = name;
     }
-}
+}*/

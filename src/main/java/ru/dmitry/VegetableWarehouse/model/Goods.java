@@ -9,7 +9,7 @@ package ru.dmitry.VegetableWarehouse.model;
  */
 @Entity
 @Table(name = "GOODS")
-@Builder
+//@Builder
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

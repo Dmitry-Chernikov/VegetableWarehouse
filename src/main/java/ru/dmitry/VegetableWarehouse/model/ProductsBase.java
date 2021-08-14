@@ -8,7 +8,7 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "BASE")
-@Builder
+//@Builder
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
