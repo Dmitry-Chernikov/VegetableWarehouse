@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Vegetable Warehouse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<h3>List of Vegetable</h3>
+<table class="centered">
+    <thead>
+        <tr>
+            <th>barcode</th>
+            <th>warehouseName</th>
+            <th>goodsName</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="ProductsBase:${Vegetable Warehouse}">
+            <td th:text="${ProductsBase.barcode}"/>
+            <td th:text="${ProductsBase.warehouseName}"/>
+            <td th:text="${ProductsBase.goodsName}"/>
+        </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/}" th:object="${newVegetable}" method="post">
+    <p>barcode:<input type="text" th:field="*{barcode}"></p>
+    <p>warehouseName:<input type="text" th:field="*{warehouseName}"></p>
+    <p>goodsName:<input type="text" th:field="*{goodsName}"></p>
+    <p><input type="submit" value="Create new Vegetable"/> <input type="reset" value="Reset"/> </p>
+</form>
+
+</body>
+</html>
