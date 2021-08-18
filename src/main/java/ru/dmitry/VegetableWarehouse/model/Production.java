@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PRODUCTION")
+//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
