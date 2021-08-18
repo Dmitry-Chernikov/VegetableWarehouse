@@ -8,7 +8,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "SYPPLIERS")
 //@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Suppliers extends BaseEntity{
