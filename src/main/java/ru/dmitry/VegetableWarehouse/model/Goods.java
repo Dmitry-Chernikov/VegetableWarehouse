@@ -21,7 +21,7 @@ public class Goods extends BaseEntity{
      * Наименование продукта
      */
     @ManyToOne
-    @JoinColumn(name = "Production")
+    @JoinColumn(name = "Production_FK")
     private Production productionName;
 
     /**
@@ -41,7 +41,7 @@ public class Goods extends BaseEntity{
      * Ед.изм
      */
     @ManyToOne
-    @JoinColumn(name = "Unit")
+    @JoinColumn(name = "Unit_FK")
     private String unitName;
 
     /**
