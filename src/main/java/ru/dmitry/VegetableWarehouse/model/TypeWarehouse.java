@@ -8,6 +8,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "WAREHOUSE")
+//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
