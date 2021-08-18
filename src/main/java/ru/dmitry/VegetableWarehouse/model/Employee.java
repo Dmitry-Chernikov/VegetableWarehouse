@@ -10,7 +10,8 @@ import java.util.Date;
 @Entity
 @Table(name = "EMPLOYEE")
 //@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Employee extends BaseEntity {
