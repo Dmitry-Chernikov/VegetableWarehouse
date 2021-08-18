@@ -9,7 +9,6 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "EMPLOYEE")
-//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
