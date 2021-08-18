@@ -26,7 +26,7 @@ public class ProductsBase extends BaseEntity{
      * Имя типа склада где храниться товар
      */
     @ManyToOne
-    @JoinColumn(name = "Warehouse")
+    @JoinColumn(name = "Warehouse_FK")
     private TypeWarehouse warehouseName;
 
     /**
