@@ -31,11 +31,11 @@ public class Goods extends BaseEntity{
     private String varietyName;
 
     /**
-     * Срок годности
+     * Годен до
      */
-    @Column(name = "Shelf_life")
+    @Column(name = "Fit_To")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lifeShelf;
+    private Date fitTo;
 
     /**
      * Ед.изм
