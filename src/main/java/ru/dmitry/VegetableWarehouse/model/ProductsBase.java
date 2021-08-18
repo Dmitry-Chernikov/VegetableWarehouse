@@ -9,7 +9,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "BASE")
 //@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class ProductsBase extends BaseEntity{
