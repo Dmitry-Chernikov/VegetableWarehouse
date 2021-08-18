@@ -11,6 +11,7 @@ import java.util.Date;
 @Table(name = "EMPLOYEE")
 @Getter
 @Setter
+//@Builder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Employee extends BaseEntity {
