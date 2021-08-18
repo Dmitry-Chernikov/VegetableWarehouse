@@ -10,7 +10,8 @@ package ru.dmitry.VegetableWarehouse.model;
 @Entity
 @Table(name = "GOODS")
 //@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Goods extends BaseEntity{
