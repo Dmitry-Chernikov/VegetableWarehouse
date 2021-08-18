@@ -28,9 +28,6 @@ public class Purchase extends BaseEntity{
      * Имя товара
      */
     @ManyToOne
-    //@OneToMany
-    //@OneToOne
-    //@ManyToMany
     @JoinColumn(name = "Name_Goods_FK")
     private ProductsBase nameGoods;
 
@@ -50,9 +47,6 @@ public class Purchase extends BaseEntity{
      * ФИО прнинявшего товар
      */
     @ManyToOne
-    //@OneToMany
-    //@OneToOne
-    //@ManyToMany
     @JoinColumn(name = "Full_Name_Suppliers_FK")
     private Suppliers suppliersFullName;
 
@@ -60,9 +54,6 @@ public class Purchase extends BaseEntity{
      * ФИО сдавшего товар
      */
     @ManyToOne
-    //@OneToMany
-    //@OneToOne
-    //@ManyToMany
     @JoinColumn(name = "Full_Name_Employee_FK")
     private Employee employeeFullName;
 
