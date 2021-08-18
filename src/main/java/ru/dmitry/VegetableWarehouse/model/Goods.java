@@ -20,8 +20,8 @@ public class Goods extends BaseEntity{
     /**
      * Наименование продукта
      */
-    @Column(name = "Production")
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "Production")
     private Production productionName;
 
     /**
