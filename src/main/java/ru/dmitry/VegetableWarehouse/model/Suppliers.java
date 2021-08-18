@@ -7,6 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "SYPPLIERS")
+//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
