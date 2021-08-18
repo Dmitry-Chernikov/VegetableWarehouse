@@ -11,7 +11,8 @@ import java.util.UUID;
 @Entity
 @Table(name = "SALES")
 //@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Sales extends BaseEntity{
