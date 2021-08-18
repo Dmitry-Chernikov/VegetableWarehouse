@@ -9,7 +9,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "UNITS")
 //@Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Units extends BaseEntity  {
