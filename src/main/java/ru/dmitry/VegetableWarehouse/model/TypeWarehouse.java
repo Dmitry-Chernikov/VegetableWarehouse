@@ -1,16 +1,37 @@
 package ru.dmitry.VegetableWarehouse.model;
 
-public enum TypeWarehouse {
+import lombok.*;
+import javax.persistence.*;
+
+/**
+ * Список типов складов
+ */
+@Entity
+@Table(name = "WAREHOUSE")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class TypeWarehouse extends BaseEntity{   
+            private static final long serialVersionUID = 1353555820728941054L;
+    /**
+     * Наименование склада
+     */
+    @Column(name = "Name_Warehouse")
+    private String nameWarehouse;
+    
     /**
      * Хранилище силосного типа
+     * Silage,
      */
-    Silage,
+    
     /**
      * Хранилище ангарнойго типа
+     * Hangar,
      */
-    Hangar,
+    
     /**
      * Хранилище подвального типа
-     */
-    Cellar
+     *Cellar
+     */    
 }
