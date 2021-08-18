@@ -40,9 +40,9 @@ public class Goods extends BaseEntity{
     /**
      * Ед.изм
      */
-    @Column(name = "Unit")
-    @Enumerated(EnumType.STRING)
-    private String unit;
+    @ManyToOne
+    @JoinColumn(name = "Unit")
+    private String unitName;
 
     /**
      * Наименование производителя
