@@ -25,16 +25,14 @@ public class ProductsBase extends BaseEntity{
     /**
      * Имя типа склада где храниться товар
      */
-    @Column(name = "Warehouse")
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "Warehouse")
     private TypeWarehouse warehouseName;
 
     /**
      * Имя товара
      */
     @ManyToOne
-    //@OneToMany
-    //@OneToOne
     @JoinColumn(name = "Name_Goods_FK")
     private Goods goodsName;
 }
