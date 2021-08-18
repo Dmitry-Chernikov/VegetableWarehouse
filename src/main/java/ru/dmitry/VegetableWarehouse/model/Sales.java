@@ -10,7 +10,6 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "SALES")
-//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,9 +28,6 @@ public class Sales extends BaseEntity{
      * Имя товара
      */
     @ManyToOne
-    //@OneToMany
-    //@OneToOne
-    //@ManyToMany
     @JoinColumn(name = "Name_Goods_FK")
     private ProductsBase nameGoods;
 
@@ -51,9 +47,6 @@ public class Sales extends BaseEntity{
      * ФИО прнинявшего товар
      */
     @ManyToOne
-    //@OneToMany
-    //@OneToOne
-    //@ManyToMany
     @JoinColumn(name = "Full_Name_Client_FK")
     private Clients clientFullName;
 
@@ -61,9 +54,6 @@ public class Sales extends BaseEntity{
      * ФИО сдавшего товар
      */
     @ManyToOne
-    //@OneToMany
-    //@OneToOne
-    //@ManyToMany
     @JoinColumn(name = "Full_Name_Employee_FK")
     private Employee employeeFullName;
 
