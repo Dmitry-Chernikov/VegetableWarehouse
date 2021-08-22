@@ -1,13 +1,14 @@
 package ru.dmitry.VegetableWarehouse.model;
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Поставщики склада
  */
 @Entity
 @Table(name = "SYPPLIERS")
-//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -50,5 +51,8 @@ public class Suppliers extends BaseEntity{
      */
     @Column(name = "Working_Position")
     private String workingPosition;
+
+    @OneToMany
+    private List<Purchase> purchaseList;
 
 }

@@ -1,14 +1,14 @@
 package ru.dmitry.VegetableWarehouse.model;
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 /**
  * База всех продуктов
  */
 @Entity
-@Table(name = "BASE")
-//@Builder
+@Table(name = "PRODUCTS_BASE")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -35,4 +35,5 @@ public class ProductsBase extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "Name_Goods_FK")
     private Goods goodsName;
+
 }

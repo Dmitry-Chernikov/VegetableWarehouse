@@ -1,20 +1,22 @@
 package ru.dmitry.VegetableWarehouse.model;
+
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Клиенты
  */
+
 @Entity
 @Table(name = "CLIENTS")
-//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Clients extends BaseEntity{
-    private static final long serialVersionUID = 1353555820728941084L;
-
+            private static final long serialVersionUID = -1007091243262555550L;
 
     /**
      * Наименование получателя
@@ -51,4 +53,7 @@ public class Clients extends BaseEntity{
      */
     @Column(name = "Working_Position")
     private String workingPosition;
+
+    @OneToMany(mappedBy = "clientFullName")
+    private List<Sales> salesList;
 }

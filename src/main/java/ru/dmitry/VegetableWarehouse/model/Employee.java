@@ -2,14 +2,15 @@ package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Сотрудники склада
  */
 @Entity
 @Table(name = "EMPLOYEE")
-//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -52,4 +53,10 @@ public class Employee extends BaseEntity {
      */
     @Column(name = "Telephone_mobil")
     private String telephoneMobil;
+
+    @OneToMany
+    private List<Sales> salesList;
+
+    @OneToMany
+    private List<Purchase> purchasesList;
 }

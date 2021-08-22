@@ -3,6 +3,7 @@ package ru.dmitry.VegetableWarehouse.model;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -10,7 +11,6 @@ import java.util.UUID;
  */
 @Entity
 @Table(name = "SALES")
-//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,9 +28,9 @@ public class Sales extends BaseEntity{
     /**
      * Имя товара
      */
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "Name_Goods_FK")
-    private ProductsBase nameGoods;
+    private ProductsBase nameGoodsSales;
 
     /**
      * Количество товара
@@ -45,7 +45,7 @@ public class Sales extends BaseEntity{
     private String clientName;
 
     /**
-     * ФИО прнинявшего товар
+     * ФИО прнинявшего клиента товар
      */
     @ManyToOne
     @JoinColumn(name = "Full_Name_Client_FK")

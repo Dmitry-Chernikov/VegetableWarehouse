@@ -2,6 +2,8 @@ package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Продукты
@@ -9,7 +11,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "PRODUCTION")
-//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,7 +22,10 @@ public class Production extends BaseEntity{
      * Наименование продукта
      */
     @Column(name = "Name_Production")
-    private String nameProduction; 
+    private String nameProduction;
+
+    @OneToMany(mappedBy = "productionName")
+    private List<Goods> goodsList;
     /**
      * Клубниплоды
      * Studes,

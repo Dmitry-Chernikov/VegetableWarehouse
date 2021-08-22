@@ -3,13 +3,13 @@ package ru.dmitry.VegetableWarehouse.model;
         import lombok.*;
         import javax.persistence.*;
         import java.util.Date;
+        import java.util.List;
 
 /**
  * Товары
  */
 @Entity
 @Table(name = "GOODS")
-//@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -42,7 +42,7 @@ public class Goods extends BaseEntity{
      */
     @ManyToOne
     @JoinColumn(name = "Unit_FK")
-    private String unitName;
+    private Units unitName;
 
     /**
      * Наименование производителя
@@ -53,6 +53,9 @@ public class Goods extends BaseEntity{
     /**
      * Страна происхождения
      */
-    @Column(name = "Couty_manufacture")
-    private String manufactureCouty;
+    @Column(name = "Manufacture_Country")
+    private String manufactureCountry;
+
+    @OneToMany(mappedBy = "goodsName")
+    private List<ProductsBase> productsBases;
 }
