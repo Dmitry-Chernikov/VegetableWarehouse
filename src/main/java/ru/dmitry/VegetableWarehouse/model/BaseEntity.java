@@ -13,11 +13,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 public class BaseEntity implements Serializable {
-    private static final long serialVersionUID = 1972709113480192104L;
+        private static final long serialVersionUID = 1972709113480192104L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
-    private long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
+        @Column(name="ID")
+        private long id;
 
 }

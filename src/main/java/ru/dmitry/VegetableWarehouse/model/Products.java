@@ -14,67 +14,66 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Products extends BaseEntity{
-            private static final long serialVersionUID = 1353555821748941084L;
-    
-     /**
-     * Наименование продукта
-     */
-    @Column(name = "Name_Production")
-    private String nameProduction;
+        private static final long serialVersionUID = 1353555821748941084L;
 
-    /**
-     * Клубниплоды
-     * Studes,
-     */
-    
-    /**
-     * Корнеплоды
-     * Roots,
-     */
-    
-    /**
-     * Капуста
-     * Cabbage,
-     */
-    
-    /**
-     * Салаты
-     * Salad,
-     */
-    
-    /**
-     * Пряные
-     * Spicy,
-     */
-    
-    /**
-     * Луковые
-     * Bulbous,
-     */
-    
-    /**
-     * Паслёновые
-     * Parenic,
-     */
-    
-    /**
-     * Бахчевые
-     * Bakhchy,
-     */
-    
-    /**
-     * Бобовые
-     * Beans,
-     */
-    
-    /**
-     * Зерновые
-     * Grain,
-     */
-    
-    /**
-     * Десертные
-     * Dessert
-     */
-    
+         /**
+         * Наименование продукта
+         */
+        @Column(name = "Name_Production")
+        private String nameProduction;
+
+        /**
+         * Клубниплоды
+         * Studes,
+         */
+
+        /**
+         * Корнеплоды
+         * Roots,
+         */
+
+        /**
+         * Капуста
+         * Cabbage,
+         */
+
+        /**
+         * Салаты
+         * Salad,
+         */
+
+        /**
+         * Пряные
+         * Spicy,
+         */
+
+        /**
+         * Луковые
+         * Bulbous,
+         */
+
+        /**
+         * Паслёновые
+         * Parenic,
+         */
+
+        /**
+         * Бахчевые
+         * Bakhchy,
+         */
+
+        /**
+         * Бобовые
+         * Beans,
+         */
+
+        /**
+         * Зерновые
+         * Grain,
+         */
+
+        /**
+         * Десертные
+         * Dessert
+         */
 }

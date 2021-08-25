@@ -15,16 +15,15 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class Units extends BaseEntity {
 
-    private static final long serialVersionUID = 2348563159789054502L;
-    /**
-     * Измеряемая велечина
-     */
-    @Column(name = "Measurement unit", nullable = false, unique = true)
-    private String measurementUnit;
-    /**
-     * Обозначение еденицы измерения
-     */
-    @Column(name = "Designation unit", nullable = false, unique = true)
-    private String designationUnit;
-
+        private static final long serialVersionUID = 2348563159789054502L;
+        /**
+         * Измеряемая велечина
+         */
+        @Column(name = "Measurement unit", nullable = false, unique = true)
+        private String measurementUnit;
+        /**
+         * Обозначение еденицы измерения
+         */
+        @Column(name = "Designation unit", nullable = false, unique = true)
+        private String designationUnit;
 }

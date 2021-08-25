@@ -14,25 +14,26 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class TypeWarehouse extends BaseEntity{   
-            private static final long serialVersionUID = 1353555820728941054L;
-    /**
-     * Наименование склада
-     */
-    @Column(name = "Name_Warehouse")
-    private String nameWarehouse;
-    
-    /**
-     * Хранилище силосного типа
-     * Silage,
-     */
-    
-    /**
-     * Хранилище ангарнойго типа
-     * Hangar,
-     */
-    
-    /**
-     * Хранилище подвального типа
-     *Cellar
-     */    
+        private static final long serialVersionUID = 1353555820728941054L;
+        
+        /**
+         * Наименование склада
+         */
+        @Column(name = "Name_Warehouse")
+        private String nameWarehouse;
+
+        /**
+         * Хранилище силосного типа
+         * Silage,
+         */
+
+        /**
+         * Хранилище ангарнойго типа
+         * Hangar,
+         */
+
+        /**
+         * Хранилище подвального типа
+         *Cellar
+         */
 }
