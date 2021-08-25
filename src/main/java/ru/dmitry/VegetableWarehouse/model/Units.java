@@ -2,34 +2,29 @@ package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Единица измерния товара
+ * Еденицы измерения
  */
-@Entity
+
 @Table(name = "UNITS")
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Units extends BaseEntity  {
-    private static final long serialVersionUID = 8349081394822016285L;
+public class Units extends BaseEntity {
 
+    private static final long serialVersionUID = 2348563159789054502L;
     /**
-     * Название еденицы
+     * Измеряемая велечина
      */
-    @Column(name = "Unit measurement")
-    private String unitMeasurement;
-
+    @Column(name = "Measurement unit", nullable = false, unique = true)
+    private String measurementUnit;
     /**
-     * Обозначение еденицы
+     * Обозначение еденицы измерения
      */
-    @Column(name = "Designation unit")
-    private String unitDesignation;
-
-    @OneToMany(mappedBy = "unitName")
-    private List<Goods> goodsList;
+    @Column(name = "Designation unit", nullable = false, unique = true)
+    private String designationUnit;
 
 }

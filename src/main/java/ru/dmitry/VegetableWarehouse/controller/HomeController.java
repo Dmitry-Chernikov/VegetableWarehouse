@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.dmitry.VegetableWarehouse.model.ProductsBase;
+import ru.dmitry.VegetableWarehouse.model.BaseProducts;
 import ru.dmitry.VegetableWarehouse.repo.BaseEntityRepository;
 
 
@@ -25,12 +25,12 @@ public class HomeController {
     @GetMapping
     public String getIndex(Model model){
         model.addAttribute("base", baseEntityRepository.findAll());
-        model.addAttribute("newVegetable",new ProductsBase());
+        model.addAttribute("newVegetable",new BaseProducts());
         return "index";
     }
 
     @PostMapping
-    public String createGoods(ProductsBase vegetable){
+    public String createGoods(BaseProducts vegetable){
         baseEntityRepository.save(vegetable);
         return "redirect:/";
     }

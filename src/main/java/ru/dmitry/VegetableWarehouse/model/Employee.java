@@ -2,9 +2,7 @@ package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Сотрудники склада
@@ -16,47 +14,41 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Employee extends BaseEntity {
-    private static final long serialVersionUID = 8281530488380256469L;
+        private static final long serialVersionUID = 8281530488380256469L;
 
-    /**
-     * ФИО сотрудника
-     */
-    @Column(name = "Full_Name")
-    private String fullName;
+        /**
+         * ФИО сотрудника
+         */
+        @Column(name = "Full_Name")
+        private String fullName;
 
-    /**
-     * Дата рождения сотрудника
-     */
-    @Column(name = "Date_Birth")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateBirth;
+        /**
+         * Дата рождения сотрудника
+         */
+        @Column(name = "Date_Birth")
+        @Temporal(TemporalType.TIMESTAMP)
+        private Date dateBirth;
 
-    /**
-     * Должность сотрудника
-     */
-    @Column(name = "Position")
-    private String position;
+        /**
+         * Должность сотрудника
+         */
+        @Column(name = "Position")
+        private String position;
 
-    /**
-     * Адрес проживания
-     */
-    @Column(name = "Address_accommodation")
-    private String accommodationAddress;
-    /**
-     * Телефон домашний
-     */
-    @Column(name = "Telephone_Home")
-    private String telephoneHome;
+        /**
+         * Адрес проживания
+         */
+        @Column(name = "Address_accommodation")
+        private String accommodationAddress;
+        /**
+         * Телефон домашний
+         */
+        @Column(name = "Telephone_Home")
+        private String telephoneHome;
 
-    /**
-     * Телефон мобильный
-     */
-    @Column(name = "Telephone_mobil")
-    private String telephoneMobil;
-
-    @OneToMany
-    private List<Sales> salesList;
-
-    @OneToMany
-    private List<Purchase> purchasesList;
+        /**
+         * Телефон мобильный
+         */
+        @Column(name = "Telephone_mobil")
+        private String telephoneMobil;
 }

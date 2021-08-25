@@ -2,7 +2,6 @@ package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,9 +20,6 @@ public class TypeWarehouse extends BaseEntity{
      */
     @Column(name = "Name_Warehouse")
     private String nameWarehouse;
-
-    @OneToMany(mappedBy = "warehouseName")
-    private List<ProductsBase> productsBaseList;
     
     /**
      * Хранилище силосного типа

@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
-                   http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
-        <changeSet  id="001"  author="ChDA">
+    <changeSet id="001" author="dmitry">
+
             <!--Имена продуктов-->
             <createTable  tableName="Products">
-                <column  name="IDProduct"  type="bigint" autoIncrement="true" startWith="1" incrementBy="1" >
-                    <constraints  primaryKey="true"  primaryKeyName="Products_IDProduct_pk" />
+                <column  name="IDProduct"  type="int" autoIncrement="true" startWith="1" incrementBy="1" >
+                    <constraints  primaryKey="true"  nullable="false"/>
                 </column>
 
                 <column  name="Name vegetable"  type="varchar(50)">
-                    <constraints unique="true" uniqueConstraintName="Products_Name vegetable_unq"/>
+                    <constraints unique="true" nullable="false"/>
                 </column>
             </createTable>
-
 
             <!--Еденица измерения-->
             <createTable tableName="Units">
@@ -25,14 +24,15 @@
                     <constraints primaryKey="true" nullable="false" />
                 </column>
 
-                <column name="Product unit" type="varchar(50)">
+                <column name="Unit measurement" type="varchar(50)">
                     <constraints nullable="false"/>
                 </column>
 
-                <column name="Designation  unit" type="varchar(20)">
+                <column name="Designation unit" type="varchar(20)">
                     <constraints nullable="false"/>
                 </column>
             </createTable>
+
             <!--Тип склада-->
             <createTable tableName="Type warehouse">
                 <column name="IDTypeWare" type="int" autoIncrement="true">
@@ -43,6 +43,7 @@
                     <constraints nullable="false"/>
                 </column>
             </createTable>
+
             <!--Клиент-->
             <createTable tableName="Clients">
                 <column name="IDClients" type="int" autoIncrement="true" startWith="1" incrementBy="1">
@@ -73,6 +74,7 @@
                     <constraints nullable="false"/>
                 </column>
             </createTable>
+
             <!--Сотрудник склада-->
             <createTable tableName="Employee warehouse">
                 <column name="IDEmpWare" type="int" autoIncrement="true" startWith="1" incrementBy="1">
@@ -103,6 +105,7 @@
                     <constraints nullable="false"/>
                 </column>
             </createTable>
+
             <!--Поставщики-->
             <createTable tableName="Suppliers">
                 <column name="IDSuppliers" type="int" autoIncrement="true" startWith="1" incrementBy="1">
@@ -129,14 +132,16 @@
                     <constraints nullable="false"/>
                 </column>
             </createTable>
+
             <!--Товары-->
             <createTable tableName="Goods">
                 <column name="IDGoods" type="int" autoIncrement="true" startWith="1" incrementBy="1">
-                    <constraints primaryKey="true" />
+                    <constraints primaryKey="true" nullable="false"/>
                 </column>
 
-                <column name="Product" type="bigint">
-                    <constraints nullable="false" notNullConstraintName="goods_products_IDProduct_nn"/>
+                <!--Key-->
+                <column name="Product" type="int">
+                    <constraints nullable="false"/>
                 </column>
 
                 <column name="Name variety" type="varchar(50)">
@@ -147,6 +152,7 @@
                     <constraints nullable="false"/>
                 </column>
 
+                <!--Key-->
                 <column name="Unit" type="int">
                     <constraints nullable="false"/>
                 </column>
@@ -159,44 +165,23 @@
                     <constraints nullable="false"/>
                 </column>
             </createTable>
-            <!--Инициализацйия ключей таблицы Товары-->
-            <addForeignKeyConstraint baseTableName="Goods"
-                                     baseColumnNames="Product"
-                                     constraintName="fk_Goods_Products"
-                                     referencedTableName= "Products"
-                                     referencedColumnNames="IDProduct"/>
 
-            <addForeignKeyConstraint baseTableName="Goods"
-                                     baseColumnNames="Unit"
-                                     constraintName="fk_Goods_Units"
-                                     referencedTableName="Units"
-                                     referencedColumnNames="IDUnit"/>
             <!--База продуктов-->
             <createTable tableName="Base products">
                 <column name="Barcode" type="int" autoIncrement="true" startWith="1" incrementBy="1">
                     <constraints primaryKey="true" nullable="false"/>
                 </column>
 
+                <!--Key-->
                 <column name="Warehouse" type="int">
                     <constraints nullable="false"/>
                 </column>
 
+                <!--Key-->
                 <column name="Products" type="int">
                     <constraints nullable="false"/>
                 </column>
             </createTable>
-            <!--Инициализацйия ключей таблицы База продуктов-->
-            <addForeignKeyConstraint baseTableName="Base products"
-                                     baseColumnNames="Warehouse"
-                                     constraintName="fk_Base products_Type warehouse"
-                                     referencedTableName="Type warehouse"
-                                     referencedColumnNames="IDTypeWare"/>
-
-            <addForeignKeyConstraint baseTableName="Base products"
-                                     baseColumnNames="Products"
-                                     constraintName="fk_Base products_Goods"
-                                     referencedTableName="Goods"
-                                     referencedColumnNames="IDGoods"/>
 
             <!--Приходная накладная-->
             <createTable tableName="Purchase Invoice">
@@ -233,24 +218,7 @@
                     <constraints nullable="false"/>
                 </column>
             </createTable>
-            <!--Инициализацйия ключей таблицы Приходная накладная-->
-            <addForeignKeyConstraint baseTableName="Purchase Invoice"
-                                     baseColumnNames="Name Product"
-                                     constraintName="fk_Purchase Invoice_Base products"
-                                     referencedTableName="Base products"
-                                     referencedColumnNames="Barcode"/>
 
-            <addForeignKeyConstraint baseTableName="Purchase Invoice"
-                                     baseColumnNames="Full Name Suppliers"
-                                     constraintName="fk_Purchase Invoice_Suppliers"
-                                     referencedTableName="Suppliers"
-                                     referencedColumnNames="IDSuppliers"/>
-
-            <addForeignKeyConstraint baseTableName="Purchase Invoice"
-                                     baseColumnNames="Full Name Employee"
-                                     constraintName="fk_Purchase Invoice_Employee warehouse"
-                                     referencedTableName="Employee warehouse"
-                                     referencedColumnNames="IDEmpWare"/>
 
             <!--Расходная накладная-->
             <createTable tableName="Sales Invoice">
@@ -287,26 +255,7 @@
                     <constraints nullable="false"/>
                 </column>
             </createTable>
-            <!--Инициализацйия ключей таблицы Приходная накладная-->
-            <addForeignKeyConstraint baseTableName="Sales Invoice"
-                                     baseColumnNames="Name Product"
-                                     constraintName="fk_Sales Invoice_Base products"
-                                     referencedTableName="Base products"
-                                     referencedColumnNames="Barcode"/>
 
-            <addForeignKeyConstraint baseTableName="Sales Invoice"
-                                     baseColumnNames="Full Name Client"
-                                     constraintName="fk_Sales Invoice_Clients"
-                                     referencedTableName="Clients"
-                                     referencedColumnNames="IDClients"/>
-
-            <addForeignKeyConstraint baseTableName="Sales Invoice"
-                                     baseColumnNames="Full Name Employee"
-                                     constraintName="fk_Sales Invoice_Employee warehouse"
-                                     referencedTableName="Employee warehouse"
-                                     referencedColumnNames="IDEmpWare"/>
-            <!--Создает новую последовательность базы данных.-->
-            <createSequence sequenceName="hibernate_sequence" incrementBy="1" startValue="1" />
         </changeSet>
 
 </databaseChangeLog>

@@ -3,8 +3,6 @@ package ru.dmitry.VegetableWarehouse.model;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Расходная накладная
@@ -21,16 +19,15 @@ public class Sales extends BaseEntity{
 
     /**
      * Уникальный идентификатор расходной товарной наклодной
+     * @Column(name = "Purchase_ID_TT")
+     * private UUID barcode;
      */
-    @Column(name = "Purchase_ID_TT")
-    private UUID barcode;
 
     /**
      * Имя товара
      */
-    @OneToOne
-    @JoinColumn(name = "Name_Goods_FK")
-    private ProductsBase nameGoodsSales;
+    @Column(name = "Name_ProductsBase_FK")
+    private int productsBase;
 
     /**
      * Количество товара
@@ -47,16 +44,14 @@ public class Sales extends BaseEntity{
     /**
      * ФИО прнинявшего клиента товар
      */
-    @ManyToOne
-    @JoinColumn(name = "Full_Name_Client_FK")
-    private Clients clientFullName;
+    @Column(name = "Full_Name_Client_FK")
+    private int clientFullName;
 
     /**
      * ФИО сдавшего товар
      */
-    @ManyToOne
-    @JoinColumn(name = "Full_Name_Employee_FK")
-    private Employee employeeFullName;
+    @Column(name = "Full_Name_Employee_FK")
+    private int employeeSalesFullName;
 
     /**
      * Дата расхода товара на склад
@@ -69,4 +64,5 @@ public class Sales extends BaseEntity{
      */
     @Column(name = "Price_Value")
     private double valuePrice;
+
 }

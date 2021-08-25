@@ -2,20 +2,18 @@ package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Продукты
  */
 
 @Entity
-@Table(name = "PRODUCTION")
+@Table(name = "PRODUCTS")
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Production extends BaseEntity{
+public class Products extends BaseEntity{
             private static final long serialVersionUID = 1353555821748941084L;
     
      /**
@@ -24,8 +22,6 @@ public class Production extends BaseEntity{
     @Column(name = "Name_Production")
     private String nameProduction;
 
-    @OneToMany(mappedBy = "productionName")
-    private List<Goods> goodsList;
     /**
      * Клубниплоды
      * Studes,
