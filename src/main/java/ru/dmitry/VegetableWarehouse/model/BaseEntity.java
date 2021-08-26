@@ -12,6 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor //создаёт конструктор по умолчанию
 @Getter
 @Setter
+
 public class BaseEntity implements Serializable {
         private static final long serialVersionUID = 1972709113480192104L;
 

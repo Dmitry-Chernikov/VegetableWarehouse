@@ -8,7 +8,7 @@ import java.util.UUID;
  * База всех продуктов
  */
 @Entity
-@Table(name = "PRODUCTS BASE")
+//@Table(name = "PRODUCTS BASE")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,19 +18,21 @@ public class BaseProducts extends BaseEntity{
 
         /**
          * Уникальный идентификатор товара в базе штрих код
+
+                @Column(name = "barcode")
+                private UUID barcode;
          */
-        @Column(name = "Barcode")
-        private UUID barcode;
+
 
         /**
          * Имя типа склада где храниться товар
          */
-        @Column(name = "Warehouse_FK")
-        private int warehouseName;
+        @Column(name = "type_warehouse_fk")
+        private long warehouseName;
 
         /**
          * Имя товара
          */
-        @Column(name = "Name_Goods_FK")
-        private int goodsName;
+        @Column(name = "goods_fk")
+        private long goodsName;
 }

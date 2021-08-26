@@ -3,12 +3,13 @@ package ru.dmitry.VegetableWarehouse.model;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Расходная накладная
  */
 @Entity
-@Table(name = "SALES")
+//@Table(name = "SALES")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,52 +17,52 @@ import java.util.Date;
 public class Sales extends BaseEntity{
         private static final long serialVersionUID = -4958131087059395614L;
 
-
         /**
          * Уникальный идентификатор расходной товарной наклодной
-         * @Column(name = "Purchase_ID_TT")
-         * private UUID barcode;
+                @Column(name = "barcode")
+                private UUID barcode;
          */
+
 
         /**
          * Имя товара
          */
-        @Column(name = "Name_ProductsBase_FK")
-        private int productsBase;
+        @Column(name = "base_products_fk")
+        private long productsBase;
 
         /**
          * Количество товара
          */
-        @Column(name = "Count_Product")
+        @Column(name = "count_product")
         private double countProduct;
 
         /**
          * Наименование получателя
          */
-        @Column(name = "Name_Client")
+        @Column(name = "name_client", length = 50)
         private String clientName;
 
         /**
          * ФИО прнинявшего клиента товар
          */
-        @Column(name = "Full_Name_Client_FK")
-        private int clientFullName;
+        @Column(name = "clients_fk")
+        private long clientFullName;
 
         /**
          * ФИО сдавшего товар
          */
-        @Column(name = "Full_Name_Employee_FK")
-        private int employeeSalesFullName;
+        @Column(name = "employee_fk")
+        private long employeeSalesFullName;
 
         /**
          * Дата расхода товара на склад
          */
-        @Column(name = "Date_Operation")
+        @Column(name = "date_operation")
         private Date operationDate;
 
         /**
          * Цена товара
          */
-        @Column(name = "Price_Value")
+        @Column(name = "price_value")
         private double valuePrice;
 }

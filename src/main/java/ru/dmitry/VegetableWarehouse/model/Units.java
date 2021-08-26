@@ -7,8 +7,8 @@ import javax.persistence.*;
  * Еденицы измерения
  */
 
-@Table(name = "UNITS")
 @Entity
+//@Table(name = "UNITS")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,11 +19,11 @@ public class Units extends BaseEntity {
         /**
          * Измеряемая велечина
          */
-        @Column(name = "Measurement unit", nullable = false, unique = true)
+        @Column(name = "unit_measurement", length = 50)
         private String measurementUnit;
         /**
          * Обозначение еденицы измерения
          */
-        @Column(name = "Designation unit", nullable = false, unique = true)
+        @Column(name = "designation_unit", length = 10)
         private String designationUnit;
 }

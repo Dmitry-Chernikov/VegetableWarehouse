@@ -8,7 +8,7 @@ import java.util.List;
  * Список типов складов
  */
 @Entity
-@Table(name = "WAREHOUSE")
+//@Table(name = "WAREHOUSE")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,7 +19,7 @@ public class TypeWarehouse extends BaseEntity{
         /**
          * Наименование склада
          */
-        @Column(name = "Name_Warehouse")
+        @Column(name = "name_warehouse", length = 50)
         private String nameWarehouse;
 
         /**

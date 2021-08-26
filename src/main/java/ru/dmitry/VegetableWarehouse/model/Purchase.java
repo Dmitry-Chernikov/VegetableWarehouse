@@ -9,7 +9,7 @@ import java.util.UUID;
  * Приходная накладная
  */
 @Entity
-@Table(name = "PURCHASE")
+//@Table(name = "PURCHASE")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,50 +18,50 @@ public class Purchase extends BaseEntity{
         private static final long serialVersionUID = -2881785172249442237L;
 
         /**
-         * Уникальный идентификатор приходной товарной наклодной
-         * @Column(name = "Purchase_ID_TT")
-         * private UUID barcode;
+        * Уникальный идентификатор приходной товарной наклодной
+                @Column(name = "barcode")
+                private UUID barcode;
          */
 
         /**
          * Имя товара
          */
-        @Column(name = "Name_Goods_FK")
-        private int nameGoodsPurchase;
+        @Column(name = "base_products_fk")
+        private long nameGoodsPurchase;
 
         /**
          * Количество товара
          */
-        @Column(name = "Count_Product")
+        @Column(name = "count_product")
         private double countProduct;
 
         /**
          * Наименование поставщика
          */
-        @Column(name = "Name_Suppliers")
+        @Column(name = "name_suppliers", length = 50)
         private String suppliersName;
 
         /**
          * ФИО сдавшего товар
          */
-        @Column(name = "Full_Name_Suppliers_FK")
-        private int suppliersFullName;
+        @Column(name = "suppliers_fk")
+        private long suppliersFullName;
 
         /**
          * ФИО прнинявшего товар
          */
-        @Column(name = "Full_Name_Employee_FK")
-        private int employeePurchaseFullName;
+        @Column(name = "employee_fk")
+        private long employeePurchaseFullName;
 
         /**
          * Дата прихода товара на склад
          */
-        @Column(name = "Date_Operation")
+        @Column(name = "date_operation")
         private Date operationDate;
 
         /**
          * Цена товара
          */
-        @Column(name = "Price_Value")
+        @Column(name = "price_value")
         private double valuePrice;
 }

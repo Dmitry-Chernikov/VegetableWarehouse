@@ -8,7 +8,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "PRODUCTS")
+//@Table(name = "PRODUCTS")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,11 +16,11 @@ import javax.persistence.*;
 public class Products extends BaseEntity{
         private static final long serialVersionUID = 1353555821748941084L;
 
-         /**
+        /**
          * Наименование продукта
          */
-        @Column(name = "Name_Production")
-        private String nameProduction;
+        @Column(name = "type_vegetable", unique = true, length = 50)
+        private String nameTypeVegetable;
 
         /**
          * Клубниплоды

@@ -8,48 +8,47 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "CLIENTS")
+//@Table(name = "clients")
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Clients extends BaseEntity{
-        private static final long serialVersionUID = -1007091243262555550L;
+        private static final long serialVersionUID = 4923336868248054214L;
 
         /**
          * Наименование получателя
          */
-        @Column(name = "Clint_Name")
-        private String name;
+        @Column(name = "clint_name", length = 50)
+        private String nameClient;
 
         /**
          * Код учётного номера плательщика УНП
          */
-        @Column(name = "Code_UNP")
+        @Column(name = "code_unp", length = 50 )
         private String codeUNP;
 
         /**
          * Юридический адрес
          */
-        @Column(name = "Legal_address")
+        @Column(name = "legal_address", length = 50)
         private String legalAddress;
 
         /**
          * Телефон
          */
-        @Column(name = "Telephone_Number")
+        @Column(name = "telephone_Number", length = 50)
         private String telephoneNumber;
 
         /**
          * Контактное лицо
          */
-        @Column(name = "Full_Name")
-        private String fullName;
+        @Column(name = "full_name", length = 50)
+        private String fullNameClient;
 
         /**
          * Должность
          */
-        @Column(name = "Working_Position")
+        @Column(name = "working_position", length = 50)
         private String workingPosition;
-
 }

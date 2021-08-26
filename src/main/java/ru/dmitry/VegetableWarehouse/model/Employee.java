@@ -8,7 +8,7 @@ import java.util.Date;
  * Сотрудники склада
  */
 @Entity
-@Table(name = "EMPLOYEE")
+//@Table(name = "EMPLOYEE")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,36 +19,36 @@ public class Employee extends BaseEntity {
         /**
          * ФИО сотрудника
          */
-        @Column(name = "Full_Name")
+        @Column(name = "full_name", length = 50)
         private String fullName;
 
         /**
          * Дата рождения сотрудника
          */
-        @Column(name = "Date_Birth")
+        @Column(name = "date_birth")
         @Temporal(TemporalType.TIMESTAMP)
         private Date dateBirth;
 
         /**
          * Должность сотрудника
          */
-        @Column(name = "Position")
+        @Column(name = "working_position", length = 50)
         private String position;
 
         /**
          * Адрес проживания
          */
-        @Column(name = "Address_accommodation")
+        @Column(name = "address_accommodation", length = 100)
         private String accommodationAddress;
         /**
          * Телефон домашний
          */
-        @Column(name = "Telephone_Home")
+        @Column(name = "telephone_home", length = 20)
         private String telephoneHome;
 
         /**
          * Телефон мобильный
          */
-        @Column(name = "Telephone_mobil")
+        @Column(name = "telephone_mobil", length = 20)
         private String telephoneMobil;
 }

@@ -9,13 +9,13 @@ public class VegetableWarehouseApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(VegetableWarehouseApplication.class, args);
 
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-				"applicationContext.xml"
-		);
-
-		TestBean testBean = context.getBean("testBean", TestBean.class);
-		System.out.println(testBean.getName());
-		context.close();
+//		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+//				"applicationContext.xml"
+//		);
+//
+//		TestBean testBean = context.getBean("testBean", TestBean.class);
+//		System.out.println(testBean.getName());
+//		context.close();
 	}
 
 }

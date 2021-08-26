@@ -8,48 +8,49 @@ import java.util.Date;
  * Товары
  */
 @Entity
-@Table(name = "GOODS")
+//@Table(name = "GOODS")
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Goods extends BaseEntity{
-    private static final long serialVersionUID = -935293741889753637L;
+
+        private static final long serialVersionUID = -935293741889753637L;
 
         /**
          * Наименование продукта
          */
-        @Column(name = "Production_FK")
-        private int productionName;
+        @Column(name = "products_fk")
+        private long productionName;
 
         /**
          * Наименование сорта
          */
-        @Column(name = "Name_Variety")
+        @Column(name = "name_variety", length = 50)
         private String varietyName;
 
         /**
          * Годен до
          */
-        @Column(name = "Shelf_Life")
+        @Column(name = "shelf_life")
         @Temporal(TemporalType.TIMESTAMP)
         private Date shelfLife;
 
         /**
          * Ед.изм
          */
-        @Column(name = "Unit_FK")
-        private int unitName;
+        @Column(name = "units_fk")
+        private long unitName;
 
         /**
          * Наименование производителя
          */
-        @Column(name = "Name_Manufacture")
+        @Column(name = "name_manufacture", length = 100)
         private String manufactureName;
 
         /**
          * Страна происхождения
          */
-        @Column(name = "Manufacture_Country")
+        @Column(name = "manufacture_country", length = 100)
         private String manufactureCountry;
 }
