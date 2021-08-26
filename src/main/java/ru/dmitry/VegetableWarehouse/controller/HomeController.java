@@ -14,7 +14,7 @@ import ru.dmitry.VegetableWarehouse.repo.BaseEntityRepository;
 @RequestMapping("/") //По какому пути этот метод будет срабатывать
 public class HomeController {
 
-    private BaseEntityRepository baseEntityRepository;
+/*    private BaseEntityRepository baseEntityRepository;
     //три типа внедрения зависимостей, через поле, черз Setter, конструктор
     //spring context вставляет необходимые зависимости
     @Autowired //Авто связь это на всякий случай
@@ -33,5 +33,5 @@ public class HomeController {
     public String createGoods(BaseProducts vegetable){
         baseEntityRepository.save(vegetable);
         return "redirect:/";
-    }
+    }*/
 }

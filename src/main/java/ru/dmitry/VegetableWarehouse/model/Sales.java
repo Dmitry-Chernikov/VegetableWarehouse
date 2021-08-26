@@ -19,9 +19,10 @@ public class Sales extends BaseEntity{
 
         /**
          * Уникальный идентификатор расходной товарной наклодной
+         */
                 @Column(name = "barcode")
                 private UUID barcode;
-         */
+
 
 
         /**

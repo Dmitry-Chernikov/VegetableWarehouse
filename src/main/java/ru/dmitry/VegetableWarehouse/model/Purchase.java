@@ -19,9 +19,10 @@ public class Purchase extends BaseEntity{
 
         /**
         * Уникальный идентификатор приходной товарной наклодной
+         */
                 @Column(name = "barcode")
                 private UUID barcode;
-         */
+
 
         /**
          * Имя товара

@@ -9,7 +9,7 @@
 
             <!--Имена продуктов-->
             <createTable  tableName="products">
-                <column  name="id"  type="bigint" autoIncrement="true" startWith="1" incrementBy="1" >
+                <column  name="id"  type="bigint" autoIncrement="true">
                     <constraints  primaryKey="true"  nullable="false" primaryKeyName="pk_products"/>
                 </column>
                 <column  name="type_vegetable"  type="varchar(50)"/>
@@ -17,7 +17,7 @@
 
             <!--Еденица измерения-->
             <createTable tableName="units">
-                <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false"  primaryKeyName="pk_units"/>
                 </column>
                 <column name="unit_measurement" type="varchar(50)"/>
@@ -34,7 +34,7 @@
 
             <!--Клиент-->
             <createTable tableName="clients">
-                <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false"  primaryKeyName="pk_clients"/>
                 </column>
                 <column name="clint_name" type="varchar(50)"/>
@@ -47,7 +47,7 @@
 
             <!--Сотрудник склада-->
             <createTable tableName="employee">
-                <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_employee"/>
                 </column>
                 <column name="full_name" type="varchar(50)"/>
@@ -60,7 +60,7 @@
 
             <!--Поставщики-->
             <createTable tableName="suppliers">
-                <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_suppliers"/>
                 </column>
                 <column name="suppliers_name" type="varchar(50)"/>
@@ -73,7 +73,7 @@
 
             <!--Товары-->
             <createTable tableName="goods">
-                <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_goods"/>
                 </column>
                 <!--Key-->
@@ -88,10 +88,10 @@
 
             <!--База продуктов-->
             <createTable tableName="base_products">
-                <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_baseproducts"/>
                 </column>
-                <!--column name="barcode" type="UUID"/-->
+                <column name="barcode" type="UUID"/>
                 <!--Key-->
                 <column name="type_warehouse_fk" type="bigint"/>
                 <!--Key-->
@@ -100,10 +100,10 @@
 
             <!--Приходная накладная-->
             <createTable tableName="purchase">
-                <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_purchase"/>
                 </column>
-                <!--column name="barcode" type="UUID"/-->
+                <column name="barcode" type="UUID"/>
                 <!--Key-->
                 <column name="base_products_fk" type="bigint"/>
                 <column name="count_product" type="double"/>
@@ -119,10 +119,10 @@
 
             <!--Расходная накладная-->
             <createTable tableName="sales">
-                <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_sales"/>
                 </column>
-                <!--column name="barcode" type="UUID"/-->
+                <column name="barcode" type="UUID"/>
                 <!--Key-->
                 <column name="base_products_fk" type="bigint"/>
                 <column name="count_product" type="double"/>
@@ -134,6 +134,6 @@
                 <column name="date_operation" type="datetime"/>
                 <column name="price_value" type="double"/>
             </createTable>
-    </changeSet>
+     </changeSet>
 
 </databaseChangeLog>

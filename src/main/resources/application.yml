@@ -15,12 +15,17 @@
 
 spring:
   jpa:
-    hibernate.ddl-auto: validate
+    hibernate:
+      ddl-auto: validate
+      #use-new-id-generator-mappings: false
     show-sql: true
   datasource:
+    driver: org.postgressql.Driver
     url: jdbc:postgresql://localhost:5432/vegetable
     username: postgres
     password: su
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
+
+
