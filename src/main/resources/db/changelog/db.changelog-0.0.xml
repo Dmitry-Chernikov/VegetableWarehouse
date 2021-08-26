@@ -14,7 +14,6 @@
                 </column>
                 <column  name="type_vegetable"  type="varchar(50)"/>
             </createTable>
-            <addUniqueConstraint columnNames="type_vegetable" constraintName="uc_products_type_vegetable" tableName="products"/>
 
             <!--Еденица измерения-->
             <createTable tableName="units">

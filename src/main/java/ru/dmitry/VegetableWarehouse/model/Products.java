@@ -19,7 +19,7 @@ public class Products extends BaseEntity{
         /**
          * Наименование продукта
          */
-        @Column(name = "type_vegetable", unique = true, length = 50)
+        @Column(name = "type_vegetable", length = 50)
         private String nameTypeVegetable;
 
         /**
