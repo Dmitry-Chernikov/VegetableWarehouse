@@ -1,12 +1,18 @@
 package ru.dmitry.VegetableWarehouse.model;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 /**
  * База всех продуктов
  */
+@Table(name = "BaseProducts")
 @Entity
 //@Table(name = "PRODUCTS BASE")
 @Getter
@@ -22,17 +28,21 @@ public class BaseProducts extends BaseEntity{
                 @Column(name = "barcode")
                 private UUID barcode;
 
-
-
         /**
          * Имя типа склада где храниться товар
          */
-        @Column(name = "type_warehouse_fk")
-        private long warehouseName;
+        @ManyToOne
+        @JoinColumn(name = "type_warehouse_id")
+        private TypeWarehouse typeWarehouse;
 
         /**
          * Имя товара
          */
-        @Column(name = "goods_fk")
-        private long goodsName;
+        @ManyToOne
+        @JoinColumn(name = "goods_id")
+        private Goods goods;
+
+        @OneToMany(mappedBy = "baseProducts")
+        private List<Sales> saleses;
+
 }

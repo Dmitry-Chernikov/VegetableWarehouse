@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+    <changeSet id="001" author="dmitry">
+        <!--goods-->
+        <addForeignKeyConstraint baseTableName="goods"
+                                 baseColumnNames="units_id"
+                                 referencedTableName="units"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_goods_unit"/>
+
+        <addForeignKeyConstraint baseTableName="goods"
+                                 baseColumnNames="products_id"
+                                 referencedTableName="products"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_goods_products"/>
+
+        <!--base_products-->
+        <addForeignKeyConstraint baseTableName="base_products"
+                                 baseColumnNames="type_warehouse_id"
+                                 referencedTableName="type_warehouse"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_baseproducts_typewarehouse"/>
+
+        <addForeignKeyConstraint baseTableName="base_products"
+                                 baseColumnNames="goods_id"
+                                 referencedTableName="goods"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_baseproducts_goods"/>
+
+        <!--sales-->
+        <addForeignKeyConstraint baseTableName="sales"
+                                 baseColumnNames="base_products_id"
+                                 referencedTableName="base_products"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_sales_baseproducts"/>
+
+        <addForeignKeyConstraint baseTableName="sales"
+                                 baseColumnNames="clients_id"
+                                 referencedTableName="clients"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_sales_clients"/>
+
+        <addForeignKeyConstraint baseTableName="sales"
+                                 baseColumnNames="employee_id"
+                                 referencedTableName="employee"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_sales_employee"/>
+
+        <!--purchase-->
+        <addForeignKeyConstraint baseTableName="purchase"
+                                 baseColumnNames="base_products_id"
+                                 referencedTableName="base_products"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_purchase_baseproducts"/>
+
+        <addForeignKeyConstraint baseTableName="purchase"
+                                 baseColumnNames="suppliers_id"
+                                 referencedTableName="suppliers"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_purchase_suppliers"/>
+
+        <addForeignKeyConstraint baseTableName="purchase"
+                                 baseColumnNames="employee_id"
+                                 referencedTableName="employee"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_purchase_employee"/>
+
+
+    </changeSet>
+</databaseChangeLog>

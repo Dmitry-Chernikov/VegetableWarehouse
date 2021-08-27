@@ -27,8 +27,9 @@ public class Purchase extends BaseEntity{
         /**
          * Имя товара
          */
-        @Column(name = "base_products_fk")
-        private long nameGoodsPurchase;
+        @ManyToOne
+        @JoinColumn(name = "base_products_id")
+        private BaseProducts baseProducts;
 
         /**
          * Количество товара
@@ -45,14 +46,16 @@ public class Purchase extends BaseEntity{
         /**
          * ФИО сдавшего товар
          */
-        @Column(name = "suppliers_fk")
-        private long suppliersFullName;
+        @ManyToOne
+        @JoinColumn(name = "suppliers_id")
+        private Suppliers suppliers;
 
         /**
          * ФИО прнинявшего товар
          */
-        @Column(name = "employee_fk")
-        private long employeePurchaseFullName;
+        @ManyToOne
+        @JoinColumn(name = "employee_id")
+        private Employee employee;
 
         /**
          * Дата прихода товара на склад
@@ -65,4 +68,7 @@ public class Purchase extends BaseEntity{
          */
         @Column(name = "price_value")
         private double valuePrice;
+
+
+
 }

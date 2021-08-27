@@ -3,6 +3,7 @@ package ru.dmitry.VegetableWarehouse.model;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Сотрудники склада
@@ -51,4 +52,11 @@ public class Employee extends BaseEntity {
          */
         @Column(name = "telephone_mobil", length = 20)
         private String telephoneMobil;
+
+        @OneToMany(mappedBy = "employee")
+        private List<Sales> saleses;
+
+        @OneToMany(mappedBy = "employee")
+        private List<Purchase> purchases;
+
 }

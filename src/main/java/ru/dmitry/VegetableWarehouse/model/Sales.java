@@ -23,13 +23,12 @@ public class Sales extends BaseEntity{
                 @Column(name = "barcode")
                 private UUID barcode;
 
-
-
         /**
          * Имя товара
          */
-        @Column(name = "base_products_fk")
-        private long productsBase;
+        @ManyToOne
+        @JoinColumn(name = "base_products_id")
+        private BaseProducts baseProducts;
 
         /**
          * Количество товара
@@ -46,14 +45,16 @@ public class Sales extends BaseEntity{
         /**
          * ФИО прнинявшего клиента товар
          */
-        @Column(name = "clients_fk")
-        private long clientFullName;
+        @ManyToOne
+        @JoinColumn(name = "clients_id")
+        private Clients clients;
 
         /**
          * ФИО сдавшего товар
          */
-        @Column(name = "employee_fk")
-        private long employeeSalesFullName;
+        @ManyToOne
+        @JoinColumn(name = "employee_id")
+        private Employee employee;;
 
         /**
          * Дата расхода товара на склад
@@ -66,4 +67,7 @@ public class Sales extends BaseEntity{
          */
         @Column(name = "price_value")
         private double valuePrice;
+
+
+
 }

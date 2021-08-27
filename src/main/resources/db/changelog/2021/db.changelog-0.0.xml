@@ -77,11 +77,11 @@
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_goods"/>
                 </column>
                 <!--Key-->
-                <column name="products_fk" type="bigint"/>
+                <column name="products_id" type="bigint"/>
                 <column name="name_variety" type="varchar(50)"/>
                 <column name="shelf_life" type="datetime"/>
                 <!--Key-->
-                <column name="units_fk" type="bigint"/>
+                <column name="units_id" type="bigint"/>
                 <column name="name_manufacture" type="varchar(100)"/>
                 <column name="manufacture_country" type="varchar(100)"/>
             </createTable>
@@ -93,9 +93,9 @@
                 </column>
                 <column name="barcode" type="UUID"/>
                 <!--Key-->
-                <column name="type_warehouse_fk" type="bigint"/>
+                <column name="type_warehouse_id" type="bigint"/>
                 <!--Key-->
-                <column name="goods_fk" type="bigint"/>
+                <column name="goods_id" type="bigint"/>
             </createTable>
 
             <!--Приходная накладная-->
@@ -105,13 +105,13 @@
                 </column>
                 <column name="barcode" type="UUID"/>
                 <!--Key-->
-                <column name="base_products_fk" type="bigint"/>
+                <column name="base_products_id" type="bigint"/>
                 <column name="count_product" type="double"/>
                 <column name="name_suppliers" type="varchar(50)"/>
                 <!--Key-->
-                <column name="suppliers_fk" type="bigint"/>
+                <column name="suppliers_id" type="bigint"/>
                 <!--Key-->
-                <column name="employee_fk" type="bigint"/>
+                <column name="employee_id" type="bigint"/>
                 <column name="date_operation" type="datetime"/>
                 <column name="price_value" type="double"/>
             </createTable>
@@ -124,16 +124,16 @@
                 </column>
                 <column name="barcode" type="UUID"/>
                 <!--Key-->
-                <column name="base_products_fk" type="bigint"/>
+                <column name="base_products_id" type="bigint"/>
                 <column name="count_product" type="double"/>
                 <column name="name_client" type="varchar(50)"/>
                 <!--Key-->
-                <column name="clients_fk" type="bigint"/>
+                <column name="clients_id" type="bigint"/>
                 <!--Key-->
-                <column name="employee_fk" type="bigint"/>
+                <column name="employee_id" type="bigint"/>
                 <column name="date_operation" type="datetime"/>
                 <column name="price_value" type="double"/>
             </createTable>
-     </changeSet>
+    </changeSet>
 
 </databaseChangeLog>

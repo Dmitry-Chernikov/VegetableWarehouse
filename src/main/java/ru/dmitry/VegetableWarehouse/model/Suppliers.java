@@ -2,6 +2,7 @@ package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Поставщики склада
@@ -50,4 +51,8 @@ public class Suppliers extends BaseEntity{
          */
         @Column(name = "working_position", length = 50)
         private String workingPosition;
+
+        @OneToMany(mappedBy = "suppliers")
+        private List<Purchase> purchases;
+
 }

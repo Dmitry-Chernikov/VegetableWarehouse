@@ -3,6 +3,7 @@ package ru.dmitry.VegetableWarehouse.model;
 import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Товары
@@ -20,8 +21,9 @@ public class Goods extends BaseEntity{
         /**
          * Наименование продукта
          */
-        @Column(name = "products_fk")
-        private long productionName;
+        @ManyToOne
+        @JoinColumn(name = "products_id")
+        private Products products;
 
         /**
          * Наименование сорта
@@ -39,8 +41,9 @@ public class Goods extends BaseEntity{
         /**
          * Ед.изм
          */
-        @Column(name = "units_fk")
-        private long unitName;
+        @ManyToOne
+        @JoinColumn(name = "units_id")
+        private Units units;
 
         /**
          * Наименование производителя
@@ -53,4 +56,8 @@ public class Goods extends BaseEntity{
          */
         @Column(name = "manufacture_country", length = 100)
         private String manufactureCountry;
+
+        @OneToMany(mappedBy = "goods")
+        private List<BaseProducts> baseProductses;
+
 }

@@ -2,6 +2,7 @@ package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Продукты
@@ -14,15 +15,18 @@ import javax.persistence.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Products extends BaseEntity{
-        private static final long serialVersionUID = 1353555821748941084L;
 
+        private static final long serialVersionUID = 1353555821748941084L;
         /**
          * Наименование продукта
          */
         @Column(name = "type_vegetable", length = 50)
         private String nameTypeVegetable;
 
-        /**
+        @OneToMany(mappedBy = "products")
+        private List<Goods> goodses;
+
+/**
          * Клубниплоды
          * Studes,
          */
