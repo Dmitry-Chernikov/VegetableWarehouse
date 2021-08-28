@@ -25,8 +25,8 @@ public class BaseProducts extends BaseEntity{
         /**
          * Уникальный идентификатор товара в базе штрих код
          */
-                @Column(name = "barcode")
-                private UUID barcode;
+        @Column(name = "barcode")
+        private UUID barcode;
 
         /**
          * Имя типа склада где храниться товар

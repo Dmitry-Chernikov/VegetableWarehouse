@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <title>Vegetable Warehouse</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
@@ -10,24 +11,26 @@
 <table class="centered">
     <thead>
         <tr>
-            <th>barcode</th>
-            <th>warehouseName</th>
-            <th>goodsName</th>
+            <th>номер</th>
+            <th>штрих-код</th>
+            <th>тип склада</th>
+            <th>товар</th>
         </tr>
     </thead>
     <tbody>
-        <tr th:each="ProductsBase:${Vegetable Warehouse}">
-            <td th:text="${ProductsBase.barcode}"/>
-            <td th:text="${ProductsBase.warehouseName}"/>
-            <td th:text="${ProductsBase.goodsName}"/>
+        <tr th:each="BaseProducts:${baseProducts}">
+            <td th:text="${BaseProducts.id}"/>
+            <td th:text="${BaseProducts.barcode}"/>
+            <td th:text="${BaseProducts.typeWarehouse}"/>
+            <td th:text="${BaseProducts.goods}"/>
         </tr>
     </tbody>
 </table>
 
-<form action="#" th:action="@{/}" th:object="${newVegetable}" method="post">
-    <p>barcode:<input type="text" th:field="*{barcode}"></p>
-    <p>warehouseName:<input type="text" th:field="*{warehouseName}"></p>
-    <p>goodsName:<input type="text" th:field="*{goodsName}"></p>
+<form action="#" th:action="@{/}" th:object="${newBaseProducts}" method="post">
+    <p>barcode:      <input type="text" th:field="*{barcode}"></p>
+    <p>warehouseName:<input type="text" th:field="*{typeWarehouse}"></p>
+    <p>goodsName:    <input type="text" th:field="*{goods}"></p>
     <p><input type="submit" value="Create new Vegetable" class="btn btn-primary green"/> <input type="reset" value="Reset" class="btn btn-danger"/> </p>
 </form>
 

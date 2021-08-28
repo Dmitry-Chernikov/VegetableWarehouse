@@ -7,31 +7,31 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.dmitry.VegetableWarehouse.model.BaseProducts;
-import ru.dmitry.VegetableWarehouse.repo.BaseEntityRepository;
+import ru.dmitry.VegetableWarehouse.repo.BaseProductsRepository;
 
 
 @Controller //помечаем что класс будет контроллером
 @RequestMapping("/") //По какому пути этот метод будет срабатывать
 public class HomeController {
 
-/*    private BaseEntityRepository baseEntityRepository;
+    private BaseProductsRepository baseProductsRepository;
     //три типа внедрения зависимостей, через поле, черз Setter, конструктор
     //spring context вставляет необходимые зависимости
     @Autowired //Авто связь это на всякий случай
-    public HomeController(BaseEntityRepository baseEntityRepository) {
-        this.baseEntityRepository = baseEntityRepository;
+    public HomeController(BaseProductsRepository baseProductsRepository) {
+        this.baseProductsRepository = baseProductsRepository;
     }
 
     @GetMapping
     public String getIndex(Model model){
-        model.addAttribute("base", baseEntityRepository.findAll());
-        model.addAttribute("newVegetable",new BaseProducts());
+        model.addAttribute("baseProducts", baseProductsRepository.findAll());
+        model.addAttribute("newBaseProducts",new BaseProducts());
         return "index";
     }
 
     @PostMapping
-    public String createGoods(BaseProducts vegetable){
-        baseEntityRepository.save(vegetable);
+    public String createGoods(BaseProducts baseProducts){
+        baseProductsRepository.save(baseProducts);
         return "redirect:/";
-    }*/
+    }
 }
