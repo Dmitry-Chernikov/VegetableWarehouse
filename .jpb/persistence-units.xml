@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PersistenceUnitSettings">
     <persistence-units>
-      <persistence-unit name="Default" defaultIncludeChangeLogFile="src/main/resources/db/changelog/2021/14-01-changelog.xml">
+      <persistence-unit name="Default">
         <packages>
           <package value="ru.dmitry.VegetableWarehouse" />
         </packages>

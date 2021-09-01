@@ -31,7 +31,7 @@ public class Units extends BaseEntity {
         @Column(name = "designation_unit", length = 10)
         private String designationUnit;
 
-        @OneToMany(mappedBy = "units")
+        @OneToMany(mappedBy = "units", fetch = FetchType.LAZY)
         private Set<Goods> goodses;
 
 }

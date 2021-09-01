@@ -14,19 +14,19 @@
 #spring.liquibase.enabled=false
 
 spring:
-      jpa:
-        show-sql: true
-        generate-dll: true
-        hibernate:
-          ddl-auto: validate
-          #use-new-id-generator-mappings: false
-      datasource:
-        driver: org.postgressql.Driver
-        url: jdbc:postgresql://localhost:5432/vegetable
-        username: postgres
-        password: su
-      liquibase:
-        enabled: true
-        change-log: classpath:db/changelog/db.changelog-master.xml
-
-
+  main:
+    lazy-initialization: false
+  jpa:
+    show-sql: true
+    generate-dll: true
+    hibernate:
+      ddl-auto: validate
+      #use-new-id-generator-mappings: false
+  datasource:
+    driver: org.postgressql.Driver
+    url: jdbc:postgresql://localhost:5432/vegetable
+    username: postgres
+    password: su
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.xml

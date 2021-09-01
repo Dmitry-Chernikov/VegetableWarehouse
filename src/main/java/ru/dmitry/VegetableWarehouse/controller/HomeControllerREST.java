@@ -1,5 +1,8 @@
 package ru.dmitry.VegetableWarehouse.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +14,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = {"/api"}, produces = "application/json")
+@AllArgsConstructor
 public class HomeControllerREST {
     private BaseProductsRepository baseProductsRepository;
-
-    public HomeControllerREST(BaseProductsRepository baseProductsRepository) {
-        this.baseProductsRepository = baseProductsRepository;
-    }
 
     //метод чтения по всей последовательности
     @GetMapping

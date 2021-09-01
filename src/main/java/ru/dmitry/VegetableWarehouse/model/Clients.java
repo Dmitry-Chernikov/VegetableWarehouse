@@ -53,7 +53,7 @@ public class Clients extends BaseEntity{
         @Column(name = "working_position", length = 50)
         private String workingPosition;
 
-        @OneToMany(mappedBy = "clients")
+        @OneToMany(mappedBy = "clients", fetch = FetchType.LAZY)
         private List<Sales> saleses;
 
 }

@@ -22,8 +22,7 @@ public class TypeWarehouse extends BaseEntity{
         @Column(name = "name_warehouse", length = 50)
         private String nameWarehouse;
 
-        @OneToMany
-        @JoinColumn(name = "type_warehouse_id")
+        @OneToMany(mappedBy = "typeWarehouse", fetch = FetchType.LAZY)
         private List<BaseProducts> baseProductses;
 
 /**

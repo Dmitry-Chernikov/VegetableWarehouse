@@ -1,6 +1,7 @@
 package ru.dmitry.VegetableWarehouse.model;
 
 //import ch.qos.logback.core.joran.spi.NoAutoStart;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class BaseEntity implements Serializable {
         private static final long serialVersionUID = 1972709113480192104L;
 
         @Id
+        @JsonIgnore
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         //@Column(name="id")
         private long id;

@@ -20,13 +20,13 @@ public class Sales extends BaseEntity{
         /**
          * Уникальный идентификатор расходной товарной наклодной
          */
-                @Column(name = "barcode")
-                private UUID barcode;
+        @Column(name = "barcode")
+        private UUID barcode;
 
         /**
          * Имя товара
          */
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "base_products_id")
         private BaseProducts baseProducts;
 
@@ -45,14 +45,14 @@ public class Sales extends BaseEntity{
         /**
          * ФИО прнинявшего клиента товар
          */
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "clients_id")
         private Clients clients;
 
         /**
          * ФИО сдавшего товар
          */
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "employee_id")
         private Employee employee;;
 

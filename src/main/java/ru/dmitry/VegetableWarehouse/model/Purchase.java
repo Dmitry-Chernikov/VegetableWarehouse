@@ -20,14 +20,13 @@ public class Purchase extends BaseEntity{
         /**
         * Уникальный идентификатор приходной товарной наклодной
          */
-                @Column(name = "barcode")
-                private UUID barcode;
-
+        @Column(name = "barcode")
+        private UUID barcode;
 
         /**
          * Имя товара
          */
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "base_products_id")
         private BaseProducts baseProducts;
 
@@ -46,14 +45,14 @@ public class Purchase extends BaseEntity{
         /**
          * ФИО сдавшего товар
          */
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "suppliers_id")
         private Suppliers suppliers;
 
         /**
          * ФИО прнинявшего товар
          */
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "employee_id")
         private Employee employee;
 

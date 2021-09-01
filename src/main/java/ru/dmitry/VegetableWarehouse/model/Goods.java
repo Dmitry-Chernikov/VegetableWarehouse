@@ -10,6 +10,7 @@ import java.util.List;
  */
 @Entity
 //@Table(name = "GOODS")
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,7 +22,7 @@ public class Goods extends BaseEntity{
         /**
          * Наименование продукта
          */
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "products_id")
         private Products products;
 
@@ -41,7 +42,7 @@ public class Goods extends BaseEntity{
         /**
          * Ед.изм
          */
-        @ManyToOne
+        @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "units_id")
         private Units units;
 
@@ -57,7 +58,7 @@ public class Goods extends BaseEntity{
         @Column(name = "manufacture_country", length = 100)
         private String manufactureCountry;
 
-        @OneToMany(mappedBy = "goods")
+        @OneToMany(mappedBy = "goods", fetch = FetchType.LAZY)
         private List<BaseProducts> baseProductses;
 
 }
