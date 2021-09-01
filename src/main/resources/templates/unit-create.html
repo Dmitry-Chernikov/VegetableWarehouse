@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create unit</title>
+</head>
+<body>
+<form action="#" th:action="@{/unit-create}" th:object="${units}" method="post">
+    <label for="measurementUnit">Еденица измерения</label>
+    <input type="text" th:field="*{measurementUnit}" id="measurementUnit" placeholder="Еденица измерения">
+
+    <label for="designationUnit">Обозначение Ед\Изм</label>
+    <input type="text" th:field="*{designationUnit}" id="designationUnit" placeholder="Обозначение Ед\Изм">
+
+    <input type="submit" value="Create Unit">
+</form>
+</body>
+</html>
