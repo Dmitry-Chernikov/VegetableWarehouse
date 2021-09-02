@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <title>Units</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
 <div th:switch="${units}">
     <h2 th:case="null">Ничего не найдено в таблице Еденицы измерения!</h2>
     <div th:case="*">
-        <h2>Units</h2>
-        <table>
+        <h2>Table Units</h2>
+        <table class="centered">
             <thead>
             <tr>
                 <th>ID</th>
@@ -22,13 +23,14 @@
                 <td th:text="${unit.id}"></td>
                 <td th:text="${unit.measurementUnit}"></td>
                 <td th:text="${unit.designationUnit}"></td>
-                <td><a th:href="@{unit-update/{id}(id=@{user.id})}">Edit</a></td>
-                <td><a th:href="@{unit-delete/{id}(id=@{user.id})}">Delete</a></td>
+                <td><a th:href="@{unit-update/{id}(id=${unit.id})}">Edit</a></td>
+                <td><a th:href="@{unit-delete/{id}(id=${unit.id})}">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </div>
-    <p><a href="/unit-create">Create user</a></p>
+    <p><a href="/unit-create" class="waves-effect waves-light btn">Create unit</a></p>
+    <p><a href="/" class="waves-effect waves-light btn">Back to main page</a></p>
 </div>
 </body>
 </html>

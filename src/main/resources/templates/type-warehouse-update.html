@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Update type warehouse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<form action="#" th:action="@{/type-warehouse-update}" th:object="${typeWarehouse}" method="post">
+    <p>ID: <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"></p>
+    <p>Назвние типа склада: <input type="text" th:field="*{nameWarehouse}" id="nameWarehouse" placeholder="Назвние типа склада"></p>
+    <p><input type="submit" value="Update type warehouse" class="btn btn-primary green"></p>
+</form>
+</body>
+</html>

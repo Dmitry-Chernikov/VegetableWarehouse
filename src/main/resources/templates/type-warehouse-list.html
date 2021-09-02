@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Type Warehouse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div th:switch="${typeWarehouse}">
+    <h2 th:case="null">Ничего не найдено в таблице Тип склада!</h2>
+    <div th:case="*">
+        <h2>Table type Warehouse</h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Наименование склада</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="type:${typeWarehouse}">
+                <td th:text="${type.id}"></td>
+                <td th:text="${type.nameWarehouse}"></td>
+                <td><a th:href="@{type-warehouse-update/{id}(id=${type.id})}">Edit</a></td>
+                <td><a th:href="@{type-warehouse-delete/{id}(id=${type.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/type-warehouse-create" class="waves-effect waves-light btn">Create type warehouse</a></p>
+    <p><a href="/" class="waves-effect waves-light btn">Back to main page</a></p>
+</div>
+</body>
+</html>
