@@ -8,7 +8,7 @@
 <body>
 <form action="#" th:action="@{/type-warehouse-update}" th:object="${typeWarehouse}" method="post">
     <p>ID: <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"></p>
-    <p>Назвние типа склада: <input type="text" th:field="*{nameWarehouse}" id="nameWarehouse" placeholder="Назвние типа склада"></p>
+    <p>Название типа склада: <input type="text" th:field="*{nameWarehouse}" id="nameWarehouse" placeholder="Название типа склада"></p>
     <p> <input type="submit" value="Update type warehouse" class="btn btn-primary green">
         <input type="reset" value="Reset" class="btn waves-effect waves-light red lighten-2"/>
         <a href="/type-warehouse" class="waves-effect waves-light btn">Back page</a>

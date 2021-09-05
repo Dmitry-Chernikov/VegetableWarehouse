@@ -10,7 +10,7 @@
 
     <p>ID: <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"></p>
 
-    <p>Идентификатор наклодной: <input readonly type="text" th:field="*{barcode}" id="barcode" placeholder="Идентификатор наклодной"></p>
+    <p>Идентификатор накладной: <input readonly type="text" th:field="*{barcode}" id="barcode" placeholder="Идентификатор накладной"></p>
 
     <p>Имя товара: <select class="browser-default" th:field="*{baseProducts}">
         <option th:each="base : ${baseList}" th:value="${base.id}" th:text="${base.getGoods().getVarietyName()}" th:selected="${baseProducts == base}">Имя товара</option>
@@ -22,7 +22,7 @@
     <p>Наименование получателя: <input type="text" th:field="*{clientName}" id="clientName" placeholder="Наименование получателя"></p>
 
     <p>ФИО клиента прнинявшего товар: <select class="browser-default" th:field="*{clients}">
-        <option th:each="client : ${clientsList}" th:value="${client.id}" th:text="${client.getNameClient()}" th:selected="${clients == client}">ФИО прнинявшего клиента товар</option>
+        <option th:each="client : ${clientsList}" th:value="${client.id}" th:text="${client.getNameClient()}" th:selected="${clients == client}">ФИО принявшего клиента товар</option>
     </select>
     </p>
 

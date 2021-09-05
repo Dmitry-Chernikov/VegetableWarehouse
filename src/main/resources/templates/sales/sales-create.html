@@ -9,7 +9,7 @@
 
 <form th:method="post" th:action="@{/sales-create}" th:object="${sales}" >
 
-    <p>Идентификатор наклодной: <input readonly type="text" th:field="*{barcode}" id="barcode" placeholder="Идентификатор наклодной"></p>
+    <p>Идентификатор накладной: <input readonly type="text" th:field="*{barcode}" id="barcode" placeholder="Идентификатор накладной"></p>
 
     <p>Имя товара: <select class="browser-default" th:field="*{baseProducts}">
         <option th:each="base : ${baseList}" th:value="${base.id}" th:text="${base.getGoods().getVarietyName()}">Имя товара</option>
@@ -20,8 +20,8 @@
 
     <p>Наименование получателя: <input type="text" th:field="*{clientName}" id="clientName" placeholder="Наименование получателя"></p>
 
-    <p>ФИО клиента прнинявшего товар: <select class="browser-default" th:field="*{clients}">
-        <option th:each="client : ${clientsList}" th:value="${client.id}" th:text="${client.getNameClient()}">ФИО прнинявшего клиента товар</option>
+    <p>ФИО клиента принявшего товар: <select class="browser-default" th:field="*{clients}">
+        <option th:each="client : ${clientsList}" th:value="${client.id}" th:text="${client.getNameClient()}">ФИО принявшего клиента товар</option>
     </select>
     </p>
 

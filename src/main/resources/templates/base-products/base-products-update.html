@@ -12,8 +12,8 @@
     <p>ID: <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"></p>
     <p>Идентификатор штрих-код: <input readonly type="text" th:field="*{barcode}" id="barcode" placeholder="Идентификатор штрих-код"></p>
 
-    <p>Склад на ктором находиться товар: <select class="browser-default" th:field="*{typeWarehouse}">
-        <option th:each="warehouse : ${typeWarehouseList}" th:value="${warehouse.id}" th:text="${warehouse.getNameWarehouse()}" th:selected="${typeWarehouse == warehouse}">Склад на ктором находиться товар</option>
+    <p>Склад на котором находиться товар: <select class="browser-default" th:field="*{typeWarehouse}">
+        <option th:each="warehouse : ${typeWarehouseList}" th:value="${warehouse.id}" th:text="${warehouse.getNameWarehouse()}" th:selected="${typeWarehouse == warehouse}">Склад на котором находиться товар</option>
     </select>
     </p>
 
