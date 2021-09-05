@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+
+    <title>Vegetable Warehouse</title>
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"  media="screen,projection"/>
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<h5>Basic Lists of Grocery Base</h5>
+<p> <a href="/units" class="waves-effect waves-light btn">Go edit table Units</a>
+    <a href="/type-warehouse" class="waves-effect waves-light btn">Go edit table Type Warehouse</a>
+    <a href="/suppliers" class="waves-effect waves-light btn">Go edit table Suppliers</a>
+    <a href="/clients" class="waves-effect waves-light btn">Go edit table Clients</a>
+    <a href="/employee" class="waves-effect waves-light btn">Go edit table Employee</a>
+    <a href="/products" class="waves-effect waves-light btn">Go edit table Products</a>
+    <a href="/goods" class="waves-effect waves-light btn">Go edit table Goods</a>
+</p>
+<hr>
+
+<h5>Operations with a commodity invoice</h5>
+<p> <a href="/sales" class="waves-effect waves-light btn">Go edit table Sales</a>
+    <a href="/purchase" class="waves-effect waves-light btn">Go edit table Purchase</a>
+</p>
+<hr>
+<h3>Table of product base</h3>
+<table class="highlight">
+    <!--caption>Имя таблицы</caption-->
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Идентификатор штрих-код</th>
+        <th>Склад на ктором находиться товар</th>
+        <th>Наименование товара</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="base : ${baseProducts}">
+        <td th:text="${base.id}"/>
+        <td th:text="${base.barcode}"/>
+        <td th:text="${base.typeWarehouse.nameWarehouse}"/>
+        <td th:text="${base.goods.varietyName}"/>
+
+        <td><a th:href="@{base-products-update/{id}(id=${base.id})}">Edit</a></td>
+        <td><a th:href="@{base-products-delete/{id}(id=${base.id})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+
+<p> <a href="/base-products-create" class="waves-effect waves-light btn">Create product base</a>
+    <a href="/" class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>Refresh table page</a>
+</p>
+</body>
+</html>

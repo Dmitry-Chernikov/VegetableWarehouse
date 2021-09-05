@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Create sales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+<form th:method="post" th:action="@{/purchase-create}" th:object="${purchase}" >
+
+    <p>Идентификатор наклодной: <input readonly type="text" th:field="*{barcode}" id="barcode" placeholder="Идентификатор наклодной"></p>
+
+    <p>Имя товара: <select class="browser-default" th:field="*{baseProducts}">
+        <option th:each="base : ${baseList}" th:value="${base.id}" th:text="${base.getGoods().getVarietyName()}">Имя товара</option>
+    </select>
+    </p>
+
+    <p>Количество товара: <input type="number" th:field="*{countProduct}" id="countProduct" placeholder="Количество товара"></p>
+
+    <p>Наименование поставщика: <input type="text" th:field="*{suppliersName}" id="suppliersName" placeholder="Наименование поставщика"></p>
+
+    <p>ФИО сдавшего товар: <select class="browser-default" th:field="*{suppliers}">
+        <option th:each="supplier : ${suppliersList}" th:value="${supplier.id}" th:text="${supplier.getName()}">ФИО сдавшего товарр</option>
+    </select>
+    </p>
+
+    <p>ФИО прнинявшего товар: <select class="browser-default" th:field="*{employee}">
+        <option th:each="employee : ${employeeList}" th:value="${employee.id}" th:text="${employee.getFullName()}">ФИО прнинявшего товар</option>
+    </select>
+    </p>
+
+    <p>Дата прихода товара на склад: <input type="date" th:field="*{operationDate}" id="operationDate" placeholder="Дата прихода товара на склад"></p>
+    <p>Цена товара: <input type="number" th:field="*{valuePrice}" id="valuePrice" placeholder="Цена товара"></p>
+
+    <p> <input type="submit" value="Create purchase" class="btn btn-primary green">
+        <input type="reset" value="Reset" class="btn waves-effect waves-light red lighten-2"/>
+        <a href="/purchase" class="waves-effect waves-light btn">Back page</a>
+    </p>
+</form>
+</body>
+</html>

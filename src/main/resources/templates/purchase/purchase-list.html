@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Purchase</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div th:switch="${purchase}">
+    <h2 th:case="null">Ничего не найдено в таблице Приходная накладная!</h2>
+    <div th:case="*">
+        <h2>Table Purchase</h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Идентификатор наклодной</th>
+                <th>Имя товара</th>
+                <th>Количество товара</th>
+                <th>Наименование поставщика</th>
+                <th>ФИО сдавшего товар</th>
+                <th>ФИО прнинявшего товар</th>
+                <th>Дата прихода товара на склад</th>
+                <th>Цена товара</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="purchas : ${purchase}">
+                <td th:text="${purchas.id}"></td>
+                <td th:text="${purchas.barcode}"></td>
+                <td th:text="${purchas.baseProducts.goods.varietyName}"></td>
+                <td th:text="${purchas.countProduct}"></td>
+                <td th:text="${purchas.suppliersName}"></td>
+                <td th:text="${purchas.suppliers.name}"></td>
+                <td th:text="${purchas.employee.fullName}"></td>
+                <td th:text="${purchas.operationDate}"></td>
+                <td th:text="${purchas.valuePrice}"></td>
+
+                <td><a th:href="@{purchase-update/{id}(id=${purchas.id})}">Edit</a></td>
+                <td><a th:href="@{purchase-delete/{id}(id=${purchas.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p> <a href="/purchase-create" class="waves-effect waves-light btn">Create unit</a>
+        <a href="/" class="waves-effect waves-light btn">Back to main page</a>
+    </p>
+</div>
+</body>
+</html>

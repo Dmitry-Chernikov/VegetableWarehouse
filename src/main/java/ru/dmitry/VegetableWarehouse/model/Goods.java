@@ -1,6 +1,8 @@
 package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -35,8 +37,9 @@ public class Goods extends BaseEntity{
         /**
          * Годен до
          */
+        @DateTimeFormat(pattern="yyyy-MM-dd")
         @Column(name = "shelf_life")
-        @Temporal(TemporalType.TIMESTAMP)
+        @Temporal(TemporalType.DATE)
         private Date shelfLife;
 
         /**

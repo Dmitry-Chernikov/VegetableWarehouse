@@ -27,7 +27,7 @@ public class ClientsService {
         return clientsRepository.findAll();
     }
     //Save one unit
-    public Clients saveUnits(Clients clients){
+    public Clients save(Clients clients){
         return clientsRepository.save(clients);
     }
     //Delete unit on id

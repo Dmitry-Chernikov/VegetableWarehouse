@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">>
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <title>Clients</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div th:switch="${clients}">
+  <h2 th:case="null">Ничего не найдено в таблице Клиенты!</h2>
+  <div th:case="*">
+    <h2>Table Clients</h2>
+    <table class="centered">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Наименование получателя</th>
+        <th>Код учётного номера плательщика</th>
+        <th>Юридический адрес</th>
+        <th>Телефон</th>
+        <th>Контактное лицо</th>
+        <th>Должность</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="clients : ${clients}">
+        <td th:text="${clients.id}"></td>
+        <td th:text="${clients.nameClient}"></td>
+        <td th:text="${clients.codeUNP}"></td>
+        <td th:text="${clients.legalAddress}"></td>
+        <td th:text="${clients.telephoneNumber}"></td>
+        <td th:text="${clients.fullNameClient}"></td>
+        <td th:text="${clients.workingPosition}"></td>
+
+        <td><a th:href="@{clients-update/{id}(id=${clients.id})}">Edit</a></td>
+        <td><a th:href="@{clients-delete/{id}(id=${clients.id})}">Delete</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <p> <a href="/clients-create" class="waves-effect waves-light btn">Create unit</a>
+      <a href="/" class="waves-effect waves-light btn">Back to main page</a>
+  </p>
+</div>
+</body>
+</html>

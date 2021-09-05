@@ -27,7 +27,7 @@ public class BaseProductsService {
         return baseProductsRepository.findAll();
     }
     //Save one unit
-    public BaseProducts saveUnits(BaseProducts baseProducts){
+    public BaseProducts save(BaseProducts baseProducts){
         return baseProductsRepository.save(baseProducts);
     }
     //Delete unit on id

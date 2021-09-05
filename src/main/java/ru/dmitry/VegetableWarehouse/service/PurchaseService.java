@@ -27,7 +27,7 @@ public class PurchaseService {
         return purchaseRepository.findAll();
     }
     //Save one unit
-    public Purchase saveUnits(Purchase purchase){
+    public Purchase save(Purchase purchase){
         return purchaseRepository.save(purchase);
     }
     //Delete unit on id

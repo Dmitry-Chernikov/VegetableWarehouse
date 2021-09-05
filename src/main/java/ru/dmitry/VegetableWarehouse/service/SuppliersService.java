@@ -27,7 +27,7 @@ public class SuppliersService {
         return suppliersRepository.findAll();
     }
     //Save one unit
-    public Suppliers saveUnits(Suppliers suppliers){
+    public Suppliers save(Suppliers suppliers){
         return suppliersRepository.save(suppliers);
     }
     //Delete unit on id

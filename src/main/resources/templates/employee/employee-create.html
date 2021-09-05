@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Create employee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<form action="#" th:action="@{/employee-create}" th:object="${employee}" method="post">
+
+    <p>ФИО сотрудника: <input type="text" th:field="*{fullName}" id="fullName" placeholder="ФИО сотрудника"></p>
+    <p>Дата рождения сотрудника: <input type="date" th:field="*{dateBirth}" id="dateBirth" placeholder="Дата рождения сотрудника"></p>
+    <p>Должность сотрудника: <input type="text" th:field="*{position}" id="position" placeholder="Должность сотрудника"></p>
+    <p>Адрес проживания: <input type="text" th:field="*{accommodationAddress}" id="accommodationAddress" placeholder="Адрес проживания"></p>
+    <p>Телефон домашний: <input type="text" th:field="*{telephoneHome}" id="telephoneHome" placeholder="Телефон домашний"></p>
+    <p>Телефон мобильный: <input type="text" th:field="*{telephoneMobil}" id="telephoneMobil" placeholder="Телефон мобильный"></p>
+
+    <p> <input type="submit" value="Create Employee" class="btn btn-primary green">
+        <input type="reset" value="Reset" class="btn waves-effect waves-light red lighten-2"/>
+        <a href="/employee" class="waves-effect waves-light btn">Back page</a>
+    </p>
+</form>
+</body>
+</html>

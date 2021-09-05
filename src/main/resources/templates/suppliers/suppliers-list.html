@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Suppliers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div th:switch="${suppliers}">
+    <h2 th:case="null">Ничего не найдено в таблице Поставщики!</h2>
+    <div th:case="*">
+        <h2>Table Suppliers</h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Наименование организации поставщика</th>
+                <th>Код учётного номера плательщика</th>
+                <th>Юридический адрес</th>
+                <th>Номер телефон</th>
+                <th>Контактное лицо</th>
+                <th>Должность представителя поставщика</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="suppliers:${suppliers}">
+                <td th:text="${suppliers.id}"></td>
+                <td th:text="${suppliers.name}"></td>
+                <td th:text="${suppliers.codeUNP}"></td>
+                <td th:text="${suppliers.legalAddress}"></td>
+                <td th:text="${suppliers.telephoneNumber}"></td>
+                <td th:text="${suppliers.fullName}"></td>
+                <td th:text="${suppliers.workingPosition}"></td>
+                <td><a th:href="@{suppliers-update/{id}(id=${suppliers.id})}">Edit</a></td>
+                <td><a th:href="@{suppliers-delete/{id}(id=${suppliers.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p> <a href="/suppliers-create" class="waves-effect waves-light btn">Create Suppliers</a>
+        <a href="/" class="waves-effect waves-light btn">Back to main page</a>
+    </p>
+</div>
+</body>
+</html>

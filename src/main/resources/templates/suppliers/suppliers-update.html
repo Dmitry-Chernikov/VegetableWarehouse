@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <title>Update Suppliers</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<form action="#" th:action="@{/suppliers-update}" th:object="${suppliers}" method="post">
+  <p>ID: <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"></p>
+  <p>Наименование организации поставщика: <input type="text" th:field="*{name}" id="name" placeholder="Наименование организации поставщика"></p>
+  <p>Код учётного номера плательщика: <input type="text" th:field="*{codeUNP}" id="codeUNP" placeholder="Код учётного номера плательщика"></p>
+  <p>Юридический адрес: <input type="text" th:field="*{legalAddress}" id="legalAddress" placeholder="Юридический адрес"></p>
+  <p>Номер телефон: <input type="text" th:field="*{telephoneNumber}" id="telephoneNumber" placeholder="Номер телефон"></p>
+  <p>Контактное лицо: <input type="text" th:field="*{fullName}" id="fullName" placeholder="Контактное лицо"></p>
+  <p>Должность представителя поставщика: <input type="text" th:field="*{workingPosition}" id="workingPosition" placeholder="Должность представителя поставщика"></p>
+  <p> <input type="submit" value="Update Supplier" class="btn btn-primary green">
+      <input type="reset" value="Reset" class="btn waves-effect waves-light red lighten-2"/>
+      <a href="/suppliers" class="waves-effect waves-light btn">Back page</a>
+  </p>
+</form>
+</body>
+</html>

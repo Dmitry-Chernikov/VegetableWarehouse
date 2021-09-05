@@ -1,6 +1,8 @@
 package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
@@ -21,7 +23,7 @@ public class Sales extends BaseEntity{
          * Уникальный идентификатор расходной товарной наклодной
          */
         @Column(name = "barcode")
-        private UUID barcode;
+        private String barcode = UUID.randomUUID().toString();
 
         /**
          * Имя товара
@@ -59,7 +61,9 @@ public class Sales extends BaseEntity{
         /**
          * Дата расхода товара на склад
          */
+        @DateTimeFormat(pattern="yyyy-MM-dd")
         @Column(name = "date_operation")
+        @Temporal(TemporalType.DATE)
         private Date operationDate;
 
         /**

@@ -38,7 +38,7 @@ public class Clients extends BaseEntity{
         /**
          * Телефон
          */
-        @Column(name = "telephone_Number", length = 50)
+        @Column(name = "telephone_number", length = 50)
         private String telephoneNumber;
 
         /**

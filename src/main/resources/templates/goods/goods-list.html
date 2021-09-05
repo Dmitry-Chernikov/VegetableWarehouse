@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Goods</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div th:switch="${goods}">
+    <h2 th:case="null">Ничего не найдено в таблице Товары!</h2>
+    <div th:case="*">
+        <h2>Table Goods</h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Наименование продукта</th>
+                <th>Наименование сорта</th>
+                <th>Годен до</th>
+                <th>Ед.изм</th>
+                <th>Наименование производителя</th>
+                <th>Страна происхождения</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="goods : ${goods}">
+                <td th:text="${goods.id}"></td>
+                <td th:text="${goods.products.nameTypeVegetable}"></td>
+                <td th:text="${goods.varietyName}"></td>
+                <td th:text="${goods.shelfLife}"></td>
+                <td th:text="${goods.units.designationUnit}"></td>
+                <td th:text="${goods.manufactureName}"></td>
+                <td th:text="${goods.manufactureCountry}"></td>
+
+                <td><a th:href="@{goods-update/{id}(id=${goods.id})}">Edit</a></td>
+                <td><a th:href="@{goods-delete/{id}(id=${goods.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p> <a href="/goods-create" class="waves-effect waves-light btn">Create unit</a>
+        <a href="/" class="waves-effect waves-light btn">Back to main page</a>
+    </p>
+</div>
+</body>
+</html>

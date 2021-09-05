@@ -69,6 +69,5 @@
                                  referencedColumnNames="id"
                                  constraintName="fk_purchase_employee"/>
 
-
     </changeSet>
 </databaseChangeLog>

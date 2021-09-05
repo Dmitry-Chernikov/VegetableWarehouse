@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Update goods</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+    <body>
+        <form th:method="post" th:action="@{/goods-update}" th:object="${goods}">
+
+            <p>ID: <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"></p>
+
+            <p>Наименование продукта: <select class="browser-default" th:name="*{products}" th:field="*{products}">
+                <option th:each="product : ${productsList}" th:value="${product.id}" th:text="${product.getNameTypeVegetable()}" th:selected="${products == product}">Наименование продукта</option>
+            </select>
+            </p>
+
+            <p>Наименование сорта: <input type="text" th:field="*{varietyName}" id="varietyName" placeholder="Наименование сорта"></p>
+            <p>Годен до: <input type="date" th:field="*{shelfLife}" id="shelfLife" placeholder="Годен до"></p>
+
+            <p>Ед.изм: <select class="browser-default" th:name="*{units}" th:field="*{units}">
+                <option th:each="unit : ${unitsList}" th:value="${unit.id}" th:text="${unit.getDesignationUnit()}" th:selected="${units == unit}">Ед.изм</option>
+            </select>
+            </p>
+
+            <p>Наименование производителя: <input type="text" th:field="*{manufactureName}" id="manufactureName" placeholder="Наименование производителя"></p>
+            <p>Страна происхождения: <input type="text" th:field="*{manufactureCountry}" id="manufactureCountry" placeholder="Страна происхождения"></p>
+
+            <p> <input type="submit" value="Update goods" class="btn btn-primary green">
+                <input type="reset" value="Reset" class="btn waves-effect waves-light red lighten-2"/>
+                <a href="/goods" class="waves-effect waves-light btn">Back page</a>
+            </p>
+        </form>
+    </body>
+</html>

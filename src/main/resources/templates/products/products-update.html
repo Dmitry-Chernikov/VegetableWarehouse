@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Update products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+    <body>
+        <form action="#" th:action="@{/products-update}" th:object="${products}" method="post">
+            <p>ID: <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"></p>
+            <p>Наименование типа продукта: <input type="text" th:field="*{nameTypeVegetable}" id="nameTypeVegetable" placeholder="Наименование типа продукта"></p>
+            <p> <input type="submit" value="Update products" class="btn btn-primary green">
+                <input type="reset" value="Reset" class="btn waves-effect waves-light red lighten-2"/>
+                <a href="/products" class="waves-effect waves-light btn">Back page</a>
+            </p>
+        </form>
+    </body>
+</html>

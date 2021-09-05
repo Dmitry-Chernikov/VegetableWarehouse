@@ -24,35 +24,36 @@ public class UnitsController {
         List<Units> units = unitsService.findAll();
         System.out.println(units.size());
         model.addAttribute("units", units);
-        return "units-list";
+        return "units/units-list";
     }
 
     @GetMapping("/unit-create")
     public String createUnitsForm (Units units){
-        return "unit-create";
+        return "units/unit-create";
     }
 
     @PostMapping("/unit-create")
     public String createUnits(Units units){
-        unitsService.saveUnits(units);
+        unitsService.save(units);
         return "redirect:/units";
     }
+
     @GetMapping("unit-delete/{id}")
-    public String deleteUnit(@PathVariable("id") Long id){
+    public String deleteUnits(@PathVariable("id") Long id){
         unitsService.deleteBuId(id);
         return "redirect:/units";
     }
 
     @GetMapping("/unit-update/{id}")
-    public String updateUnitForm (@PathVariable("id") Long id, Model model){
+    public String updateUnitsForm (@PathVariable("id") Long id, Model model){
         Units unit = unitsService.findById(id);
         model.addAttribute("unit", unit);
-        return "/unit-update";
+        return "units/unit-update";
     }
 
     @PostMapping("/unit-update")
-    public String updateUser(Units units){
-        unitsService.saveUnits(units);
+    public String updateUnits(Units units){
+        unitsService.save(units);
         return "redirect:/units";
     }
 }

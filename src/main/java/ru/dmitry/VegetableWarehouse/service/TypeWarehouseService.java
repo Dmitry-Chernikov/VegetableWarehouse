@@ -27,7 +27,7 @@ public class TypeWarehouseService {
         return typeWarehouseRepository.findAll();
     }
     //Save one unit
-    public TypeWarehouse saveUnits(TypeWarehouse typeWarehouse){
+    public TypeWarehouse save(TypeWarehouse typeWarehouse){
         return typeWarehouseRepository.save(typeWarehouse);
     }
     //Delete unit on id

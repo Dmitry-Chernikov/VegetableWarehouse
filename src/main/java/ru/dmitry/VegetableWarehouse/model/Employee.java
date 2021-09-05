@@ -1,6 +1,8 @@
 package ru.dmitry.VegetableWarehouse.model;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -26,8 +28,9 @@ public class Employee extends BaseEntity {
         /**
          * Дата рождения сотрудника
          */
+        @DateTimeFormat(pattern="yyyy-MM-dd")
         @Column(name = "date_birth")
-        @Temporal(TemporalType.TIMESTAMP)
+        @Temporal(TemporalType.DATE)
         private Date dateBirth;
 
         /**

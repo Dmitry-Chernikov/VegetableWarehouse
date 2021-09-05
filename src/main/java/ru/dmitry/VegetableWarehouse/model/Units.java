@@ -32,6 +32,6 @@ public class Units extends BaseEntity {
         private String designationUnit;
 
         @OneToMany(mappedBy = "units", fetch = FetchType.LAZY)
-        private Set<Goods> goodses;
+        private List<Goods> goodses;
 
 }

@@ -2,15 +2,17 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <title>Update Units</title>
+    <title>Create unit</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
     <body>
-        <form action="#" th:action="@{/unit-update}" th:object="${unit}" method="post">
-            <p>ID: <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"></p>
+        <form action="#" th:action="@{/unit-create}" th:object="${units}" method="post">
             <p>Еденица измерения: <input type="text" th:field="*{measurementUnit}" id="measurementUnit" placeholder="Еденица измерения"></p>
             <p>Обозначение Ед\Изм: <input type="text" th:field="*{designationUnit}" id="designationUnit" placeholder="Обозначение Ед\Изм"></p>
-            <p><input type="submit" value="Update Unit" class="btn btn-primary green"></p>
+            <p> <input type="submit" value="Create Unit" class="btn btn-primary green">
+                <input type="reset" value="Reset" class="btn waves-effect waves-light red lighten-2"/>
+                <a href="/units" class="waves-effect waves-light btn">Back page</a>
+            </p>
         </form>
     </body>
 </html>

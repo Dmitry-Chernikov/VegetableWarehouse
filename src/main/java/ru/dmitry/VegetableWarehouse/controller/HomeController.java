@@ -11,7 +11,7 @@ import ru.dmitry.VegetableWarehouse.repo.BaseProductsRepository;
 
 
 @Controller //помечаем что класс будет контроллером
-@RequestMapping("/") //По какому пути этот метод будет срабатывать
+@RequestMapping(value = "/home")
 public class HomeController {
 
     private BaseProductsRepository baseProductsRepository;
@@ -22,14 +22,14 @@ public class HomeController {
         this.baseProductsRepository = baseProductsRepository;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String getIndex(Model model){
         model.addAttribute("baseProducts", baseProductsRepository.findAll());
         model.addAttribute("newBaseProducts",new BaseProducts());
         return "index";
     }
 
-    @PostMapping
+    @PostMapping("/")
     public String createGoods(BaseProducts baseProducts){
         baseProductsRepository.save(baseProducts);
         return "redirect:/";

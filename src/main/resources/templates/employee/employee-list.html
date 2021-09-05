@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Employee</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div th:switch="${employee}">
+    <h2 th:case="null">Ничего не найдено в таблице Сотрудники склада!</h2>
+    <div th:case="*">
+        <h2>Table Employee</h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>ФИО сотрудника</th>
+                <th>Дата рождения сотрудника</th>
+                <th>Должность сотрудника</th>
+                <th>Адрес проживания</th>
+                <th>Телефон домашний</th>
+                <th>Телефон мобильный</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="employee : ${employee}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.fullName}"></td>
+                <td th:text="${employee.dateBirth}"></td>
+                <td th:text="${employee.position}"></td>
+                <td th:text="${employee.accommodationAddress}"></td>
+                <td th:text="${employee.telephoneHome}"></td>
+                <td th:text="${employee.telephoneMobil}"></td>
+
+                <td><a th:href="@{employee-update/{id}(id=${employee.id})}">Edit</a></td>
+                <td><a th:href="@{employee-delete/{id}(id=${employee.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p> <a href="/employee-create" class="waves-effect waves-light btn">Create Employee</a>
+        <a href="/" class="waves-effect waves-light btn">Back to main page</a>
+    </p>
+</div>
+</body>
+</html>

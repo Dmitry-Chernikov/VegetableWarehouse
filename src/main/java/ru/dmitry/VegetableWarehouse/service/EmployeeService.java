@@ -28,7 +28,7 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
     //Save one unit
-    public Employee saveUnits(Employee employee){
+    public Employee save(Employee employee){
         return employeeRepository.save(employee);
     }
     //Delete unit on id

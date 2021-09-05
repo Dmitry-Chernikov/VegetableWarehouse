@@ -31,7 +31,7 @@ public class Suppliers extends BaseEntity{
         /**
          * Юридический адрес
          */
-        @Column(name = "legal_address", length = 50)
+        @Column(name = "legal_address", length = 100)
         private String legalAddress;
 
         /**

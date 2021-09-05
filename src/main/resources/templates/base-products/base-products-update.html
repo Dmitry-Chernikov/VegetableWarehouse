@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Update products base</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+
+<form th:method="post" th:action="@{/base-products-create}" th:object="${baseProducts}" >
+
+    <p>ID: <input readonly type="number" th:field="*{id}" id="id" placeholder="ID"></p>
+    <p>Идентификатор штрих-код: <input readonly type="text" th:field="*{barcode}" id="barcode" placeholder="Идентификатор штрих-код"></p>
+
+    <p>Склад на ктором находиться товар: <select class="browser-default" th:field="*{typeWarehouse}">
+        <option th:each="warehouse : ${typeWarehouseList}" th:value="${warehouse.id}" th:text="${warehouse.getNameWarehouse()}" th:selected="${typeWarehouse == warehouse}">Склад на ктором находиться товар</option>
+    </select>
+    </p>
+
+    <p>Наименование товара: <select class="browser-default" th:field="*{goods}">
+        <option th:each="good : ${goodsList}" th:value="${good.id}" th:text="${good.getVarietyName()}" th:selected="${goods == good}">Наименование товара</option>
+    </select>
+    </p>
+
+    <p> <input type="submit" value="Update product base" class="btn btn-primary green">
+        <input type="reset" value="Reset" class="btn waves-effect waves-light red lighten-2"/>
+        <a href="/" class="waves-effect waves-light btn">Back page</a>
+    </p>
+</form>
+
+</body>
+</html>

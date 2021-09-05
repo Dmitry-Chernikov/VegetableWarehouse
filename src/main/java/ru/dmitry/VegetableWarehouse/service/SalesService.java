@@ -27,7 +27,7 @@ public class SalesService {
         return salesRepository.findAll();
     }
     //Save one unit
-    public Sales saveUnits(Sales sales){
+    public Sales save(Sales sales){
         return salesRepository.save(sales);
     }
     //Delete unit on id

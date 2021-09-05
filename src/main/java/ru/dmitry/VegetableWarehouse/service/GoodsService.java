@@ -27,7 +27,7 @@ public class GoodsService {
         return goodsRepository.findAll();
     }
     //Save one unit
-    public Goods saveUnits(Goods goods){
+    public Goods save(Goods goods){
         return goodsRepository.save(goods);
     }
     //Delete unit on id

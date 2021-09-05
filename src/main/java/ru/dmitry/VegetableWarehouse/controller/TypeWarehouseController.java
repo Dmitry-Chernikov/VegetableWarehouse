@@ -25,17 +25,17 @@ public class TypeWarehouseController {
     public String findAll(Model model){
         List<TypeWarehouse> typeWarehouse = typeWarehouseService.findAll();
         model.addAttribute("typeWarehouse", typeWarehouse);
-        return "type-warehouse-list";
+        return "warehouse/type-warehouse-list";
     }
 
     @GetMapping("/type-warehouse-create")
     public String createTypeWarehouseForm (TypeWarehouse typeWarehouse){
-        return "type-warehouse-create";
+        return "warehouse/type-warehouse-create";
     }
 
     @PostMapping("/type-warehouse-create")
     public String createTypeWarehouse(TypeWarehouse typeWarehouse){
-        typeWarehouseService.saveUnits(typeWarehouse);
+        typeWarehouseService.save(typeWarehouse);
         return "redirect:/type-warehouse";
     }
 
@@ -49,12 +49,12 @@ public class TypeWarehouseController {
     public String updateTypeWarehouseForm (@PathVariable("id") Long id, Model model){
         TypeWarehouse typeWarehouse = typeWarehouseService.findById(id);
         model.addAttribute("typeWarehouse", typeWarehouse);
-        return "/type-warehouse-update";
+        return "warehouse/type-warehouse-update";
     }
 
     @PostMapping("/type-warehouse-update")
-    public String updateUser(TypeWarehouse typeWarehouse){
-        typeWarehouseService.saveUnits(typeWarehouse);
+    public String updateTypeWarehouse(TypeWarehouse typeWarehouse){
+        typeWarehouseService.save(typeWarehouse);
         return "redirect:/type-warehouse";
     }
 }

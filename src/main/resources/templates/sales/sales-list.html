@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <title>Sales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<div th:switch="${sales}">
+    <h2 th:case="null">Ничего не найдено в таблице Расходная накладная!</h2>
+    <div th:case="*">
+        <h2>Table Sales</h2>
+        <table class="centered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Идентификатор наклодной</th>
+                <th>Имя товара</th>
+                <th>Количество товара</th>
+                <th>Наименование получателя</th>
+                <th>ФИО прнинявшего клиента товар</th>
+                <th>ФИО сдавшего товар</th>
+                <th>Дата расхода товара на склад</th>
+                <th>Цена товара</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="sales : ${sales}">
+                <td th:text="${sales.id}"></td>
+                <td th:text="${sales.barcode}"></td>
+                <td th:text="${sales.baseProducts.goods.varietyName}"></td>
+                <td th:text="${sales.countProduct}"></td>
+                <td th:text="${sales.clientName}"></td>
+                <td th:text="${sales.clients.nameClient}"></td>
+                <td th:text="${sales.employee.fullName}"></td>
+                <td th:text="${sales.operationDate}"></td>
+                <td th:text="${sales.valuePrice}"></td>
+
+                <td><a th:href="@{sales-update/{id}(id=${sales.id})}">Edit</a></td>
+                <td><a th:href="@{sales-delete/{id}(id=${sales.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p> <a href="/sales-create" class="waves-effect waves-light btn">Create unit</a>
+        <a href="/" class="waves-effect waves-light btn">Back to main page</a>
+    </p>
+</div>
+</body>
+</html>

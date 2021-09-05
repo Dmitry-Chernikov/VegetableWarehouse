@@ -40,7 +40,7 @@
                 <column name="clint_name" type="varchar(50)"/>
                 <column name="code_unp" type="varchar(50)"/>
                 <column name="legal_address" type="varchar(50)"/>
-                <column name="telephone_Number" type="varchar(50)"/>
+                <column name="telephone_number" type="varchar(50)"/>
                 <column name="full_name" type="varchar(50)"/>
                 <column name="working_position" type="varchar(50)"/>
             </createTable>
@@ -51,7 +51,7 @@
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_employee"/>
                 </column>
                 <column name="full_name" type="varchar(50)"/>
-                <column name="date_birth" type="datetime"/>
+                <column name="date_birth" type="date"/>
                 <column name="working_position" type="varchar(50)"/>
                 <column name="address_accommodation" type="varchar(100)"/>
                 <column name="telephone_home" type="varchar(20)"/>
@@ -79,7 +79,7 @@
                 <!--Key-->
                 <column name="products_id" type="bigint"/>
                 <column name="name_variety" type="varchar(50)"/>
-                <column name="shelf_life" type="datetime"/>
+                <column name="shelf_life" type="date"/>
                 <!--Key-->
                 <column name="units_id" type="bigint"/>
                 <column name="name_manufacture" type="varchar(100)"/>
@@ -91,7 +91,7 @@
                 <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_baseproducts"/>
                 </column>
-                <column name="barcode" type="UUID"/>
+                <column name="barcode" type="text"/>
                 <!--Key-->
                 <column name="type_warehouse_id" type="bigint"/>
                 <!--Key-->
@@ -103,7 +103,7 @@
                 <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_purchase"/>
                 </column>
-                <column name="barcode" type="UUID"/>
+                <column name="barcode" type="text"/>
                 <!--Key-->
                 <column name="base_products_id" type="bigint"/>
                 <column name="count_product" type="double"/>
@@ -112,7 +112,7 @@
                 <column name="suppliers_id" type="bigint"/>
                 <!--Key-->
                 <column name="employee_id" type="bigint"/>
-                <column name="date_operation" type="datetime"/>
+                <column name="date_operation" type="date"/>
                 <column name="price_value" type="double"/>
             </createTable>
 
@@ -122,7 +122,7 @@
                 <column name="id" type="bigint" autoIncrement="true">
                     <constraints primaryKey="true" nullable="false" primaryKeyName="pk_sales"/>
                 </column>
-                <column name="barcode" type="UUID"/>
+                <column name="barcode" type="text"/>
                 <!--Key-->
                 <column name="base_products_id" type="bigint"/>
                 <column name="count_product" type="double"/>
@@ -131,9 +131,10 @@
                 <column name="clients_id" type="bigint"/>
                 <!--Key-->
                 <column name="employee_id" type="bigint"/>
-                <column name="date_operation" type="datetime"/>
+                <column name="date_operation" type="date"/>
                 <column name="price_value" type="double"/>
             </createTable>
+
     </changeSet>
 
 </databaseChangeLog>
