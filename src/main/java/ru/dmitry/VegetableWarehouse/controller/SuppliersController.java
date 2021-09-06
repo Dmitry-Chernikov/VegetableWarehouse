@@ -22,13 +22,13 @@ public class SuppliersController {
 
     @GetMapping("/suppliers")
     public String findAll(Model model){
-        List<Suppliers> suppliers = suppliersService.findAll();
-        model.addAttribute("suppliers", suppliers);
+        model.addAttribute("suppliers", suppliersService.findAll());
         return "suppliers/suppliers-list";
     }
 
     @GetMapping("/suppliers-create")
-    public String createSuppliersForm (Suppliers suppliers){
+    public String createSuppliersForm (Model model){
+        model.addAttribute("suppliers", new Suppliers());
         return "suppliers/suppliers-create";
     }
 
@@ -46,8 +46,7 @@ public class SuppliersController {
 
     @GetMapping("/suppliers-update/{id}")
     public String updateSuppliersForm (@PathVariable("id") Long id, Model model){
-        Suppliers suppliers = suppliersService.findById(id);
-        model.addAttribute("suppliers", suppliers);
+        model.addAttribute("suppliers", suppliersService.findById(id));
         return "suppliers/suppliers-update";
     }
 

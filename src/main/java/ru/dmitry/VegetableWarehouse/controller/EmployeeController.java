@@ -22,14 +22,13 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     public String findAll(Model model){
-        List<Employee> employee = employeeService.findAll();
-        System.out.println(employee.size());
-        model.addAttribute("employee", employee);
+        model.addAttribute("employee", employeeService.findAll());
         return "employee/employee-list";
     }
 
     @GetMapping("/employee-create")
-    public String createEmployeeForm (Employee employee){
+    public String createEmployeeForm (Model model){
+        model.addAttribute("employee", new Employee());
         return "employee/employee-create";
     }
 
@@ -47,8 +46,7 @@ public class EmployeeController {
 
     @GetMapping("/employee-update/{id}")
     public String updateEmployeeForm (@PathVariable("id") Long id, Model model){
-        Employee employee = employeeService.findById(id);
-        model.addAttribute("employee", employee);
+        model.addAttribute("employee", employeeService.findById(id));
         return "employee/employee-update";
     }
 

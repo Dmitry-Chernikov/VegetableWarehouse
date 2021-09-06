@@ -23,13 +23,13 @@ public class TypeWarehouseController {
     
     @GetMapping("/type-warehouse")
     public String findAll(Model model){
-        List<TypeWarehouse> typeWarehouse = typeWarehouseService.findAll();
-        model.addAttribute("typeWarehouse", typeWarehouse);
+        model.addAttribute("typeWarehouse", typeWarehouseService.findAll());
         return "warehouse/type-warehouse-list";
     }
 
     @GetMapping("/type-warehouse-create")
-    public String createTypeWarehouseForm (TypeWarehouse typeWarehouse){
+    public String createTypeWarehouseForm (Model model){
+        model.addAttribute("typeWarehouse", new TypeWarehouse());
         return "warehouse/type-warehouse-create";
     }
 
@@ -47,8 +47,7 @@ public class TypeWarehouseController {
 
     @GetMapping("type-warehouse-update/{id}")
     public String updateTypeWarehouseForm (@PathVariable("id") Long id, Model model){
-        TypeWarehouse typeWarehouse = typeWarehouseService.findById(id);
-        model.addAttribute("typeWarehouse", typeWarehouse);
+        model.addAttribute("typeWarehouse", typeWarehouseService.findById(id));
         return "warehouse/type-warehouse-update";
     }
 

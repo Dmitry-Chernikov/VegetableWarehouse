@@ -23,13 +23,13 @@ public class ClientsController {
 
     @GetMapping("/clients")
     public String findAll(Model model){
-        List<Clients> clients = clientsService.findAll();
-        model.addAttribute("clients", clients);
+        model.addAttribute("clients", clientsService.findAll());
         return "clients/clients-list";
     }
 
     @GetMapping("/clients-create")
-    public String createClientsForm (Clients clients){
+    public String createClientsForm (Model model){
+        model.addAttribute("clients", new Clients());
         return "clients/clients-create";
     }
 
@@ -47,8 +47,7 @@ public class ClientsController {
 
     @GetMapping("/clients-update/{id}")
     public String updateClientsForm (@PathVariable("id") Long id, Model model){
-        Clients clients = clientsService.findById(id);
-        model.addAttribute("clients", clients);
+        model.addAttribute("clients", clientsService.findById(id));
         return "clients/clients-update";
     }
 

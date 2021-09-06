@@ -21,14 +21,13 @@ public class UnitsController {
 
     @GetMapping("/units")
     public String findAll(Model model){
-        List<Units> units = unitsService.findAll();
-        System.out.println(units.size());
-        model.addAttribute("units", units);
+        model.addAttribute("units", unitsService.findAll());
         return "units/units-list";
     }
 
     @GetMapping("/unit-create")
-    public String createUnitsForm (Units units){
+    public String createUnitsForm (Model model){
+        model.addAttribute("units", new Units());
         return "units/unit-create";
     }
 
@@ -46,8 +45,7 @@ public class UnitsController {
 
     @GetMapping("/unit-update/{id}")
     public String updateUnitsForm (@PathVariable("id") Long id, Model model){
-        Units unit = unitsService.findById(id);
-        model.addAttribute("unit", unit);
+        model.addAttribute("unit", unitsService.findById(id));
         return "units/unit-update";
     }
 

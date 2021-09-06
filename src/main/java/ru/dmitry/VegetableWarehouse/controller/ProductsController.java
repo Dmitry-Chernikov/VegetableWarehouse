@@ -22,13 +22,13 @@ public class ProductsController {
 
     @GetMapping("/products")
     public String findAll(Model model){
-        List<Products> products = productsService.findAll();
-        model.addAttribute("products", products);
+        model.addAttribute("products", productsService.findAll());
         return "products/products-list";
     }
 
     @GetMapping("/products-create")
-    public String createProductsForm (Products products){
+    public String createProductsForm (Model model){
+        model.addAttribute("products", new Products());
         return "products/products-create";
     }
 
@@ -46,8 +46,7 @@ public class ProductsController {
 
     @GetMapping("/products-update/{id}")
     public String updateProductsForm (@PathVariable("id") Long id, Model model){
-        Products products = productsService.findById(id);
-        model.addAttribute("products", products);
+        model.addAttribute("products", productsService.findById(id));
         return "products/products-update";
     }
 
