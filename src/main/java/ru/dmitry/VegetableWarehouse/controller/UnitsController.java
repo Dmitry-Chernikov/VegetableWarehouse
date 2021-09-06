@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import ru.dmitry.VegetableWarehouse.model.Units;
 import ru.dmitry.VegetableWarehouse.service.UnitsService;
 
-import java.util.List;
-
 @Controller
 public class UnitsController {
     private final UnitsService unitsService;
