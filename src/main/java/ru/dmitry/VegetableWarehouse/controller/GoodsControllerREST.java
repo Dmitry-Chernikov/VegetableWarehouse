@@ -6,8 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import ru.dmitry.VegetableWarehouse.dto.GoodsDto;
 import ru.dmitry.VegetableWarehouse.model.Goods;
-import ru.dmitry.VegetableWarehouse.service.GoodsService;
+import ru.dmitry.VegetableWarehouse.service.GoodsServiceDto;
 
 import java.util.Optional;
 
@@ -15,66 +16,63 @@ import java.util.Optional;
 @RequestMapping(value = {"/api"}, produces = "application/json")
 @AllArgsConstructor
 public class GoodsControllerREST {
-    private final GoodsService goodsService;
+    private final GoodsServiceDto goodsServiceDto;
 
     //Получить все записи
     @GetMapping(path = "/goods")
-    public Iterable<Goods> getAllGoods() {
-        return goodsService.findAll();
+    public Iterable<GoodsDto> getAllGoods() {
+        return goodsServiceDto.findAll();
     }
 
     //Получить записи по id
     @GetMapping(path = "/goods/{id}")
-    public ResponseEntity<Goods> getGoodsById(@PathVariable("id") Long id) {
-        Optional<Goods> goods = Optional.ofNullable(goodsService.findById(id));
-        if (goods.isPresent()) {
-            return new ResponseEntity<>(goods.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<GoodsDto> getGoodsById(@PathVariable("id") Long id) {
+        Optional<GoodsDto> goodsDto = Optional.ofNullable(goodsServiceDto.findById(id));
+        return goodsDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     //Метод добовления
     @PostMapping(path = "/goods", consumes = "application/json")
-    public Goods postGoods(@RequestBody Goods goods) {
-        return goodsService.save(goods);
+    public GoodsDto postGoods(@RequestBody GoodsDto goodsDto) {
+        return goodsServiceDto.save(goodsDto);
     }
 
     //Метод обновления
     @PutMapping(path = "/goods/{id}")
-    public Goods putGoods(@RequestBody Goods goods) {
-        return goodsService.save(goods);
+    public GoodsDto putGoods(@RequestBody GoodsDto goodsDto) {
+        return goodsServiceDto.save(goodsDto);
     }
 
     //Метод обновления с проверкой поля
     @PatchMapping(path = "/goods/{id}", consumes = "application/json")
-    public Goods patchGoods(@PathVariable("id") Long id, @RequestBody Goods goods) {
-        Goods goodsRefresh = goodsService.findById(id);
+    public GoodsDto patchGoods(@PathVariable("id") Long id, @RequestBody GoodsDto goodsDto) {
+        GoodsDto goodsDtoRefresh = goodsServiceDto.findById(id);
 
-        if (goods.getProducts() != null) {
-            goodsRefresh.setProducts(goods.getProducts());
+//        if (goodsDto.getProducts() != null) {
+//            goodsDtoRefresh.setProducts(goodsDto.getProducts());
+//        }
+
+        if (goodsDto.getVarietyName() != null) {
+            goodsDtoRefresh.setVarietyName(goodsDto.getVarietyName());
         }
 
-        if (goods.getVarietyName() != null) {
-            goodsRefresh.setVarietyName(goods.getVarietyName());
+        if (goodsDto.getShelfLife() != null) {
+            goodsDtoRefresh.setShelfLife(goodsDto.getShelfLife());
         }
 
-        if (goods.getShelfLife() != null) {
-            goodsRefresh.setShelfLife(goods.getShelfLife());
+//        if (goodsDto.getUnits() != null) {
+//            goodsDtoRefresh.setUnits(goodsDto.getUnits());
+//        }
+
+        if (goodsDto.getManufactureName() != null) {
+            goodsDtoRefresh.setManufactureName(goodsDto.getManufactureName());
         }
 
-        if (goods.getUnits() != null) {
-            goodsRefresh.setUnits(goods.getUnits());
+        if (goodsDto.getManufactureCountry() != null) {
+            goodsDtoRefresh.setManufactureCountry(goodsDto.getManufactureCountry());
         }
 
-        if (goods.getManufactureName() != null) {
-            goodsRefresh.setManufactureName(goods.getManufactureName());
-        }
-
-        if (goods.getManufactureCountry() != null) {
-            goodsRefresh.setManufactureCountry(goods.getManufactureCountry());
-        }
-
-        return goodsService.save(goodsRefresh);
+        return goodsServiceDto.save(goodsDtoRefresh);
     }
 
     //Метод удаления
@@ -82,7 +80,7 @@ public class GoodsControllerREST {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteGoods(@PathVariable("id") Long id) {
         try {
-            goodsService.deleteBuId(id);
+            goodsServiceDto.deleteBuId(id);
         } catch (EmptyResultDataAccessException e) {
         }
     }

@@ -6,8 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import ru.dmitry.VegetableWarehouse.dto.EmployeeDto;
 import ru.dmitry.VegetableWarehouse.model.Employee;
-import ru.dmitry.VegetableWarehouse.service.EmployeeService;
+import ru.dmitry.VegetableWarehouse.service.EmployeeServiceDto;
 
 import java.util.Optional;
 
@@ -16,67 +17,64 @@ import java.util.Optional;
 @AllArgsConstructor
 public class EmployeeControllerREST {
 
-    private final EmployeeService employeeService;
+    private final EmployeeServiceDto employeeServiceDto;
 
     //Получить все записи
     @GetMapping(path = "/employee")
-    public Iterable<Employee> getAllEmployee() {
-        return employeeService.findAll();
+    public Iterable<EmployeeDto> getAllEmployee() {
+        return employeeServiceDto.findAll();
     }
 
     //Получить записи по id
     @GetMapping(path = "/employee/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
-        Optional<Employee> employee = Optional.ofNullable(employeeService.findById(id));
-        if (employee.isPresent()) {
-            return new ResponseEntity<>(employee.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long id) {
+        Optional<EmployeeDto> employeeDto = Optional.ofNullable(employeeServiceDto.findById(id));
+        return employeeDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     //Метод добовления
     @PostMapping(path = "/employee", consumes = "application/json")
-    public Employee postEmployee(@RequestBody Employee employee) {
-        return employeeService.save(employee);
+    public EmployeeDto postEmployee(@RequestBody EmployeeDto employeeDto) {
+        return employeeServiceDto.save(employeeDto);
     }
 
     //Метод обновления
     @PutMapping(path = "/employee/{id}")
-    public Employee putEmployee(@RequestBody Employee employee) {
-        return employeeService.save(employee);
+    public EmployeeDto putEmployee(@RequestBody EmployeeDto employeeDto) {
+        return employeeServiceDto.save(employeeDto);
     }
 
     //Метод обновления с проверкой поля
     @PatchMapping(path = "/employee/{id}", consumes = "application/json")
-    public Employee patchEmployee(@PathVariable("id") Long id, @RequestBody Employee employee) {
-        Employee employeeRefresh = employeeService.findById(id);
+    public EmployeeDto patchEmployee(@PathVariable("id") Long id, @RequestBody EmployeeDto employeeDto) {
+        EmployeeDto employeeDtoRefresh = employeeServiceDto.findById(id);
 
-        if (employee.getFullName() != null) {
-            employeeRefresh.setFullName(employee.getFullName());
-        }
-
-        if (employee.getDateBirth() != null) {
-            employeeRefresh.setDateBirth(employee.getDateBirth());
+        if (employeeDto.getFullName() != null) {
+            employeeDtoRefresh.setFullName(employeeDto.getFullName());
         }
 
-        if (employee.getDateBirth() != null) {
-            employeeRefresh.setDateBirth(employee.getDateBirth());
+        if (employeeDto.getDateBirth() != null) {
+            employeeDtoRefresh.setDateBirth(employeeDto.getDateBirth());
         }
 
-        if (employee.getPosition() != null) {
-            employeeRefresh.setPosition(employee.getPosition());
-        }
-        if (employee.getAccommodationAddress() != null) {
-            employeeRefresh.setAccommodationAddress(employee.getAccommodationAddress());
-        }
-        if (employee.getTelephoneHome() != null) {
-            employeeRefresh.setTelephoneHome(employee.getTelephoneHome());
-        }
-        if (employee.getTelephoneMobil() != null) {
-            employeeRefresh.setTelephoneMobil(employee.getTelephoneMobil());
+        if (employeeDto.getDateBirth() != null) {
+            employeeDtoRefresh.setDateBirth(employeeDto.getDateBirth());
         }
 
-        return employeeService.save(employeeRefresh);
+        if (employeeDto.getPosition() != null) {
+            employeeDtoRefresh.setPosition(employeeDto.getPosition());
+        }
+        if (employeeDto.getAccommodationAddress() != null) {
+            employeeDtoRefresh.setAccommodationAddress(employeeDto.getAccommodationAddress());
+        }
+        if (employeeDto.getTelephoneHome() != null) {
+            employeeDtoRefresh.setTelephoneHome(employeeDto.getTelephoneHome());
+        }
+        if (employeeDto.getTelephoneMobil() != null) {
+            employeeDtoRefresh.setTelephoneMobil(employeeDto.getTelephoneMobil());
+        }
+
+        return employeeServiceDto.save(employeeDtoRefresh);
     }
 
     //Метод удаления
@@ -84,7 +82,7 @@ public class EmployeeControllerREST {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable("id") Long id) {
         try {
-            employeeService.deleteBuId(id);
+            employeeServiceDto.deleteBuId(id);
         } catch (EmptyResultDataAccessException e) {
         }
     }

@@ -1,6 +1,10 @@
 package ru.dmitry.VegetableWarehouse.model;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -53,7 +57,7 @@ public class Clients extends BaseEntity{
         @Column(name = "working_position", length = 50)
         private String workingPosition;
 
-        @OneToMany(mappedBy = "clients", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "clients", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Sales> saleses;
 
 }

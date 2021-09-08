@@ -8,13 +8,13 @@ import java.util.Set;
 /**
  * Еденицы измерения
  */
-
 @Entity
 //@Table(name = "UNITS")
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class Units extends BaseEntity {
 
         private static final long serialVersionUID = 2348563159789054502L;
@@ -31,7 +31,11 @@ public class Units extends BaseEntity {
         @Column(name = "designation_unit", length = 10)
         private String designationUnit;
 
-        @OneToMany(mappedBy = "units", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "units", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Goods> goodses;
 
+        public Units(String measurementUnit, String designationUnit) {
+                this.measurementUnit = measurementUnit;
+                this.designationUnit = designationUnit;
+        }
 }

@@ -71,7 +71,4 @@ public class Sales extends BaseEntity{
          */
         @Column(name = "price_value")
         private double valuePrice;
-
-
-
 }

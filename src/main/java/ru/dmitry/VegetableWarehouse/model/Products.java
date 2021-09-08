@@ -23,7 +23,7 @@ public class Products extends BaseEntity{
         @Column(name = "type_vegetable", length = 50)
         private String nameTypeVegetable;
 
-        @OneToMany(mappedBy = "products", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "products", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Goods> goodses;
 
 /**

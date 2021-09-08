@@ -6,8 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import ru.dmitry.VegetableWarehouse.dto.ProductsDto;
 import ru.dmitry.VegetableWarehouse.model.Products;
-import ru.dmitry.VegetableWarehouse.service.ProductsService;
+import ru.dmitry.VegetableWarehouse.service.ProductsServiceDto;
 
 import java.util.Optional;
 
@@ -16,46 +17,43 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ProductsControllerREST {
 
-    private final ProductsService productsService;
+    private final ProductsServiceDto productsServiceDto;
 
     //Получить все записи
     @GetMapping(path = "/products")
-    public Iterable<Products> getAllProducts() {
-        return productsService.findAll();
+    public Iterable<ProductsDto> getAllProducts() {
+        return productsServiceDto.findAll();
     }
 
     //Получить записи по id
     @GetMapping(path = "/products/{id}")
-    public ResponseEntity<Products> getProductsById(@PathVariable("id") Long id) {
-        Optional<Products> products = Optional.ofNullable(productsService.findById(id));
-        if (products.isPresent()) {
-            return new ResponseEntity<>(products.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ProductsDto> getProductsById(@PathVariable("id") Long id) {
+        Optional<ProductsDto> productsDto = Optional.ofNullable(productsServiceDto.findById(id));
+        return productsDto.<ResponseEntity<ProductsDto>>map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     //Метод добовления
     @PostMapping(path = "/products", consumes = "application/json")
-    public Products postProducts(@RequestBody Products products) {
-        return productsService.save(products);
+    public ProductsDto postProducts(@RequestBody ProductsDto productsDto) {
+        return productsServiceDto.save(productsDto);
     }
 
     //Метод обновления
     @PutMapping(path = "/products/{id}")
-    public Products putProducts(@RequestBody Products products) {
-        return productsService.save(products);
+    public ProductsDto putProducts(@RequestBody ProductsDto productsDto) {
+        return productsServiceDto.save(productsDto);
     }
 
     //Метод обновления с проверкой поля
     @PatchMapping(path = "/products/{id}", consumes = "application/json")
-    public Products patchProducts(@PathVariable("id") Long id, @RequestBody Products products) {
-        Products productsRefresh = productsService.findById(id);
+    public ProductsDto patchProducts(@PathVariable("id") Long id, @RequestBody ProductsDto productsDto) {
+        ProductsDto productsDtoRefresh = productsServiceDto.findById(id);
 
-        if (products.getNameTypeVegetable() != null) {
-            productsRefresh.setNameTypeVegetable(products.getNameTypeVegetable());
+        if (productsDto.getNameTypeVegetable() != null) {
+            productsDtoRefresh.setNameTypeVegetable(productsDto.getNameTypeVegetable());
         }
 
-        return productsService.save(productsRefresh);
+        return productsServiceDto.save(productsDtoRefresh);
     }
 
     //Метод удаления
@@ -63,7 +61,7 @@ public class ProductsControllerREST {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteProducts(@PathVariable("id") Long id) {
         try {
-            productsService.deleteBuId(id);
+            productsServiceDto.deleteBuId(id);
         } catch (EmptyResultDataAccessException e) {
         }
     }

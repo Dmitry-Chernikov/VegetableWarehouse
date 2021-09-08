@@ -5,9 +5,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import ru.dmitry.VegetableWarehouse.model.Clients;
-import ru.dmitry.VegetableWarehouse.service.ClientsService;
+import ru.dmitry.VegetableWarehouse.dto.ClientsDto;
+import ru.dmitry.VegetableWarehouse.service.ClientsServiceDto;
 
 import java.util.Optional;
 
@@ -15,66 +14,63 @@ import java.util.Optional;
 @RequestMapping(value = {"/api"}, produces = "application/json")
 @AllArgsConstructor
 public class ClientsControllerREST {
-    private final ClientsService clientsService;
+    private final ClientsServiceDto clientsServiceDto;
 
     //Получить все записи
     @GetMapping(path = "/clients")
-    public Iterable<Clients> getAllClients() {
-        return clientsService.findAll();
+    public Iterable<ClientsDto> getAllClients() {
+        return clientsServiceDto.findAll();
     }
 
     //Получить записи по id
     @GetMapping(path = "/clients/{id}")
-    public ResponseEntity<Clients> getClientsById(@PathVariable("id") Long id) {
-        Optional<Clients> clients = Optional.ofNullable(clientsService.findById(id));
-        if (clients.isPresent()) {
-            return new ResponseEntity<>(clients.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ClientsDto> getClientsById(@PathVariable("id") Long id) {
+        Optional<ClientsDto> clientsDto = Optional.ofNullable(clientsServiceDto.findById(id));
+        return clientsDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     //Метод добовления
     @PostMapping(path = "/clients", consumes = "application/json")
-    public Clients postClients(@RequestBody Clients clients) {
-        return clientsService.save(clients);
+    public ClientsDto postClients(@RequestBody ClientsDto clientsDto) {
+        return clientsServiceDto.save(clientsDto);
     }
 
     //Метод обновления
     @PutMapping(path = "/clients/{id}")
-    public Clients putClients(@RequestBody Clients clients) {
-        return clientsService.save(clients);
+    public ClientsDto putClients(@RequestBody ClientsDto clientsDto) {
+        return clientsServiceDto.save(clientsDto);
     }
 
     //Метод обновления с проверкой поля
     @PatchMapping(path = "/clients/{id}", consumes = "application/json")
-    public Clients patchClients(@PathVariable("id") Long id, @RequestBody Clients clients) {
-        Clients clientsRefresh = clientsService.findById(id);
+    public ClientsDto patchClients(@PathVariable("id") Long id, @RequestBody ClientsDto clientsDto) {
+        ClientsDto clientsDtoRefresh = clientsServiceDto.findById(id);
 
-        if (clients.getNameClient() != null) {
-            clientsRefresh.setNameClient(clients.getNameClient());
+        if (clientsDto.getNameClient() != null) {
+            clientsDtoRefresh.setNameClient(clientsDto.getNameClient());
         }
 
-        if (clients.getCodeUNP() != null) {
-            clientsRefresh.setCodeUNP(clients.getCodeUNP());
+        if (clientsDto.getCodeUNP() != null) {
+            clientsDtoRefresh.setCodeUNP(clientsDto.getCodeUNP());
         }
 
-        if (clients.getLegalAddress() != null) {
-            clientsRefresh.setLegalAddress(clients.getLegalAddress());
+        if (clientsDto.getLegalAddress() != null) {
+            clientsDtoRefresh.setLegalAddress(clientsDto.getLegalAddress());
         }
 
-        if (clients.getTelephoneNumber() != null) {
-            clientsRefresh.setTelephoneNumber(clients.getTelephoneNumber());
+        if (clientsDto.getTelephoneNumber() != null) {
+            clientsDtoRefresh.setTelephoneNumber(clientsDto.getTelephoneNumber());
         }
 
-        if (clients.getFullNameClient() != null) {
-            clientsRefresh.setFullNameClient(clients.getFullNameClient());
+        if (clientsDto.getFullNameClient() != null) {
+            clientsDtoRefresh.setFullNameClient(clientsDto.getFullNameClient());
         }
 
-        if (clients.getWorkingPosition() != null) {
-            clientsRefresh.setWorkingPosition(clients.getWorkingPosition());
+        if (clientsDto.getWorkingPosition() != null) {
+            clientsDtoRefresh.setWorkingPosition(clientsDto.getWorkingPosition());
         }
 
-        return clientsService.save(clientsRefresh);
+        return clientsServiceDto.save(clientsDtoRefresh);
     }
 
     //Метод удаления
@@ -82,7 +78,7 @@ public class ClientsControllerREST {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteClients(@PathVariable("id") Long id) {
         try {
-            clientsService.deleteBuId(id);
+            clientsServiceDto.deleteBuId(id);
         } catch (EmptyResultDataAccessException e) {
         }
     }

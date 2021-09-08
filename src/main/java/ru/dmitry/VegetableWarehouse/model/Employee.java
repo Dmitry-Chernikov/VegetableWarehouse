@@ -56,10 +56,10 @@ public class Employee extends BaseEntity {
         @Column(name = "telephone_mobil", length = 20)
         private String telephoneMobil;
 
-        @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Sales> saleses;
 
-        @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Purchase> purchases;
 
 }

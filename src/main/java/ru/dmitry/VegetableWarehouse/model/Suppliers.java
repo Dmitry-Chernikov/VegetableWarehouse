@@ -52,7 +52,7 @@ public class Suppliers extends BaseEntity{
         @Column(name = "working_position", length = 50)
         private String workingPosition;
 
-        @OneToMany(mappedBy = "suppliers", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "suppliers", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Purchase> purchases;
 
 }

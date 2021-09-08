@@ -1,8 +1,9 @@
 package ru.dmitry.VegetableWarehouse.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.UUID;
 /**
  * База всех продуктов
  */
-@Table(name = "BaseProducts")
+//@Table(name = "BaseProducts")
 @Entity
 //@Table(name = "PRODUCTS BASE")
 @Getter
@@ -41,7 +42,10 @@ public class BaseProducts extends BaseEntity{
         @JoinColumn(name = "goods_id")
         private Goods goods;
 
-        @OneToMany(mappedBy = "baseProducts", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "baseProducts", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Sales> saleses;
+
+        @OneToMany(mappedBy = "baseProducts", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+        private List<Purchase> purchases;
 
 }

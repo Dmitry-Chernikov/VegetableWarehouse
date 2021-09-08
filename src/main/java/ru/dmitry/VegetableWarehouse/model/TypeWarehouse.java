@@ -1,5 +1,6 @@
 package ru.dmitry.VegetableWarehouse.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import javax.persistence.*;
 import java.util.List;
@@ -22,7 +23,7 @@ public class TypeWarehouse extends BaseEntity{
         @Column(name = "name_warehouse", length = 50)
         private String nameWarehouse;
 
-        @OneToMany(mappedBy = "typeWarehouse", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "typeWarehouse", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<BaseProducts> baseProductses;
 
 /**

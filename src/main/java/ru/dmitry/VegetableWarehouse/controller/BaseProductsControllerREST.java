@@ -5,9 +5,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import ru.dmitry.VegetableWarehouse.model.BaseProducts;
-import ru.dmitry.VegetableWarehouse.service.BaseProductsService;
+import ru.dmitry.VegetableWarehouse.dto.BaseProductsDto;
+import ru.dmitry.VegetableWarehouse.service.BaseProductsServiceDto;
 
 import java.util.Optional;
 
@@ -16,54 +15,51 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BaseProductsControllerREST {
 
-    private final BaseProductsService baseProductsService;
+    private final BaseProductsServiceDto baseProductsServiceDto;
 
     //Получить все записи
     @GetMapping(path = "/base-products")
-    public Iterable<BaseProducts> getAllBaseProducts() {
-        return baseProductsService.findAll();
+    public Iterable<BaseProductsDto> getAllBaseProducts() {
+        return baseProductsServiceDto.findAll();
     }
 
     //Получить записи по id
     @GetMapping(path = "/base-products/{id}")
-    public ResponseEntity<BaseProducts> getBaseProductsById(@PathVariable("id") Long id) {
-        Optional<BaseProducts> baseProducts = Optional.ofNullable(baseProductsService.findById(id));
-        if (baseProducts.isPresent()) {
-            return new ResponseEntity<>(baseProducts.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<BaseProductsDto> getBaseProductsById(@PathVariable("id") Long id) {
+        Optional<BaseProductsDto> baseProductsDto = Optional.ofNullable(baseProductsServiceDto.findById(id));
+        return baseProductsDto.map(productsDto -> new ResponseEntity<>(productsDto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     //Метод добовления
     @PostMapping(path = "/base-products", consumes = "application/json")
-    public BaseProducts postBaseProducts(@RequestBody BaseProducts baseProducts) {
-        return baseProductsService.save(baseProducts);
+    public BaseProductsDto postBaseProducts(@RequestBody BaseProductsDto baseProductsDto) {
+        return baseProductsServiceDto.save(baseProductsDto);
     }
 
     //Метод обновления
     @PutMapping(path = "/base-products/{id}")
-    public BaseProducts putBaseProducts(@RequestBody BaseProducts baseProducts) {
-        return baseProductsService.save(baseProducts);
+    public BaseProductsDto putBaseProducts(@RequestBody BaseProductsDto baseProductsDto) {
+        return baseProductsServiceDto.save(baseProductsDto);
     }
 
     //Метод обновления с проверкой поля
     @PatchMapping(path = "/base-products/{id}", consumes = "application/json")
-    public BaseProducts patchBaseProducts(@PathVariable("id") Long id, @RequestBody BaseProducts baseProducts) {
-        BaseProducts baseProductsRefresh = baseProductsService.findById(id);
+    public BaseProductsDto patchBaseProducts(@PathVariable("id") Long id, @RequestBody BaseProductsDto baseProductsDto) {
+        BaseProductsDto baseProductsDtoRefresh = baseProductsServiceDto.findById(id);
 
-        if (baseProducts.getBarcode() != null) {
-            baseProductsRefresh.setBarcode(baseProducts.getBarcode());
+        if (baseProductsDto.getBarcode() != null) {
+            baseProductsDtoRefresh.setBarcode(baseProductsDto.getBarcode());
         }
 
-        if (baseProducts.getTypeWarehouse() != null) {
-            baseProductsRefresh.setTypeWarehouse(baseProducts.getTypeWarehouse());
-        }
+//        if (baseProductsDto.getTypeWarehouse() != null) {
+//            baseProductsDtoRefresh.setTypeWarehouse(baseProductsDto.getTypeWarehouse());
+//        }
 
-        if (baseProducts.getGoods() != null) {
-            baseProductsRefresh.setGoods(baseProducts.getGoods());
-        }
+//        if (baseProductsDto.getGoods() != null) {
+//            baseProductsDtoRefresh.setGoods(baseProductsDto.getGoods());
+//        }
 
-        return baseProductsService.save(baseProductsRefresh);
+        return baseProductsServiceDto.save(baseProductsDtoRefresh);
     }
 
     //Метод удаления
@@ -71,7 +67,7 @@ public class BaseProductsControllerREST {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteBaseProducts(@PathVariable("id") Long id) {
         try {
-            baseProductsService.deleteBuId(id);
+            baseProductsServiceDto.deleteBuId(id);
         } catch (EmptyResultDataAccessException e) {
         }
     }

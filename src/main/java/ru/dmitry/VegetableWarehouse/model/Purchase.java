@@ -72,6 +72,4 @@ public class Purchase extends BaseEntity{
         @Column(name = "price_value")
         private double valuePrice;
 
-
-
 }

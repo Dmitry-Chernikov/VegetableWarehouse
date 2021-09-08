@@ -6,8 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import ru.dmitry.VegetableWarehouse.dto.SuppliersDto;
 import ru.dmitry.VegetableWarehouse.model.Suppliers;
-import ru.dmitry.VegetableWarehouse.service.SuppliersService;
+import ru.dmitry.VegetableWarehouse.service.SuppliersServiceDto;
 
 import java.util.Optional;
 
@@ -16,66 +17,63 @@ import java.util.Optional;
 @AllArgsConstructor //
 public class SuppliersControllerREST {
 
-    private final SuppliersService suppliersService;
+    private final SuppliersServiceDto suppliersServiceDto;
 
     //Получить все записи
     @GetMapping("/suppliers")
-    public Iterable<Suppliers> getAllSuppliers(){
-        return suppliersService.findAll();
+    public Iterable<SuppliersDto> getAllSuppliers(){
+        return suppliersServiceDto.findAll();
     }
 
     //Получить записи по id
     @GetMapping("/suppliers/{id}")
-    public ResponseEntity<Suppliers> getSuppliersById(@PathVariable("id") Long id){
-        Optional<Suppliers> suppliers = Optional.ofNullable(suppliersService.findById(id));
-        if(suppliers.isPresent()){
-            return new ResponseEntity<>(suppliers.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+    public ResponseEntity<SuppliersDto> getSuppliersById(@PathVariable("id") Long id){
+        Optional<SuppliersDto> suppliersDto = Optional.ofNullable(suppliersServiceDto.findById(id));
+        return suppliersDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     //Метод добовления
     @PostMapping(consumes = "application/json", path = "/suppliers")
-    public Suppliers postSuppliers(@RequestBody Suppliers suppliers){
-        return suppliersService.save(suppliers);
+    public SuppliersDto postSuppliers(@RequestBody SuppliersDto suppliersDto){
+        return suppliersServiceDto.save(suppliersDto);
     }
 
     //Метод обновления
     @PutMapping("/suppliers/{id}")
-    public Suppliers putSuppliers(@RequestBody Suppliers suppliers){
-        return suppliersService.save(suppliers);
+    public SuppliersDto putSuppliers(@RequestBody SuppliersDto suppliersDto){
+        return suppliersServiceDto.save(suppliersDto);
     }
 
     //Метод обновления с проверкой поля
     @PatchMapping(path = "/suppliers/{id}",consumes = "application/json")
-    public Suppliers patchSuppliers(@PathVariable("id") Long id, @RequestBody Suppliers suppliers){
-        Suppliers suppliersRefresh = suppliersService.findById(id);
+    public SuppliersDto patchSuppliers(@PathVariable("id") Long id, @RequestBody SuppliersDto suppliersDto){
+        SuppliersDto suppliersDtoRefresh = suppliersServiceDto.findById(id);
 
-        if(suppliers.getName() != null){
-            suppliersRefresh.setName(suppliers.getName());
+        if(suppliersDto.getName() != null){
+            suppliersDtoRefresh.setName(suppliersDto.getName());
         }
 
-        if(suppliers.getCodeUNP() != null){
-            suppliersRefresh.setCodeUNP(suppliers.getCodeUNP());
+        if(suppliersDto.getCodeUNP() != null){
+            suppliersDtoRefresh.setCodeUNP(suppliersDto.getCodeUNP());
         }
 
-        if(suppliers.getLegalAddress() != null){
-            suppliersRefresh.setLegalAddress(suppliers.getLegalAddress());
+        if(suppliersDto.getLegalAddress() != null){
+            suppliersDtoRefresh.setLegalAddress(suppliersDto.getLegalAddress());
         }
 
-        if(suppliers.getTelephoneNumber() != null){
-            suppliersRefresh.setTelephoneNumber(suppliers.getTelephoneNumber());
+        if(suppliersDto.getTelephoneNumber() != null){
+            suppliersDtoRefresh.setTelephoneNumber(suppliersDto.getTelephoneNumber());
         }
 
-        if(suppliers.getFullName() != null){
-            suppliersRefresh.setFullName(suppliers.getFullName());
+        if(suppliersDto.getFullName() != null){
+            suppliersDtoRefresh.setFullName(suppliersDto.getFullName());
         }
 
-        if(suppliers.getWorkingPosition() != null){
-            suppliersRefresh.setWorkingPosition(suppliers.getWorkingPosition());
+        if(suppliersDto.getWorkingPosition() != null){
+            suppliersDtoRefresh.setWorkingPosition(suppliersDto.getWorkingPosition());
         }
 
-        return suppliersService.save(suppliersRefresh);
+        return suppliersServiceDto.save(suppliersDtoRefresh);
     }
 
     //Метод удаления
@@ -83,7 +81,7 @@ public class SuppliersControllerREST {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteSuppliers (@PathVariable("id") Long id){
         try{
-            suppliersService.deleteBuId(id);
+            suppliersServiceDto.deleteBuId(id);
         }catch (EmptyResultDataAccessException e){}
     }
 

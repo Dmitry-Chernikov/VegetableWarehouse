@@ -61,7 +61,7 @@ public class Goods extends BaseEntity{
         @Column(name = "manufacture_country", length = 100)
         private String manufactureCountry;
 
-        @OneToMany(mappedBy = "goods", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "goods", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<BaseProducts> baseProductses;
 
 }
