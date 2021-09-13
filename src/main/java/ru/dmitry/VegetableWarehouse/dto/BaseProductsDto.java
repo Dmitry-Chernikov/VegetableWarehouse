@@ -1,17 +1,19 @@
 package ru.dmitry.VegetableWarehouse.dto;
 
 import lombok.*;
+import ru.dmitry.VegetableWarehouse.model.Goods;
+import ru.dmitry.VegetableWarehouse.model.TypeWarehouse;
 
 import java.util.UUID;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class BaseProductsDto extends AbstractDto{
-    private Long id;
-    private String barcode = UUID.randomUUID().toString();;
-    private Long typeWarehouseId;
-    private Long goodsId;
+
+    private String barcode;
+    private String nameWarehouse;
+    private String varietyName;
 }

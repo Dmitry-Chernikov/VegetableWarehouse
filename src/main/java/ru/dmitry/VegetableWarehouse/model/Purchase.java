@@ -14,8 +14,9 @@ import java.util.UUID;
 //@Table(name = "PURCHASE")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class Purchase extends BaseEntity{
         private static final long serialVersionUID = -2881785172249442237L;
 

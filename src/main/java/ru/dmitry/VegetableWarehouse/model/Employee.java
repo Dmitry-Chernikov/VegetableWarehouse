@@ -14,8 +14,9 @@ import java.util.List;
 //@Table(name = "EMPLOYEE")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class Employee extends BaseEntity {
         private static final long serialVersionUID = 8281530488380256469L;
 

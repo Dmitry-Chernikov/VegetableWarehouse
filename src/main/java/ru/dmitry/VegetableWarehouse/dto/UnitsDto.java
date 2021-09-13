@@ -1,16 +1,14 @@
 package ru.dmitry.VegetableWarehouse.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UnitsDto extends AbstractDto {
-    private Long id;
+
     private String measurementUnit;
     private String designationUnit;
 }

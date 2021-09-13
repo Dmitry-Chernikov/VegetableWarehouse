@@ -1,9 +1,6 @@
 package ru.dmitry.VegetableWarehouse.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,8 +13,9 @@ import java.util.List;
 //@Table(name = "clients")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class Clients extends BaseEntity{
         private static final long serialVersionUID = 4923336868248054214L;
 

@@ -12,11 +12,11 @@ import java.util.List;
  */
 @Entity
 //@Table(name = "GOODS")
-
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class Goods extends BaseEntity{
 
         private static final long serialVersionUID = -935293741889753637L;

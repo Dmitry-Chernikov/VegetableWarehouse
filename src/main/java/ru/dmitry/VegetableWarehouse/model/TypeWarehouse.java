@@ -12,8 +12,9 @@ import java.util.List;
 //@Table(name = "WAREHOUSE")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class TypeWarehouse extends BaseEntity{   
         private static final long serialVersionUID = 1353555820728941054L;
         

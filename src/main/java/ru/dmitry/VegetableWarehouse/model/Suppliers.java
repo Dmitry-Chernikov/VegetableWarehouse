@@ -11,8 +11,9 @@ import java.util.List;
 //@Table(name = "SYPPLIERS")
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class Suppliers extends BaseEntity{
         private static final long serialVersionUID = -4624970170178964461L;
 

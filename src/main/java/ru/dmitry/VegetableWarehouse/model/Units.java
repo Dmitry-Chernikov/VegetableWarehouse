@@ -12,9 +12,9 @@ import java.util.Set;
 //@Table(name = "UNITS")
 @Getter
 @Setter
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor
 public class Units extends BaseEntity {
 
         private static final long serialVersionUID = 2348563159789054502L;
@@ -33,9 +33,4 @@ public class Units extends BaseEntity {
 
         @OneToMany(mappedBy = "units", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Goods> goodses;
-
-        public Units(String measurementUnit, String designationUnit) {
-                this.measurementUnit = measurementUnit;
-                this.designationUnit = designationUnit;
-        }
 }

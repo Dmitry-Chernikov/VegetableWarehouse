@@ -39,7 +39,7 @@
     <!--caption>Имя таблицы</caption-->
     <thead>
     <tr>
-        <th>ID</th>
+        <!--th>ID</th-->
         <th>Идентификатор штрих-код</th>
         <th>Склад на котором находиться товар</th>
         <th>Наименование товара</th>
@@ -47,7 +47,7 @@
     </thead>
     <tbody>
     <tr th:each="base : ${baseProducts}">
-        <td th:text="${base.id}"/>
+        <!--td th:text="${base.id}"/-->
         <td th:text="${base.barcode}"/>
         <td th:text="${base.typeWarehouse.nameWarehouse}"/>
         <td th:text="${base.goods.varietyName}"/>

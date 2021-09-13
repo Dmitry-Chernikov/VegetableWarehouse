@@ -1,11 +1,14 @@
 package ru.dmitry.VegetableWarehouse.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import java.io.Serializable;
 
-
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class AbstractDto implements Serializable {
 
     private Long id;

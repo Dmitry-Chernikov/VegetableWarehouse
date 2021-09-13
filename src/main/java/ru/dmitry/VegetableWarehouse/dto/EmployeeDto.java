@@ -1,18 +1,16 @@
 package ru.dmitry.VegetableWarehouse.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployeeDto extends AbstractDto{
-    private Long id;
+
     private String fullName;
     private Date dateBirth;
     private String position;

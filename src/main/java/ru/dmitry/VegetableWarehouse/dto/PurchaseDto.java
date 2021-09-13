@@ -1,24 +1,22 @@
 package ru.dmitry.VegetableWarehouse.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
-@EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PurchaseDto extends AbstractDto{
-    private Long id;
+
     private String barcode;
-    private Long baseProductsId;
+    private String nameTypeVegetable;
     private double countProduct;
     private String suppliersName;
-    private Long suppliersId;
-    private Long employeeId;
+    private String name;
+    private String fullName;
     private Date operationDate;
     private double valuePrice;
 }
