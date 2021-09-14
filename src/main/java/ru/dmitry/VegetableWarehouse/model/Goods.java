@@ -11,12 +11,7 @@ import java.util.List;
  * Товары
  */
 @Entity
-//@Table(name = "GOODS")
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Goods extends BaseEntity{
 
         private static final long serialVersionUID = -935293741889753637L;
@@ -26,7 +21,7 @@ public class Goods extends BaseEntity{
          */
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "products_id")
-        private Products products;
+                private Products products;
 
         /**
          * Наименование сорта

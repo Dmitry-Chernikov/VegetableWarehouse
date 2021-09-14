@@ -1,6 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +13,7 @@ import ru.dmitry.VegetableWarehouse.services.PurchaseService;
 import ru.dmitry.VegetableWarehouse.services.SuppliersService;
 
 @Controller
+@RequiredArgsConstructor
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
@@ -20,22 +21,14 @@ public class PurchaseController {
     private final SuppliersService suppliersService;
     private final EmployeeService employeeService;
 
-    @Autowired
-    public PurchaseController(PurchaseService purchaseService, BaseProductsService baseProductsService, SuppliersService suppliersService, EmployeeService employeeService) {
-        this.purchaseService = purchaseService;
-        this.baseProductsService = baseProductsService;
-        this.suppliersService = suppliersService;
-        this.employeeService = employeeService;
-    }
-
     @GetMapping("/purchase")
-    public String findAll(Model model){
+    public String findAll(Model model) {
         model.addAttribute("purchase", purchaseService.findAll());
         return "purchase/purchase-list";
     }
 
     @GetMapping("/purchase-create")
-    public String createPurchaseForm (Model model){
+    public String createPurchaseForm(Model model) {
         model.addAttribute("purchase", new Purchase());
         model.addAttribute("baseList", baseProductsService.findAll());
         model.addAttribute("suppliersList", suppliersService.findAll());
@@ -44,19 +37,19 @@ public class PurchaseController {
     }
 
     @PostMapping("/purchase-create")
-    public String createPurchase(Purchase purchase){
+    public String createPurchase(Purchase purchase) {
         purchaseService.save(purchase);
         return "redirect:/purchase";
     }
 
     @GetMapping("purchase-delete/{id}")
-    public String deletePurchase(@PathVariable("id") Long id){
+    public String deletePurchase(@PathVariable("id") Long id) {
         purchaseService.deleteBuId(id);
         return "redirect:/purchase";
     }
 
     @GetMapping("/purchase-update/{id}")
-    public String updatePurchaseForm (@PathVariable("id") Long id, Model model){
+    public String updatePurchaseForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("baseList", baseProductsService.findAll());
         model.addAttribute("suppliersList", suppliersService.findAll());
         model.addAttribute("employeeList", employeeService.findAll());
@@ -65,7 +58,7 @@ public class PurchaseController {
     }
 
     @PostMapping("/purchase-update")
-    public String updatePurchase(Purchase purchase){
+    public String updatePurchase(Purchase purchase) {
         purchaseService.save(purchase);
         return "redirect:/purchase";
     }

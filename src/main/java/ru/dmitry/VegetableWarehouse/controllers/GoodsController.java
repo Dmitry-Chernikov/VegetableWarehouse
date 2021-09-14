@@ -1,6 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,27 +12,21 @@ import ru.dmitry.VegetableWarehouse.services.ProductsService;
 import ru.dmitry.VegetableWarehouse.services.UnitsService;
 
 @Controller
+@RequiredArgsConstructor
 public class GoodsController {
 
     private final GoodsService goodsService;
     private final ProductsService productsService;
     private final UnitsService unitsService;
 
-    @Autowired
-    public GoodsController(GoodsService goodsService, ProductsService productsService, UnitsService unitsService) {
-        this.goodsService = goodsService;
-        this.productsService = productsService;
-        this.unitsService = unitsService;
-    }
-
     @GetMapping("/goods")
-    public String findAll(Model model){
+    public String findAll(Model model) {
         model.addAttribute("goods", goodsService.findAll());
         return "goods/goods-list";
     }
 
     @GetMapping("/goods-create")
-    public String createGoodsForm (Model model){
+    public String createGoodsForm(Model model) {
         model.addAttribute("goods", new Goods());
         model.addAttribute("productsList", productsService.findAll());
         model.addAttribute("unitsList", unitsService.findAll());
@@ -40,19 +34,19 @@ public class GoodsController {
     }
 
     @PostMapping("/goods-create")
-    public String createGoods(Goods goods){
+    public String createGoods(Goods goods) {
         goodsService.save(goods);
         return "redirect:/goods";
     }
 
     @GetMapping("goods-delete/{id}")
-    public String deleteGoods(@PathVariable("id") Long id){
+    public String deleteGoods(@PathVariable("id") Long id) {
         goodsService.deleteBuId(id);
         return "redirect:/goods";
     }
 
     @GetMapping("/goods-update/{id}")
-    public String updateGoodsForm (@PathVariable("id") Long id, Model model){
+    public String updateGoodsForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("productsList", productsService.findAll());
         model.addAttribute("unitsList", unitsService.findAll());
         model.addAttribute("goods", goodsService.findById(id));
@@ -60,7 +54,7 @@ public class GoodsController {
     }
 
     @PostMapping("/goods-update")
-    public String updateGoods(Goods goods){
+    public String updateGoods(Goods goods) {
         goodsService.save(goods);
         return "redirect:/goods";
     }

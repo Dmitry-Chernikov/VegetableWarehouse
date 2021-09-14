@@ -2,11 +2,7 @@ package ru.dmitry.VegetableWarehouse.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class SuppliersDto extends AbstractDto{
 
     private String name;

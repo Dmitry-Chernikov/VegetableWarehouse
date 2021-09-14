@@ -8,12 +8,7 @@ import java.util.List;
  * Поставщики склада
  */
 @Entity
-//@Table(name = "SYPPLIERS")
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Suppliers extends BaseEntity{
         private static final long serialVersionUID = -4624970170178964461L;
 

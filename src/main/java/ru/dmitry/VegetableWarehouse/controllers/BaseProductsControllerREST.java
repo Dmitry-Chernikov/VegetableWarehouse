@@ -1,6 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,67 +14,55 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = {"/api"}, produces = "application/json")
+@RequiredArgsConstructor
 public class BaseProductsControllerREST {
 
     private final BaseProductsService baseProductsService;
-    @Autowired
-    public BaseProductsControllerREST(BaseProductsService baseProductsService) {
-        this.baseProductsService = baseProductsService;
-    }
 
-    //Получить все записи
     @GetMapping(path = "/base-products")
     public List<BaseProductsDto> getAllBaseProducts() {
         return baseProductsService.findAllDto();
     }
 
-    //Получить записи по id
     @GetMapping(path = "/base-products/{id}")
     public ResponseEntity<BaseProductsDto> getBaseProductsById(@PathVariable("id") Long id) {
         Optional<BaseProductsDto> baseProductsDto = Optional.ofNullable(baseProductsService.findByIdDto(id));
         return baseProductsDto.map(productsDto -> new ResponseEntity<>(productsDto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    //Метод добовления
     @PostMapping(path = "/base-products", consumes = "application/json")
-    public BaseProductsDto postBaseProducts(@RequestBody BaseProductsDto baseProductsDto) {
+    public BaseProductsDto createBaseProducts(@RequestBody BaseProductsDto baseProductsDto) {
         return baseProductsService.saveDto(baseProductsDto);
     }
 
-    //Метод обновления
     @PutMapping(path = "/base-products/{id}")
-    public BaseProductsDto putBaseProducts(@RequestBody BaseProductsDto baseProductsDto) {
+    public BaseProductsDto updateBaseProducts(@RequestBody BaseProductsDto baseProductsDto) {
         return baseProductsService.saveDto(baseProductsDto);
     }
 
-    //Метод обновления с проверкой поля
-/*    @PatchMapping(path = "/base-products/{id}", consumes = "application/json")
-    public BaseProductsDto patchBaseProducts(@PathVariable("id") Long id, @RequestBody @Validated BaseProductsDto baseProductsDto) {
+    @PatchMapping(path = "/base-products/{id}", consumes = "application/json")
+    public BaseProductsDto updateCheckBaseProducts(@PathVariable("id") Long id, @RequestBody @Validated BaseProductsDto baseProductsDto) {
         BaseProductsDto baseProductsDtoRefresh = baseProductsService.findByIdDto(id);
 
         if (baseProductsDto.getBarcode() != null) {
             baseProductsDtoRefresh.setBarcode(baseProductsDto.getBarcode());
         }
 
-//        if (baseProductsDto.getTypeWarehouse() != null) {
-//            baseProductsDtoRefresh.setTypeWarehouse(baseProductsDto.getTypeWarehouse());
-//        }
+        if (baseProductsDto.getNameWarehouse() != null) {
+            baseProductsDtoRefresh.setNameWarehouse(baseProductsDto.getNameWarehouse());
+        }
 
-//        if (baseProductsDto.getGoods() != null) {
-//            baseProductsDtoRefresh.setGoods(baseProductsDto.getGoods());
-//        }
+        if (baseProductsDto.getVarietyName() != null) {
+            baseProductsDtoRefresh.setVarietyName(baseProductsDto.getVarietyName());
+        }
 
         return baseProductsService.saveDto(baseProductsDtoRefresh);
-    }*/
+    }
 
-    //Метод удаления
     @DeleteMapping(path = "/base-products/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteBaseProducts(@PathVariable("id") Long id) {
-        try {
-            baseProductsService.deleteBuIdDto(id);
-        } catch (EmptyResultDataAccessException e) {
-        }
+        baseProductsService.deleteBuIdDto(id);
     }
 
 }

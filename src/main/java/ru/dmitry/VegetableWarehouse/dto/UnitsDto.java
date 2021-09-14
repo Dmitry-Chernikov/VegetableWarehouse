@@ -2,11 +2,7 @@ package ru.dmitry.VegetableWarehouse.dto;
 
 import lombok.*;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class UnitsDto extends AbstractDto {
 
     private String measurementUnit;

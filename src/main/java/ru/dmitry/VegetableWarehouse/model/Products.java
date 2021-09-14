@@ -9,12 +9,7 @@ import java.util.List;
  */
 
 @Entity
-//@Table(name = "PRODUCTS")
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Products extends BaseEntity{
 
         private static final long serialVersionUID = 1353555821748941084L;

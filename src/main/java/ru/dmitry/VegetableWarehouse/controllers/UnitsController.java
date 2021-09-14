@@ -1,6 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,45 +10,42 @@ import ru.dmitry.VegetableWarehouse.model.Units;
 import ru.dmitry.VegetableWarehouse.services.UnitsService;
 
 @Controller
+@RequiredArgsConstructor
 public class UnitsController {
     private final UnitsService unitsService;
-    @Autowired
-    public UnitsController(UnitsService unitsService) {
-        this.unitsService = unitsService;
-    }
 
     @GetMapping("/units")
-    public String findAll(Model model){
+    public String findAll(Model model) {
         model.addAttribute("units", unitsService.findAll());
         return "units/units-list";
     }
 
     @GetMapping("/unit-create")
-    public String createUnitsForm (Model model){
+    public String createUnitsForm(Model model) {
         model.addAttribute("units", new Units());
         return "units/unit-create";
     }
 
     @PostMapping("/unit-create")
-    public String createUnits(Units units){
+    public String createUnits(Units units) {
         unitsService.save(units);
         return "redirect:/units";
     }
 
     @GetMapping("unit-delete/{id}")
-    public String deleteUnits(@PathVariable("id") Long id){
+    public String deleteUnits(@PathVariable("id") Long id) {
         unitsService.deleteBuId(id);
         return "redirect:/units";
     }
 
     @GetMapping("/unit-update/{id}")
-    public String updateUnitsForm (@PathVariable("id") Long id, Model model){
+    public String updateUnitsForm(@PathVariable("id") Long id, Model model) {
         model.addAttribute("unit", unitsService.findById(id));
         return "units/unit-update";
     }
 
     @PostMapping("/unit-update")
-    public String updateUnits(Units units){
+    public String updateUnits(Units units) {
         unitsService.save(units);
         return "redirect:/units";
     }

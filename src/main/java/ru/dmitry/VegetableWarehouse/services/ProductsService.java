@@ -1,68 +1,73 @@
 package ru.dmitry.VegetableWarehouse.services;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.dmitry.VegetableWarehouse.dto.ProductsDto;
+import ru.dmitry.VegetableWarehouse.dto.PurchaseDto;
 import ru.dmitry.VegetableWarehouse.mappers.ProductsMapper;
 import ru.dmitry.VegetableWarehouse.model.Products;
+import ru.dmitry.VegetableWarehouse.model.Purchase;
 import ru.dmitry.VegetableWarehouse.repositories.ProductsRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Service
+@RequiredArgsConstructor
 public class ProductsService {
 
     private final ProductsRepository productsRepository;
     private final ProductsMapper mapper;
-    @Autowired
-    public ProductsService(ProductsRepository productsRepository, ProductsMapper mapper) {
-        this.productsRepository = productsRepository;
-        this.mapper = mapper;
-    }
 
     //Read id
-    public Products findById(Long id){
+    public Products findById(Long id) {
         return productsRepository.findById(id).orElse(null);
     }
+
     //Read All
-    public List<Products> findAll(){
+    public List<Products> findAll() {
         return productsRepository.findAll();
     }
+
     //Save one unit
-    public Products save(Products products){
+    public Products save(Products products) {
         return productsRepository.save(products);
     }
+
     //Delete unit on id
-    public void deleteBuId(Long id){
-        try{
+    public void deleteBuId(Long id) {
+        try {
             productsRepository.deleteById(id);
-        }catch (EmptyResultDataAccessException e){}
+        } catch (EmptyResultDataAccessException e) {
+        }
     }
 
 
-    //Read id
-    public ProductsDto findByIdDto(Long id){
-        return mapper.toDto(productsRepository.findById(id).orElse(null));
+    ///////////
+    ////DTO////
+    ///////////
+    //Read id to Dto
+    public ProductsDto findByIdDto(Long id) {
+        return mapper.toDto(this.findById(id));
     }
-    //Read All
-    public List<ProductsDto> findAllDto(){
+
+    //Read All to Dto
+    public List<ProductsDto> findAllDto() {
         List<ProductsDto> productsDto = new ArrayList<>();
-        for (Products products: productsRepository.findAll()) {
+        for (Products products : this.findAll()) {
             productsDto.add(mapper.toDto(products));
         }
         return productsDto;
     }
-    //Save one unit
-    public ProductsDto saveDto(ProductsDto productsDto){
-        return mapper.toDto(productsRepository.save(mapper.toEntity(productsDto)));
+
+    //Save one unit and return Dto
+    public ProductsDto saveDto(ProductsDto productsDto) {
+        return mapper.toDto(this.save(mapper.toEntity(productsDto)));
     }
+
     //Delete unit on id
-    public void deleteBuIdDto(Long id){
-        try{
-            productsRepository.deleteById(id);
-        }catch (EmptyResultDataAccessException e){}
+    public void deleteBuIdDto(Long id) {
+        this.deleteBuId(id);
     }
 }

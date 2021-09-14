@@ -6,10 +6,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public abstract class AbstractDto implements Serializable {
+public abstract class AbstractDto implements Serializable{
 
     private Long id;
 

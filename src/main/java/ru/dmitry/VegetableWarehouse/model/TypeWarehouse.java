@@ -9,12 +9,7 @@ import java.util.List;
  * Список типов складов
  */
 @Entity
-//@Table(name = "WAREHOUSE")
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class TypeWarehouse extends BaseEntity{   
         private static final long serialVersionUID = 1353555820728941054L;
         

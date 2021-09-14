@@ -4,16 +4,13 @@ import lombok.*;
 
 import java.util.Date;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class SalesDto extends AbstractDto{
 
     private String barcode;
     private String nameTypeVegetable;
     private double countProduct;
+    private String designationUnit;
     private String clientName;
     private String nameClient;
     private String fullName;

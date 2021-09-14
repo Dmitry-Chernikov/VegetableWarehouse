@@ -1,8 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,85 +13,78 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = {"/api"}, produces = "application/json")
+@RequiredArgsConstructor
 public class PurchaseControllerREST {
 
     private final PurchaseService purchaseService;
-    @Autowired
-    public PurchaseControllerREST(PurchaseService purchaseService) {
-        this.purchaseService = purchaseService;
-    }
 
-    //Получить все записи
     @GetMapping(path = "/purchase")
     public Iterable<PurchaseDto> getAllPurchase() {
         return purchaseService.findAllDto();
     }
 
-    //Получить записи по id
     @GetMapping(path = "/purchase/{id}")
     public ResponseEntity<PurchaseDto> getUnitsById(@PathVariable("id") Long id) {
         Optional<PurchaseDto> purchaseDto = Optional.ofNullable(purchaseService.findByIdDto(id));
         return purchaseDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    //Метод добовления
     @PostMapping(path = "/purchase", consumes = "application/json")
-    public PurchaseDto postPurchase(@RequestBody PurchaseDto purchaseDto) {
+    public PurchaseDto createPurchase(@RequestBody PurchaseDto purchaseDto) {
         return purchaseService.saveDto(purchaseDto);
     }
 
-    //Метод обновления
     @PutMapping(path = "/purchase/{id}")
-    public PurchaseDto putPurchase(@RequestBody PurchaseDto purchaseDto) {
+    public PurchaseDto updatePurchase(@RequestBody PurchaseDto purchaseDto) {
         return purchaseService.saveDto(purchaseDto);
     }
 
-    //Метод обновления с проверкой поля
-/*    @PatchMapping(path = "/purchase/{id}", consumes = "application/json")
-    public PurchaseDto patchPurchase(@PathVariable("id") Long id, @RequestBody @Validated PurchaseDto purchaseDto) {
+    @PatchMapping(path = "/purchase/{id}", consumes = "application/json")
+    public PurchaseDto updateCheckPurchase(@PathVariable("id") Long id, @RequestBody @Validated PurchaseDto purchaseDto) {
         PurchaseDto purchaseDtoRefresh = purchaseService.findByIdDto(id);
 
         if (purchaseDto.getBarcode() != null) {
             purchaseDtoRefresh.setBarcode(purchaseDto.getBarcode());
         }
 
-//        if (purchaseDto.getBaseProducts() != null) {
-//            purchaseDtoRefresh.setBaseProducts(purchaseDto.getBaseProducts());
-//        }
+        if (purchaseDto.getNameTypeVegetable() != null) {
+            purchaseDtoRefresh.setNameTypeVegetable(purchaseDto.getNameTypeVegetable());
+        }
 
-        //if (purchaseDto.getCountProduct() != null) {
-        //    purchaseDtoRefresh.setCountProduct(purchaseDto.getCountProduct());
-        //}
+        if (purchaseDto.getCountProduct() != 0.0) {
+            purchaseDtoRefresh.setCountProduct(purchaseDto.getCountProduct());
+        }
 
         if (purchaseDto.getSuppliersName() != null) {
             purchaseDtoRefresh.setSuppliersName(purchaseDto.getSuppliersName());
         }
 
-//        if (purchaseDto.getSuppliers() != null) {
-//            purchaseDtoRefresh.setSuppliers(purchaseDto.getSuppliers());
-//        }
+        if (purchaseDto.getSuppliersName() != null) {
+            purchaseDtoRefresh.setSuppliersName(purchaseDto.getSuppliersName());
+        }
 
-//        if (purchaseDto.getEmployee() != null) {
-//            purchaseDtoRefresh.setEmployee(purchaseDto.getEmployee());
-//        }
+        if (purchaseDto.getName() != null) {
+            purchaseDtoRefresh.setName(purchaseDto.getName());
+        }
+
+        if (purchaseDto.getFullName() != null) {
+            purchaseDtoRefresh.setFullName(purchaseDto.getFullName());
+        }
 
         if (purchaseDto.getOperationDate() != null) {
             purchaseDtoRefresh.setOperationDate(purchaseDto.getOperationDate());
         }
 
-        //if (purchaseDto.getValuePrice() != null) {
-        //    purchaseDtoRefresh.setValuePrice(purchaseDto.getValuePrice());
-        //}
+        if (purchaseDto.getValuePrice() != 0.0) {
+            purchaseDtoRefresh.setValuePrice(purchaseDto.getValuePrice());
+        }
         return purchaseService.saveDto(purchaseDtoRefresh);
-    }*/
+    }
 
-    //Метод удаления
     @DeleteMapping(path = "/purchase/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deletePurchase(@PathVariable("id") Long id) {
-        try {
-            purchaseService.deleteBuIdDto(id);
-        } catch (EmptyResultDataAccessException e) {
-        }
+        purchaseService.deleteBuIdDto(id);
     }
 }
+

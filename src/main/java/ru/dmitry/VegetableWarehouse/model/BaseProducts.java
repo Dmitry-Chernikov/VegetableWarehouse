@@ -9,14 +9,8 @@ import java.util.UUID;
 /**
  * База всех продуктов
  */
-//@Table(name = "BaseProducts")
 @Entity
-//@Table(name = "PRODUCTS BASE")
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class BaseProducts extends BaseEntity{
         private static final long serialVersionUID = -4265266289869875308L;
 
