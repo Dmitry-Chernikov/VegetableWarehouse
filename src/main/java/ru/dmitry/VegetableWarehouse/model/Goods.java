@@ -11,7 +11,8 @@ import java.util.List;
  * Товары
  */
 @Entity
-@Data
+@Getter
+@Setter
 public class Goods extends BaseEntity{
 
         private static final long serialVersionUID = -935293741889753637L;

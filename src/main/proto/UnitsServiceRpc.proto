@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.example.grpc;
+
+service Service {
+  rpc getAllUnits(Request) returns (Response); // RPC метод
+}
+
+message Request { //Запрос
+
+   string name = 1;
+   repeated string hobbies = 2; // repeated то поле может повторяться любое количество раз
+
+}
+
+message Response { //Ответ
+
+  string greeting = 1;
+
+}
+

@@ -38,7 +38,7 @@ public class GoodsControllerREST {
     public GoodsDto updateGoods(@RequestBody GoodsDto goodsDto) {
         return goodsService.saveDto(goodsDto);
     }
-поля
+
     @PatchMapping(path = "/goods/{id}", consumes = "application/json")
     public GoodsDto updateCheckGoods(@PathVariable("id") Long id, @RequestBody @Validated GoodsDto goodsDto) {
         GoodsDto goodsDtoRefresh = goodsService.findByIdDto(id);

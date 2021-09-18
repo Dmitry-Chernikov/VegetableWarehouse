@@ -10,7 +10,8 @@ import java.util.List;
  */
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Clients extends BaseEntity{
         private static final long serialVersionUID = 4923336868248054214L;
 

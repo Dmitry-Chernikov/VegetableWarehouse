@@ -9,7 +9,8 @@ import java.util.Set;
  * Еденицы измерения
  */
 @Entity
-@Data
+@Getter
+@Setter
 public class Units extends BaseEntity {
 
         private static final long serialVersionUID = 2348563159789054502L;

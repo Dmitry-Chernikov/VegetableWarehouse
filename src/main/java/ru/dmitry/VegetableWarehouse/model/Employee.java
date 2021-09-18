@@ -11,7 +11,8 @@ import java.util.List;
  * Сотрудники склада
  */
 @Entity
-@Data
+@Getter
+@Setter
 public class Employee extends BaseEntity {
         private static final long serialVersionUID = 8281530488380256469L;
 

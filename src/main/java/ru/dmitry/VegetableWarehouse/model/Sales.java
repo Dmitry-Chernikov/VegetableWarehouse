@@ -11,7 +11,8 @@ import java.util.UUID;
  * Расходная накладная
  */
 @Entity
-@Data
+@Getter
+@Setter
 public class Sales extends BaseEntity{
         private static final long serialVersionUID = -4958131087059395614L;
 

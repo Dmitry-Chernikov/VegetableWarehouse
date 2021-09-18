@@ -9,7 +9,8 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 public class BaseProductsDto extends AbstractDto{
 
     private String barcode;

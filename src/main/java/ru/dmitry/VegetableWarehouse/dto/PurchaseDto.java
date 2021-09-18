@@ -4,7 +4,8 @@ import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 public class PurchaseDto extends AbstractDto{
 
     private String barcode;

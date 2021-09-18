@@ -1,7 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -19,28 +18,28 @@ public class TypeWarehouseControllerREST {
 
     private final TypeWarehouseService typeWarehouseService;
 
-    @GetMapping(path = "/type-warehouse")
+    @GetMapping(path = "/typeWarehouse")
     public List<TypeWarehouseDto> getAllTypeWarehouse() {
         return typeWarehouseService.findAllDto();
     }
 
-    @GetMapping(path = "/type-warehouse/{id}")
+    @GetMapping(path = "/typeWarehouse/{id}")
     public ResponseEntity<TypeWarehouseDto> getTypeWarehouseById(@PathVariable("id") Long id) {
         Optional<TypeWarehouseDto> typeWarehouseDto = Optional.ofNullable(typeWarehouseService.findByIdDto(id));
         return typeWarehouseDto.map(warehouseDto -> new ResponseEntity<>(warehouseDto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(path = "/type-warehouse", consumes = "application/json")
+    @PostMapping(path = "/typeWarehouse", consumes = "application/json")
     public TypeWarehouseDto createTypeWarehouse(@RequestBody TypeWarehouseDto typeWarehouseDto) {
         return typeWarehouseService.saveDto(typeWarehouseDto);
     }
 
-    @PutMapping(path = "/type-warehouse/{id}")
+    @PutMapping(path = "/typeWarehouse/{id}")
     public TypeWarehouseDto updateTypeWarehouse(@RequestBody TypeWarehouseDto typeWarehouseDto) {
         return typeWarehouseService.saveDto(typeWarehouseDto);
     }
 
-    @PatchMapping(path = "/type-warehouse/{id}", consumes = "application/json")
+    @PatchMapping(path = "/typeWarehouse/{id}", consumes = "application/json")
     public TypeWarehouseDto updateCheckTypeWarehouse(@PathVariable("id") Long id, @RequestBody @Validated TypeWarehouseDto typeWarehouseDto) {
         TypeWarehouseDto typeWarehouseDtoRefresh = typeWarehouseService.findByIdDto(id);
 
@@ -51,7 +50,7 @@ public class TypeWarehouseControllerREST {
         return typeWarehouseService.saveDto(typeWarehouseDtoRefresh);
     }
 
-    @DeleteMapping(path = "/type-warehouse/{id}")
+    @DeleteMapping(path = "/typeWarehouse/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteTypeWarehouse(@PathVariable("id") Long id) {
         typeWarehouseService.deleteBuIdDto(id);

@@ -10,7 +10,8 @@ import java.util.UUID;
  * База всех продуктов
  */
 @Entity
-@Data
+@Getter
+@Setter
 public class BaseProducts extends BaseEntity{
         private static final long serialVersionUID = -4265266289869875308L;
 

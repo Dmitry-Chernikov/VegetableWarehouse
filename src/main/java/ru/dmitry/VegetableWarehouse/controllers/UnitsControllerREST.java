@@ -41,7 +41,7 @@ public class UnitsControllerREST {
     }
 
     @PatchMapping(path = "/units/{id}", consumes = "application/json")
-    public UnitsDto patchUnits(@PathVariable("id") Long id, @RequestBody @Validated UnitsDto unitsDto) {
+    public UnitsDto updateCheckUnits(@PathVariable("id") Long id, @RequestBody @Validated UnitsDto unitsDto) {
         UnitsDto unitsDtoRefresh = unitsService.findByIdDto(id);
 
         if (unitsDto.getMeasurementUnit() != null) {
@@ -58,9 +58,6 @@ public class UnitsControllerREST {
     @DeleteMapping(path = "/units/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteUnits(@PathVariable("id") Long id) {
-        try {
-            unitsService.deleteBuIdDto(id);
-        } catch (EmptyResultDataAccessException e) {
-        }
+        unitsService.deleteBuIdDto(id);
     }
 }

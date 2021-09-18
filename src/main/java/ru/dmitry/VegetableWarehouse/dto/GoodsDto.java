@@ -4,7 +4,8 @@ import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 public class GoodsDto extends AbstractDto{
 
     private String nameTypeVegetable;
