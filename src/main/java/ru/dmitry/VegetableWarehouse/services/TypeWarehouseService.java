@@ -3,15 +3,13 @@ package ru.dmitry.VegetableWarehouse.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import ru.dmitry.VegetableWarehouse.dto.BaseProductsDto;
 import ru.dmitry.VegetableWarehouse.dto.TypeWarehouseDto;
 import ru.dmitry.VegetableWarehouse.mappers.TypeWarehouseMapper;
-import ru.dmitry.VegetableWarehouse.model.BaseProducts;
 import ru.dmitry.VegetableWarehouse.model.TypeWarehouse;
 import ru.dmitry.VegetableWarehouse.repositories.TypeWarehouseRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,16 +47,12 @@ public class TypeWarehouseService {
     ///////////
     //Read id to Dto
     public TypeWarehouseDto findByIdDto(Long id) {
-        return mapper.toDto(this.findById(id));
+        return mapper.toDto(typeWarehouseRepository.findById(id).orElse(null));
     }
 
     //Read All to Dto
     public List<TypeWarehouseDto> findAllDto() {
-        List<TypeWarehouseDto> typeWarehouseDto = new ArrayList<>();
-        for (TypeWarehouse typeWarehouse : this.findAll()) {
-            typeWarehouseDto.add(mapper.toDto(typeWarehouse));
-        }
-        return typeWarehouseDto;
+        return typeWarehouseRepository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
     }
 
     //Save one unit and return Dto

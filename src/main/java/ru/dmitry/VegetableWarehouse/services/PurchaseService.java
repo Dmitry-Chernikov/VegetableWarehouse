@@ -4,14 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.dmitry.VegetableWarehouse.dto.PurchaseDto;
-import ru.dmitry.VegetableWarehouse.dto.SalesDto;
 import ru.dmitry.VegetableWarehouse.mappers.PurchaseMapper;
 import ru.dmitry.VegetableWarehouse.model.Purchase;
-import ru.dmitry.VegetableWarehouse.model.Sales;
 import ru.dmitry.VegetableWarehouse.repositories.PurchaseRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,16 +47,12 @@ public class PurchaseService {
     ///////////
     //Read id to Dto
     public PurchaseDto findByIdDto(Long id) {
-        return mapper.toDto(this.findById(id));
+        return mapper.toDto(purchaseRepository.findById(id).orElse(null));
     }
 
     //Read All to Dto
     public List<PurchaseDto> findAllDto() {
-        List<PurchaseDto> purchaseDto = new ArrayList<>();
-        for (Purchase purchase : this.findAll()) {
-            purchaseDto.add(mapper.toDto(purchase));
-        }
-        return purchaseDto;
+        return purchaseRepository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
     }
 
     //Save one unit and return Dto

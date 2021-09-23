@@ -4,14 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.dmitry.VegetableWarehouse.dto.EmployeeDto;
-import ru.dmitry.VegetableWarehouse.dto.GoodsDto;
 import ru.dmitry.VegetableWarehouse.mappers.EmployeeMapper;
 import ru.dmitry.VegetableWarehouse.model.Employee;
-import ru.dmitry.VegetableWarehouse.model.Goods;
 import ru.dmitry.VegetableWarehouse.repositories.EmployeeRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -49,16 +47,12 @@ public class EmployeeService {
     ///////////
     //Read id to Dto
     public EmployeeDto findByIdDto(Long id) {
-        return mapper.toDto(this.findById(id));
+        return mapper.toDto(employeeRepository.findById(id).orElse(null));
     }
 
     //Read All to Dto
     public List<EmployeeDto> findAllDto() {
-        List<EmployeeDto> employeeDto = new ArrayList<>();
-        for (Employee employee : this.findAll()) {
-            employeeDto.add(mapper.toDto(employee));
-        }
-        return employeeDto;
+        return employeeRepository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
     }
 
     //Save one unit and return Dto

@@ -8,8 +8,8 @@ import ru.dmitry.VegetableWarehouse.mappers.UnitsMapper;
 import ru.dmitry.VegetableWarehouse.model.Units;
 import ru.dmitry.VegetableWarehouse.repositories.UnitsRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -46,16 +46,12 @@ public class UnitsService {
     ///////////
     //Read id to Dto
     public UnitsDto findByIdDto(Long id) {
-        return mapper.toDto(this.findById(id));
+        return mapper.toDto(unitsRepository.findById(id).orElse(null));
     }
 
     //Read All to Dto
     public List<UnitsDto> findAllDto() {
-        List<UnitsDto> unitsDto = new ArrayList<>();
-        for (Units units : this.findAll()) {
-            unitsDto.add(mapper.toDto(units));
-        }
-        return unitsDto;
+        return unitsRepository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
     }
 
     //Save one unit and return Dto
