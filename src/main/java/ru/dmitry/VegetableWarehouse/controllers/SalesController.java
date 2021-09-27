@@ -1,67 +1,49 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import ru.dmitry.VegetableWarehouse.model.Sales;
-import ru.dmitry.VegetableWarehouse.services.BaseProductsService;
-import ru.dmitry.VegetableWarehouse.services.ClientsService;
-import ru.dmitry.VegetableWarehouse.services.EmployeeService;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.dmitry.VegetableWarehouse.dto.SalesDto;
 import ru.dmitry.VegetableWarehouse.services.SalesService;
 
-@Controller
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
 public class SalesController {
 
     private final SalesService salesService;
-    private final BaseProductsService baseProductsService;
-    private final ClientsService clientsService;
-    private final EmployeeService employeeService;
 
-    @GetMapping("/sales")
-    public String findAll(Model model) {
-        model.addAttribute("sales", salesService.findAll());
-        return "sales/sales-list";
+    @GetMapping(path = "/sales")
+    public Iterable<SalesDto> getAllSales() {
+        return salesService.findAll();
     }
 
-    @GetMapping("/sales-create")
-    public String createSalesForm(Model model) {
-        model.addAttribute("sales", new Sales());
-        model.addAttribute("baseList", baseProductsService.findAll());
-        model.addAttribute("clientsList", clientsService.findAll());
-        model.addAttribute("employeeList", employeeService.findAll());
-        return "sales/sales-create";
+    @GetMapping(path = "/sales/{id}")
+    public ResponseEntity<SalesDto> getSalesById(@PathVariable("id") Long id) {
+        Optional<SalesDto> salesDto = Optional.ofNullable(salesService.findById(id));
+        return salesDto.<ResponseEntity<SalesDto>>map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/sales-create")
-    public String createSales(Sales sales) {
-        salesService.save(sales);
-        return "redirect:/sales";
+    @PostMapping(path = "/sales", consumes = "application/json")
+    public SalesDto createSales(@RequestBody SalesDto salesDto) {
+        return salesService.save(salesDto);
     }
 
-    @GetMapping("sales-delete/{id}")
-    public String deleteSales(@PathVariable("id") Long id) {
-        salesService.deleteBuId(id);
-        return "redirect:/sales";
+    @PutMapping(path = "/sales/{id}")
+    public SalesDto updateSales(@RequestBody SalesDto salesDto) {
+        return salesService.save(salesDto);
     }
 
-    @GetMapping("/sales-update/{id}")
-    public String updateSalesForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("baseList", baseProductsService.findAll());
-        model.addAttribute("clientsList", clientsService.findAll());
-        model.addAttribute("employeeList", employeeService.findAll());
-        model.addAttribute("sales", salesService.findById(id));
-        return "sales/sales-update";
+    @DeleteMapping(path = "/sales/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteSales(@PathVariable("id") Long id) {
+        try {
+            salesService.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+        }
     }
-
-    @PostMapping("/sales-update")
-    public String updateSales(Sales sales) {
-        salesService.save(sales);
-        return "redirect:/sales";
-    }
-
-
 }

@@ -1,65 +1,46 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import ru.dmitry.VegetableWarehouse.model.Purchase;
-import ru.dmitry.VegetableWarehouse.services.BaseProductsService;
-import ru.dmitry.VegetableWarehouse.services.EmployeeService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.dmitry.VegetableWarehouse.dto.PurchaseDto;
 import ru.dmitry.VegetableWarehouse.services.PurchaseService;
-import ru.dmitry.VegetableWarehouse.services.SuppliersService;
 
-@Controller
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
-    private final BaseProductsService baseProductsService;
-    private final SuppliersService suppliersService;
-    private final EmployeeService employeeService;
 
-    @GetMapping("/purchase")
-    public String findAll(Model model) {
-        model.addAttribute("purchase", purchaseService.findAll());
-        return "purchase/purchase-list";
+    @GetMapping(path = "/purchase")
+    public Iterable<PurchaseDto> getAllPurchase() {
+        return purchaseService.findAll();
     }
 
-    @GetMapping("/purchase-create")
-    public String createPurchaseForm(Model model) {
-        model.addAttribute("purchase", new Purchase());
-        model.addAttribute("baseList", baseProductsService.findAll());
-        model.addAttribute("suppliersList", suppliersService.findAll());
-        model.addAttribute("employeeList", employeeService.findAll());
-        return "purchase/purchase-create";
+    @GetMapping(path = "/purchase/{id}")
+    public ResponseEntity<PurchaseDto> getUnitsById(@PathVariable("id") Long id) {
+        Optional<PurchaseDto> purchaseDto = Optional.ofNullable(purchaseService.findById(id));
+        return purchaseDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/purchase-create")
-    public String createPurchase(Purchase purchase) {
-        purchaseService.save(purchase);
-        return "redirect:/purchase";
+    @PostMapping(path = "/purchase", consumes = "application/json")
+    public PurchaseDto createPurchase(@RequestBody PurchaseDto purchaseDto) {
+        return purchaseService.save(purchaseDto);
     }
 
-    @GetMapping("purchase-delete/{id}")
-    public String deletePurchase(@PathVariable("id") Long id) {
-        purchaseService.deleteBuId(id);
-        return "redirect:/purchase";
+    @PutMapping(path = "/purchase/{id}")
+    public PurchaseDto updatePurchase(@RequestBody PurchaseDto purchaseDto) {
+        return purchaseService.save(purchaseDto);
     }
 
-    @GetMapping("/purchase-update/{id}")
-    public String updatePurchaseForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("baseList", baseProductsService.findAll());
-        model.addAttribute("suppliersList", suppliersService.findAll());
-        model.addAttribute("employeeList", employeeService.findAll());
-        model.addAttribute("purchase", purchaseService.findById(id));
-        return "purchase/purchase-update";
-    }
-
-    @PostMapping("/purchase-update")
-    public String updatePurchase(Purchase purchase) {
-        purchaseService.save(purchase);
-        return "redirect:/purchase";
+    @DeleteMapping(path = "/purchase/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deletePurchase(@PathVariable("id") Long id) {
+        purchaseService.deleteById(id);
     }
 }
+

@@ -1,53 +1,45 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import ru.dmitry.VegetableWarehouse.model.Products;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.dmitry.VegetableWarehouse.dto.ProductsDto;
 import ru.dmitry.VegetableWarehouse.services.ProductsService;
 
-@Controller
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
 public class ProductsController {
 
     private final ProductsService productsService;
 
-    @GetMapping("/products")
-    public String findAll(Model model) {
-        model.addAttribute("products", productsService.findAll());
-        return "products/products-list";
+    @GetMapping(path = "/products")
+    public Iterable<ProductsDto> getAllProducts() {
+        return productsService.findAll();
     }
 
-    @GetMapping("/products-create")
-    public String createProductsForm(Model model) {
-        model.addAttribute("products", new Products());
-        return "products/products-create";
+    @GetMapping(path = "/products/{id}")
+    public ResponseEntity<ProductsDto> getProductsById(@PathVariable("id") Long id) {
+        Optional<ProductsDto> productsDto = Optional.ofNullable(productsService.findById(id));
+        return productsDto.<ResponseEntity<ProductsDto>>map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/products-create")
-    public String createProducts(Products products) {
-        productsService.save(products);
-        return "redirect:/products";
+    @PostMapping(path = "/products", consumes = "application/json")
+    public ProductsDto createProducts(@RequestBody ProductsDto productsDto) {
+        return productsService.save(productsDto);
     }
 
-    @GetMapping("products-delete/{id}")
-    public String deleteProducts(@PathVariable("id") Long id) {
-        productsService.deleteBuId(id);
-        return "redirect:/products";
+    @PutMapping(path = "/products/{id}")
+    public ProductsDto updateProducts(@RequestBody ProductsDto productsDto) {
+        return productsService.save(productsDto);
     }
 
-    @GetMapping("/products-update/{id}")
-    public String updateProductsForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("products", productsService.findById(id));
-        return "products/products-update";
-    }
-
-    @PostMapping("/products-update")
-    public String updateProducts(Products products) {
-        productsService.save(products);
-        return "redirect:/products";
+    @DeleteMapping(path = "/products/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteProducts(@PathVariable("id") Long id) {
+        productsService.deleteById(id);
     }
 }

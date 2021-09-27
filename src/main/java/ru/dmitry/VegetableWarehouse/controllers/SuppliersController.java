@@ -1,54 +1,46 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import ru.dmitry.VegetableWarehouse.model.Suppliers;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.dmitry.VegetableWarehouse.dto.SuppliersDto;
 import ru.dmitry.VegetableWarehouse.services.SuppliersService;
 
-@Controller
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
 public class SuppliersController {
 
     private final SuppliersService suppliersService;
 
     @GetMapping("/suppliers")
-    public String findAll(Model model) {
-        model.addAttribute("suppliers", suppliersService.findAll());
-        return "suppliers/suppliers-list";
+    public Iterable<SuppliersDto> getAllSuppliers() {
+        return suppliersService.findAll();
     }
 
-    @GetMapping("/suppliers-create")
-    public String createSuppliersForm(Model model) {
-        model.addAttribute("suppliers", new Suppliers());
-        return "suppliers/suppliers-create";
+    @GetMapping("/suppliers/{id}")
+    public ResponseEntity<SuppliersDto> getSuppliersById(@PathVariable("id") Long id) {
+        Optional<SuppliersDto> suppliersDto = Optional.ofNullable(suppliersService.findById(id));
+        return suppliersDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/suppliers-create")
-    public String createSuppliers(Suppliers suppliers) {
-        suppliersService.save(suppliers);
-        return "redirect:/suppliers";
+    @PostMapping(consumes = "application/json", path = "/suppliers")
+    public SuppliersDto createSuppliers(@RequestBody SuppliersDto suppliersDto) {
+        return suppliersService.save(suppliersDto);
     }
 
-    @GetMapping("suppliers-delete/{id}")
-    public String deleteSuppliers(@PathVariable("id") Long id) {
-        suppliersService.deleteBuId(id);
-        return "redirect:/suppliers";
+    @PutMapping("/suppliers/{id}")
+    public SuppliersDto updateSuppliers(@RequestBody SuppliersDto suppliersDto) {
+        return suppliersService.save(suppliersDto);
     }
 
-    @GetMapping("/suppliers-update/{id}")
-    public String updateSuppliersForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("suppliers", suppliersService.findById(id));
-        return "suppliers/suppliers-update";
-    }
-
-    @PostMapping("/suppliers-update")
-    public String updateSuppliers(Suppliers suppliers) {
-        suppliersService.save(suppliers);
-        return "redirect:/suppliers";
+    @DeleteMapping("/suppliers/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteSuppliers(@PathVariable("id") Long id) {
+        suppliersService.deleteById(id);
     }
 
 }

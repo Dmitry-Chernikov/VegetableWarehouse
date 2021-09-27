@@ -1,53 +1,45 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import ru.dmitry.VegetableWarehouse.model.Clients;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.dmitry.VegetableWarehouse.dto.ClientsDto;
 import ru.dmitry.VegetableWarehouse.services.ClientsService;
 
-@Controller
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
 public class ClientsController {
 
     private final ClientsService clientsService;
 
-    @GetMapping("/clients")
-    public String findAll(Model model) {
-        model.addAttribute("clients", clientsService.findAll());
-        return "clients/clients-list";
+    @GetMapping(path = "/clients")
+    public Iterable<ClientsDto> getAllClients() {
+        return clientsService.findAll();
     }
 
-    @GetMapping("/clients-create")
-    public String createClientsForm(Model model) {
-        model.addAttribute("clients", new Clients());
-        return "clients/clients-create";
+    @GetMapping(path = "/clients/{id}")
+    public ResponseEntity<ClientsDto> getClientsById(@PathVariable("id") Long id) {
+        Optional<ClientsDto> clientsDto = Optional.ofNullable(clientsService.findById(id));
+        return clientsDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/clients-create")
-    public String createClients(Clients clients) {
-        clientsService.save(clients);
-        return "redirect:/clients";
+    @PostMapping(path = "/clients", consumes = "application/json")
+    public ClientsDto createClients(@RequestBody ClientsDto clientsDto) {
+        return clientsService.save(clientsDto);
     }
 
-    @GetMapping("clients-delete/{id}")
-    public String deleteClients(@PathVariable("id") Long id) {
-        clientsService.deleteBuId(id);
-        return "redirect:/clients";
+    @PutMapping(path = "/clients/{id}")
+    public ClientsDto updateClients(@RequestBody ClientsDto clientsDto) {
+        return clientsService.save(clientsDto);
     }
 
-    @GetMapping("/clients-update/{id}")
-    public String updateClientsForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("clients", clientsService.findById(id));
-        return "clients/clients-update";
-    }
-
-    @PostMapping("/clients-update")
-    public String updateClients(Clients clients) {
-        clientsService.save(clients);
-        return "redirect:/clients";
+    @DeleteMapping(path = "/clients/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteClients(@PathVariable("id") Long id) {
+        clientsService.deleteById(id);
     }
 }

@@ -1,53 +1,46 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import ru.dmitry.VegetableWarehouse.model.TypeWarehouse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.dmitry.VegetableWarehouse.dto.TypeWarehouseDto;
 import ru.dmitry.VegetableWarehouse.services.TypeWarehouseService;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
 public class TypeWarehouseController {
 
     private final TypeWarehouseService typeWarehouseService;
 
-    @GetMapping("/type-warehouse")
-    public String findAll(Model model) {
-        model.addAttribute("typeWarehouse", typeWarehouseService.findAll());
-        return "warehouse/type-warehouse-list";
+    @GetMapping(path = "/typeWarehouse")
+    public List<TypeWarehouseDto> getAllTypeWarehouse() {
+        return typeWarehouseService.findAll();
     }
 
-    @GetMapping("/type-warehouse-create")
-    public String createTypeWarehouseForm(Model model) {
-        model.addAttribute("typeWarehouse", new TypeWarehouse());
-        return "warehouse/type-warehouse-create";
+    @GetMapping(path = "/typeWarehouse/{id}")
+    public ResponseEntity<TypeWarehouseDto> getTypeWarehouseById(@PathVariable("id") Long id) {
+        Optional<TypeWarehouseDto> typeWarehouseDto = Optional.ofNullable(typeWarehouseService.findById(id));
+        return typeWarehouseDto.map(warehouseDto -> new ResponseEntity<>(warehouseDto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/type-warehouse-create")
-    public String createTypeWarehouse(TypeWarehouse typeWarehouse) {
-        typeWarehouseService.save(typeWarehouse);
-        return "redirect:/type-warehouse";
+    @PostMapping(path = "/typeWarehouse", consumes = "application/json")
+    public TypeWarehouseDto createTypeWarehouse(@RequestBody TypeWarehouseDto typeWarehouseDto) {
+        return typeWarehouseService.save(typeWarehouseDto);
     }
 
-    @GetMapping("type-warehouse-delete/{id}")
-    public String deleteTypeWarehouse(@PathVariable("id") Long id) {
-        typeWarehouseService.deleteBuId(id);
-        return "redirect:/type-warehouse";
+    @PutMapping(path = "/typeWarehouse/{id}")
+    public TypeWarehouseDto updateTypeWarehouse(@RequestBody TypeWarehouseDto typeWarehouseDto) {
+        return typeWarehouseService.save(typeWarehouseDto);
     }
 
-    @GetMapping("type-warehouse-update/{id}")
-    public String updateTypeWarehouseForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("typeWarehouse", typeWarehouseService.findById(id));
-        return "warehouse/type-warehouse-update";
-    }
-
-    @PostMapping("/type-warehouse-update")
-    public String updateTypeWarehouse(TypeWarehouse typeWarehouse) {
-        typeWarehouseService.save(typeWarehouse);
-        return "redirect:/type-warehouse";
+    @DeleteMapping(path = "/typeWarehouse/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteTypeWarehouse(@PathVariable("id") Long id) {
+        typeWarehouseService.deleteById(id);
     }
 }

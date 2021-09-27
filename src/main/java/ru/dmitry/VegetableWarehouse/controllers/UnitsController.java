@@ -1,52 +1,46 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import ru.dmitry.VegetableWarehouse.model.Units;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.dmitry.VegetableWarehouse.dto.UnitsDto;
 import ru.dmitry.VegetableWarehouse.services.UnitsService;
 
-@Controller
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
 public class UnitsController {
+
     private final UnitsService unitsService;
 
-    @GetMapping("/units")
-    public String findAll(Model model) {
-        model.addAttribute("units", unitsService.findAll());
-        return "units/units-list";
+    @GetMapping(path = "/units")
+    public List<UnitsDto> getAllUnits() {
+        return unitsService.findAll();
     }
 
-    @GetMapping("/unit-create")
-    public String createUnitsForm(Model model) {
-        model.addAttribute("units", new Units());
-        return "units/unit-create";
+    @GetMapping(path = "/units/{id}")
+    public ResponseEntity<UnitsDto> getUnitsById(@PathVariable("id") Long id) {
+        Optional<UnitsDto> unitsDto = Optional.ofNullable(unitsService.findById(id));
+        return unitsDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/unit-create")
-    public String createUnits(Units units) {
-        unitsService.save(units);
-        return "redirect:/units";
+    @PostMapping(path = "/units", consumes = "application/json")
+    public UnitsDto createUnits(@RequestBody UnitsDto unitsDto) {
+        return unitsService.save(unitsDto);
     }
 
-    @GetMapping("unit-delete/{id}")
-    public String deleteUnits(@PathVariable("id") Long id) {
-        unitsService.deleteBuId(id);
-        return "redirect:/units";
+    @PutMapping(path = "/units/{id}")
+    public UnitsDto updateUnits(@RequestBody UnitsDto unitsDto) {
+        return unitsService.save(unitsDto);
     }
 
-    @GetMapping("/unit-update/{id}")
-    public String updateUnitsForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("unit", unitsService.findById(id));
-        return "units/unit-update";
-    }
-
-    @PostMapping("/unit-update")
-    public String updateUnits(Units units) {
-        unitsService.save(units);
-        return "redirect:/units";
+    @DeleteMapping(path = "/units/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteUnits(@PathVariable("id") Long id) {
+        unitsService.deleteById(id);
     }
 }

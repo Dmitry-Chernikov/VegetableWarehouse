@@ -1,54 +1,45 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import ru.dmitry.VegetableWarehouse.model.Employee;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.dmitry.VegetableWarehouse.dto.EmployeeDto;
 import ru.dmitry.VegetableWarehouse.services.EmployeeService;
 
-@Controller
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
 public class EmployeeController {
 
     private final EmployeeService employeeService;
 
-    @GetMapping("/employee")
-    public String findAll(Model model) {
-        model.addAttribute("employee", employeeService.findAll());
-        return "employee/employee-list";
+    @GetMapping(path = "/employee")
+    public Iterable<EmployeeDto> getAllEmployee() {
+        return employeeService.findAll();
     }
 
-    @GetMapping("/employee-create")
-    public String createEmployeeForm(Model model) {
-        model.addAttribute("employee", new Employee());
-        return "employee/employee-create";
+    @GetMapping(path = "/employee/{id}")
+    public ResponseEntity<EmployeeDto> getEmployeeById(@PathVariable("id") Long id) {
+        Optional<EmployeeDto> employeeDto = Optional.ofNullable(employeeService.findById(id));
+        return employeeDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/employee-create")
-    public String createEmployee(Employee employee) {
-        employeeService.save(employee);
-        return "redirect:/employee";
+    @PostMapping(path = "/employee", consumes = "application/json")
+    public EmployeeDto createEmployee(@RequestBody EmployeeDto employeeDto) {
+        return employeeService.save(employeeDto);
     }
 
-    @GetMapping("employee-delete/{id}")
-    public String deleteEmployee(@PathVariable("id") Long id) {
-        employeeService.deleteBuId(id);
-        return "redirect:/employee";
+    @PutMapping(path = "/employee/{id}")
+    public EmployeeDto updateEmployee(@RequestBody EmployeeDto employeeDto) {
+        return employeeService.save(employeeDto);
     }
 
-    @GetMapping("/employee-update/{id}")
-    public String updateEmployeeForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("employee", employeeService.findById(id));
-        return "employee/employee-update";
-    }
-
-    @PostMapping("/employee-update")
-    public String updateEmployee(Employee employee) {
-        employeeService.save(employee);
-        return "redirect:/employee";
+    @DeleteMapping(path = "/employee/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteEmployee(@PathVariable("id") Long id) {
+        employeeService.deleteById(id);
     }
 }

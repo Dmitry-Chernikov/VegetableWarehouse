@@ -1,63 +1,47 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ru.dmitry.VegetableWarehouse.model.BaseProducts;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.dmitry.VegetableWarehouse.dto.BaseProductsDto;
 import ru.dmitry.VegetableWarehouse.services.BaseProductsService;
-import ru.dmitry.VegetableWarehouse.services.GoodsService;
-import ru.dmitry.VegetableWarehouse.services.TypeWarehouseService;
 
-@Controller
-@RequestMapping("/")
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
 public class BaseProductsController {
 
     private final BaseProductsService baseProductsService;
-    private final TypeWarehouseService typeWarehouseService;
-    private final GoodsService goodsService;
 
-    @GetMapping
-    public String findAll(Model model) {
-        model.addAttribute("baseProducts", baseProductsService.findAll());
-        return "base-products/base-products-list";
+    @GetMapping(path = "/baseProducts")
+    public List<BaseProductsDto> getAllBaseProducts() {
+        return baseProductsService.findAll();
     }
 
-    @GetMapping("/base-products-create")
-    public String createBaseProductsForm(Model model) {
-        model.addAttribute("baseProducts", new BaseProducts());
-        model.addAttribute("typeWarehouseList", typeWarehouseService.findAll());
-        model.addAttribute("goodsList", goodsService.findAll());
-        return "base-products/base-products-create";
+    @GetMapping(path = "/baseProducts/{id}")
+    public ResponseEntity<BaseProductsDto> getBaseProductsById(@PathVariable("id") Long id) {
+        Optional<BaseProductsDto> baseProductsDto = Optional.ofNullable(baseProductsService.findById(id));
+        return baseProductsDto.map(productsDto -> new ResponseEntity<>(productsDto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/base-products-create")
-    public String createBaseProducts(BaseProducts baseProducts) {
-        baseProductsService.save(baseProducts);
-        return "redirect:/";
+    @PostMapping(path = "/baseProducts", consumes = "application/json")
+    public BaseProductsDto createBaseProducts(@RequestBody BaseProductsDto baseProductsDto) {
+        return baseProductsService.save(baseProductsDto);
     }
 
-    @GetMapping("base-products-delete/{id}")
-    public String deleteBaseProducts(@PathVariable("id") Long id) {
-        baseProductsService.deleteBuId(id);
-        return "redirect:/";
+    @PutMapping(path = "/baseProducts/{id}")
+    public BaseProductsDto updateBaseProducts(@RequestBody BaseProductsDto baseProductsDto) {
+        return baseProductsService.save(baseProductsDto);
     }
 
-    @GetMapping("/base-products-update/{id}")
-    public String updateBaseProductsForm(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("baseProducts", baseProductsService.findById(id));
-        model.addAttribute("typeWarehouseList", typeWarehouseService.findAll());
-        model.addAttribute("goodsList", goodsService.findAll());
-        return "base-products/base-products-update";
+    @DeleteMapping(path = "/baseProducts/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deleteBaseProducts(@PathVariable("id") Long id) {
+        baseProductsService.deleteById(id);
     }
 
-    @PostMapping("/base-products-update")
-    public String updateBaseProducts(BaseProducts baseProducts) {
-        baseProductsService.save(baseProducts);
-        return "redirect:/";
-    }
 }
