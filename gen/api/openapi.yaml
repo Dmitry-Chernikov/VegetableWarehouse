@@ -1,51 +1,46 @@
 openapi: 3.0.3
 info:
-  title: Api Documentation
-  description: Api Documentation
-  termsOfService: urn:tos
   contact:
-    name: API Support
     email: support@example.com
+    name: API Support
     url: https://example.com/support
+  description: Api Documentation
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  version: 1.0
-
+  termsOfService: urn:tos
+  title: Api Documentation
+  version: "1.0"
 servers:
-  - url: http://localhost:8080/sware/
-    description: Inferred Url
-
+- description: Inferred Url
+  url: http://localhost:8080/sware/
 tags:
-  - name: base-products-controller
-    description: Base Products Controller
-
+- description: Base Products Controller
+  name: base-products-controller
 paths:
   /baseProducts:
     get:
-      tags:
-        - base-products-controller
-      summary: getAllBaseProducts
       operationId: getAllBaseProductsUsingGET
       responses:
-        '200':
-          description: OK
+        "200":
           content:
             application/json:
               schema:
-                type: array
                 items:
                   $ref: '#/components/schemas/BaseProductsDto'
-        '401':
+                type: array
+          description: OK
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
-    post:
+      summary: getAllBaseProducts
       tags:
-        - base-products-controller
-      summary: createBaseProducts
+      - base-products-controller
+      x-accepts: application/json
+    post:
       operationId: createBaseProductsUsingPOST
       requestBody:
         content:
@@ -53,33 +48,43 @@ paths:
             schema:
               $ref: '#/components/schemas/BaseProductsDto'
       responses:
-        '200':
-          description: OK
+        "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BaseProductsDto'
-        '201':
+          description: OK
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
-
+      summary: createBaseProducts
+      tags:
+      - base-products-controller
+      x-contentType: application/json
+      x-accepts: application/json
 components:
   schemas:
     BaseProductsDto:
-      title: BaseProductsDto
-      type: object
+      example:
+        id: 0
+        varietyName: varietyName
+        barcode: barcode
+        nameWarehouse: nameWarehouse
       properties:
         barcode:
           type: string
         id:
-          type: integer
           format: int64
+          type: integer
         nameWarehouse:
           type: string
         varietyName:
           type: string
+      title: BaseProductsDto
+      type: object
+
