@@ -3,17 +3,22 @@ package ru.dmitry.VegetableWarehouse;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.ResponseEntity;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
 @EnableSwagger2
+//@EnableSwagger2WebMvc
+@Import(SpringDataRestConfiguration.class)
 @SpringBootApplication
 public class VegetableWarehouseApplication {
 
@@ -28,10 +33,7 @@ public class VegetableWarehouseApplication {
 				.select()
 				.apis(RequestHandlerSelectors.any())
 				.paths(PathSelectors.any())
-				.build()
-				.pathMapping("/swagger")
-				.directModelSubstitute(LocalDate.class, String.class)
-				.genericModelSubstitutes(ResponseEntity.class);
+				.build();
 	}
 
 /*	@Bean

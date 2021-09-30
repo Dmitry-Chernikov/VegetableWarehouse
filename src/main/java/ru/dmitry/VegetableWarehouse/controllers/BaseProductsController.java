@@ -10,6 +10,13 @@ import ru.dmitry.VegetableWarehouse.services.BaseProductsService;
 import java.util.List;
 import java.util.Optional;
 
+
+/**
+ * Repository to manage {@link ResponseEntity} instances.
+ *
+ * @author Dmitry Chernikov
+ */
+
 @RestController
 @RequestMapping(value = {"/"}, produces = "application/json")
 @RequiredArgsConstructor
