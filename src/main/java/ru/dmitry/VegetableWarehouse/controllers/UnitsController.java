@@ -1,5 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +12,9 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = {"/"}, produces = "application/json")
+@RequestMapping(value = {"/"})
 @RequiredArgsConstructor
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Единицы измерения\" и используеться CRUD для базы данных.")
 public class UnitsController {
 
     private final UnitsService unitsService;
@@ -28,7 +30,7 @@ public class UnitsController {
         return unitsDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(path = "/units", consumes = "application/json")
+    @PostMapping(path = "/units")
     public UnitsDto createUnits(@RequestBody UnitsDto unitsDto) {
         return unitsService.save(unitsDto);
     }

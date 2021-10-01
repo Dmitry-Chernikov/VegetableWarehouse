@@ -1,5 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +11,9 @@ import ru.dmitry.VegetableWarehouse.services.ClientsService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = {"/"}, produces = "application/json")
+@RequestMapping(value = {"/"})
 @RequiredArgsConstructor
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Клиенты\" и используеться CRUD для базы данных.", hidden = true)
 public class ClientsController {
 
     private final ClientsService clientsService;
@@ -27,7 +29,7 @@ public class ClientsController {
         return clientsDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(path = "/clients", consumes = "application/json")
+    @PostMapping(path = "/clients")
     public ClientsDto createClients(@RequestBody ClientsDto clientsDto) {
         return clientsService.save(clientsDto);
     }

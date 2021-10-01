@@ -1,5 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +11,9 @@ import ru.dmitry.VegetableWarehouse.services.GoodsService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = {"/"}, produces = "application/json")
+@RequestMapping(value = {"/"})
 @RequiredArgsConstructor
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Товары\" и используеться CRUD для базы данных.")
 public class GoodsController {
 
     private final GoodsService goodsService;
@@ -27,7 +29,7 @@ public class GoodsController {
         return goodsDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(path = "/goods", consumes = "application/json")
+    @PostMapping(path = "/goods")
     public GoodsDto createGoods(@RequestBody GoodsDto goodsDto) {
         return goodsService.saveDto(goodsDto);
     }

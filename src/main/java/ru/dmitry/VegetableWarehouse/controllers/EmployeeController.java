@@ -1,5 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +11,9 @@ import ru.dmitry.VegetableWarehouse.services.EmployeeService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = {"/"}, produces = "application/json")
+@RequestMapping(value = {"/"})
 @RequiredArgsConstructor
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Сотрудники\" и используеться CRUD для базы данных.", hidden = true)
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -27,7 +29,7 @@ public class EmployeeController {
         return employeeDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(path = "/employee", consumes = "application/json")
+    @PostMapping(path = "/employee")
     public EmployeeDto createEmployee(@RequestBody EmployeeDto employeeDto) {
         return employeeService.save(employeeDto);
     }

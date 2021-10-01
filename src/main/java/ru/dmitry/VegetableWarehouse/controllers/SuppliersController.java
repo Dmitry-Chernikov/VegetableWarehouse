@@ -1,5 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +11,9 @@ import ru.dmitry.VegetableWarehouse.services.SuppliersService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = {"/"}, produces = "application/json")
+@RequestMapping(value = {"/"})
 @RequiredArgsConstructor
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Поставщики\" и используеться CRUD для базы данных.")
 public class SuppliersController {
 
     private final SuppliersService suppliersService;
@@ -27,7 +29,7 @@ public class SuppliersController {
         return suppliersDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(consumes = "application/json", path = "/suppliers")
+    @PostMapping(path = "/suppliers")
     public SuppliersDto createSuppliers(@RequestBody SuppliersDto suppliersDto) {
         return suppliersService.save(suppliersDto);
     }

@@ -1,5 +1,6 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +11,9 @@ import ru.dmitry.VegetableWarehouse.services.PurchaseService;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = {"/"}, produces = "application/json")
+@RequestMapping(value = {"/"})
 @RequiredArgsConstructor
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Расходные накладные\" и используеться CRUD для базы данных.")
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
@@ -27,7 +29,7 @@ public class PurchaseController {
         return purchaseDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping(path = "/purchase", consumes = "application/json")
+    @PostMapping(path = "/purchase")
     public PurchaseDto createPurchase(@RequestBody PurchaseDto purchaseDto) {
         return purchaseService.save(purchaseDto);
     }
