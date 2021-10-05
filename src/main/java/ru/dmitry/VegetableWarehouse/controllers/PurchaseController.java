@@ -18,27 +18,32 @@ public class PurchaseController {
 
     private final PurchaseService purchaseService;
 
+        @ApiOperation("Метод возвращает всех служащих овощебазы")
     @GetMapping(path = "/purchase")
     public Iterable<PurchaseDto> getAllPurchase() {
         return purchaseService.findAll();
     }
 
+        @ApiOperation("Метод возвращает одну накладную из таблицы \"Расходные накладные\" овощебазы по id")
     @GetMapping(path = "/purchase/{id}")
     public ResponseEntity<PurchaseDto> getUnitsById(@PathVariable("id") Long id) {
         Optional<PurchaseDto> purchaseDto = Optional.ofNullable(purchaseService.findById(id));
         return purchaseDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
+        @ApiOperation("Метод добвляет в таблице \"Расходные накладные\" накладную")
     @PostMapping(path = "/purchase")
     public PurchaseDto createPurchase(@RequestBody PurchaseDto purchaseDto) {
         return purchaseService.save(purchaseDto);
     }
 
+        @ApiOperation("Метод изменяет атрибуты накладной в таблице \"Расходные накладные\"")
     @PutMapping(path = "/purchase/{id}")
     public PurchaseDto updatePurchase(@RequestBody PurchaseDto purchaseDto) {
         return purchaseService.save(purchaseDto);
     }
 
+        @ApiOperation("Метод удаляет накладную из таблицы \"Расходные накладные\" по id")
     @DeleteMapping(path = "/purchase/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deletePurchase(@PathVariable("id") Long id) {

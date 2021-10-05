@@ -19,27 +19,32 @@ public class UnigtsController {
 
     private final UnitsService unitsService;
 
+        @ApiOperation("Метод возвращает всех еденицы измерения использумые в овощебазе, хранящиеся в таблице \"Единицы измерения\"")
     @GetMapping(path = "/units")
     public List<UnitsDto> getAllUnits() {
         return unitsService.findAll();
     }
 
+        @ApiOperation("Метод возвращает еденицу измерения по id из таблицы \"Единицы измерения\"")
     @GetMapping(path = "/units/{id}")
     public ResponseEntity<UnitsDto> getUnitsById(@PathVariable("id") Long id) {
         Optional<UnitsDto> unitsDto = Optional.ofNullable(unitsService.findById(id));
         return unitsDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
+        @ApiOperation("Метод добовляет в таблиуц \"Единицы измерения\" новою еденицу измерения")
     @PostMapping(path = "/units")
     public UnitsDto createUnits(@RequestBody UnitsDto unitsDto) {
         return unitsService.save(unitsDto);
     }
 
+        @ApiOperation("Метод изменяет атрибуты еденицы измерения хранящуюся в таблице \"Единицы измерения\"")
     @PutMapping(path = "/units/{id}")
     public UnitsDto updateUnits(@RequestBody UnitsDto unitsDto) {
         return unitsService.save(unitsDto);
     }
 
+        @ApiOperation("Метод удаляет еденицу измерения по id из таблицы \"Единицы измерения\"")
     @DeleteMapping(path = "/units/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteUnits(@PathVariable("id") Long id) {
