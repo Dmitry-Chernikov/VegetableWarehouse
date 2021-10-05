@@ -18,27 +18,32 @@ public class ProductsController {
 
     private final ProductsService productsService;
 
+        @ApiOperation("Метод возвращает все продуткты тыблицы \"Продукты\"")
     @GetMapping(path = "/products")
     public Iterable<ProductsDto> getAllProducts() {
         return productsService.findAll();
     }
 
+        @ApiOperation("Метод возвращает один продукт из таблицы \"Продукты\" по id")
     @GetMapping(path = "/products/{id}")
     public ResponseEntity<ProductsDto> getProductsById(@PathVariable("id") Long id) {
         Optional<ProductsDto> productsDto = Optional.ofNullable(productsService.findById(id));
         return productsDto.<ResponseEntity<ProductsDto>>map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
+        @ApiOperation("Метод добовляет в таблицу \"Продукты\" один продукт")
     @PostMapping(path = "/products")
     public ProductsDto createProducts(@RequestBody ProductsDto productsDto) {
         return productsService.save(productsDto);
     }
-
+        
+        @ApiOperation("Метод изменяет атрибуты продукта в таблице \"Продукты\"")
     @PutMapping(path = "/products/{id}")
     public ProductsDto updateProducts(@RequestBody ProductsDto productsDto) {
         return productsService.save(productsDto);
     }
 
+        @ApiOperation("Метод удаляет продукт из таблицы \"Продукты\" по id")
     @DeleteMapping(path = "/products/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteProducts(@PathVariable("id") Long id) {
