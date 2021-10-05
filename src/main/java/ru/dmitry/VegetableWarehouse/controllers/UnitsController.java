@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequestMapping(value = {"/"})
 @RequiredArgsConstructor
 @Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Единицы измерения\" и используеться CRUD для базы данных.")
-public class UnitsController {
+public class UnigtsController {
 
     private final UnitsService unitsService;
 
