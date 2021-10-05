@@ -1,6 +1,7 @@
 package ru.dmitry.VegetableWarehouse.controllers;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @RequestMapping(value = {"/"})
 @RequiredArgsConstructor
 @Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Единицы измерения\" и используеться CRUD для базы данных.")
-public class UnigtsController {
+public class UnitsController {
 
     private final UnitsService unitsService;
 
