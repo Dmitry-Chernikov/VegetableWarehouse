@@ -1,6 +1,8 @@
 package ru.dmitry.VegetableWarehouse.services;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.dmitry.VegetableWarehouse.dto.UnitsDto;
 import ru.dmitry.VegetableWarehouse.mappers.UnitsMapper;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+//@NoArgsConstructor
 @RequiredArgsConstructor
 public class UnitsService {
 

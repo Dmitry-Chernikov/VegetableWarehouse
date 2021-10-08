@@ -1,38 +1,56 @@
 package ru.dmitry.VegetableWarehouse.services;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.junit4.SpringRunner;
-import ru.dmitry.VegetableWarehouse.model.Units;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import ru.dmitry.VegetableWarehouse.dto.UnitsDto;
+import ru.dmitry.VegetableWarehouse.mappers.UnitsMapper;
 import ru.dmitry.VegetableWarehouse.repositories.UnitsRepository;
 
-import java.util.List;
-
-@RunWith(SpringRunner.class)
-@DataJpaTest
+//@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
+//@SpringBootTest
 class UnitsServiceTest {
-    @Autowired
-    private TestEntityManager entityManager;
+    @InjectMocks
+    private UnitsService unitsService;
 
-    @Autowired
+    @Mock
+    private UnitsMapper mapper;
+
+    @Mock
     private UnitsRepository unitsRepository;
 
-    @Test
-    void save() {
-        Units units = new Units();
-        units.setMeasurementUnit("Тонна");
-        units.setDesignationUnit("т/t");
+/*    @TestConfiguration
+    static class UnitsServiceTestContextConfiguration {
+        @Bean
+        public UnitsService unitsService() {
+            return new UnitsService();
+        }
+    }*/
 
-        entityManager.persist(units);
-        entityManager.flush();
+    @Before
+    public void setUp() {
+        //Mockito.when(unitsRepository.getById(10L)).thenReturn(units);
+        MockitoAnnotations.initMocks(this);
+    }
 
-        unitsRepository.save(units);
+ /*   @Test
+    public void save() throws Exception {
+        UnitsDto unitsDto = new UnitsDto();
+        unitsDto.setId(11L);
+        unitsDto.setMeasurementUnit("Тонна");
+        unitsDto.setDesignationUnit("т/t");
 
-        Assertions.assertThat(units.getId()).isGreaterThan(11L);
+        this.unitsRepository.save(this.mapper.toEntity(unitsDto));
+        //unitsDto = unitsService.findById(11L);
+        Assertions.assertThat(unitsDto.getId()).isGreaterThan(0L);
     }
 
     @Test
@@ -56,6 +74,11 @@ class UnitsServiceTest {
 
     @Test
     void deleteById() {
-        unitsRepository.delete(unitsRepository.getById(11L));
-    }
+        UnitsDto unitsDto = new UnitsDto();
+        unitsDto = this.unitsService.findById(2L);
+        Mockito.verify(unitsRepository).findById(2l);
+
+        Assertions.assertThat(unitsDto.getDesignationUnit()).isEqualTo("ц");
+        this.unitsService.deleteById(10L);
+    }*/
 }
