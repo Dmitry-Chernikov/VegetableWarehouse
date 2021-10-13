@@ -2,6 +2,8 @@ package ru.dmitry.VegetableWarehouse.services;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,22 +25,24 @@ import static org.mockito.Mockito.*;
 //@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class UnitsServiceTest {
-    //@Mock
-    @MockBean //создаёт фиктивную реализацию
+    @Mock
+    //@MockBean //создаёт фиктивную реализацию
     private UnitsMapper mapper;
 
-    //@Mock
-    @MockBean
+    @Mock
+    //@MockBean
     private UnitsRepository unitsRepository;
 
     //@InjectMocks //создаёт макет реализации, дополнительно вводит в него фиктивные реализации
     @Autowired
     private UnitsService unitsService;
 
-   @BeforeEach // Выполнять пред каждым
+
+    @BeforeEach // Выполнять пред каждым
     public void init() {
         //MockitoAnnotations.initMocks(this);
-        List<Units> unitsList = new ArrayList<Units>();//unitsRepository.findAll();
+        //List<Units> unitsList = new ArrayList<Units>();//unitsRepository.findAll();
+/*
         Units unitsOne = new Units();
         Units unitsTwo = new Units();
         unitsOne.setId(1L);
@@ -50,9 +54,10 @@ class UnitsServiceTest {
 
         unitsList.add(unitsOne);
         unitsList.add(unitsTwo);
-        when(unitsRepository.findAll()).thenReturn(unitsList);
-
+*/
+        //when(unitsRepository.findAll()).thenReturn(unitsList);
         //unitsService = new UnitsService(this.unitsRepository,this.mapper);
+
 
     }
 
@@ -60,47 +65,50 @@ class UnitsServiceTest {
     @DisplayName("Тест findAllTest")
     @Test
     public void findAllTest() {
+        //when(unitsRepository.findAll()).thenReturn(unitsList);
         List<UnitsDto> unitsDtoList = unitsService.findAll();
-        assertEquals(unitsRepository.findAll().size(), unitsDtoList.size());
+        assertEquals(unitsService.findAll().size(), unitsDtoList.size());
     }
 
     @DisplayName("Тест saveTest")
     @Test
     public void saveTest() {
         UnitsDto unitsDto = new UnitsDto();
-        unitsDto.setId(1L);
+        unitsDto.setId(23L);
         unitsDto.setMeasurementUnit("Евро");
         unitsDto.setDesignationUnit("EUR");
 
         unitsService.save(unitsDto);
-        Units units = unitsRepository.findById(1L).orElse(null);
 
-        assertEquals(units.getDesignationUnit(),unitsDto.getDesignationUnit());
+        assertEquals(unitsService.findById(23L).getDesignationUnit(), unitsDto.getDesignationUnit());
     }
 
 
     @DisplayName("Тест updateTest")
     @Test
     void updateTest() {
-        UnitsDto unitsDto = unitsService.findById(1L);
+        UnitsDto unitsDto = unitsService.findById(23L);
         unitsDto.setDesignationUnit("тест");
-        assertEquals(unitsRepository.findById(1L).get().getDesignationUnit(),unitsDto.getDesignationUnit());
+        unitsService.save(unitsDto);
+        assertEquals(unitsService.findById(23L).getDesignationUnit(), unitsDto.getDesignationUnit());
     }
 
 
     @DisplayName("Тест finByIdTest")
     @Test
     void findByIdTest() {
-        UnitsDto unitsDto = unitsService.findById(1L);
-        assertEquals(unitsDto.getId().longValue(),1L);
+        UnitsDto unitsDto = unitsService.findById(23L);
+        assertEquals(unitsDto.getId().longValue(), 23L);
     }
 
 
     @DisplayName("Тест deleteByIdTest")
     @Test
     void deleteByIdTest() {
-        unitsService.deleteById(1L);
-        unitsService.deleteById(2L);
-        assertEquals(unitsRepository.findAll().size(), 0);
+        if (isNull() != unitsService.findById(23L)) {
+            unitsService.deleteById(23L);
+            return;
+        }
+        assertEquals(unitsService.findById(23L), isNull(), "Строка не найдена");
     }
 }
