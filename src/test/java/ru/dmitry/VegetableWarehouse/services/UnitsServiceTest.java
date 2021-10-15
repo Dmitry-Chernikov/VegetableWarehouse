@@ -14,6 +14,7 @@ import ru.dmitry.VegetableWarehouse.repositories.UnitsRepository;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.isNull;
 
 //@RunWith(MockitoJUnitRunner.class)
@@ -90,6 +91,6 @@ class UnitsServiceTest {
             assertEquals(unitsRepository.findById(id), Optional.empty(), "Строка " + id + " удалена");
             return;
         }
-        assertEquals(unitsRepository.findById(id), Optional.empty(), "Строка не найдена");
+        assertNotEquals(unitsRepository.findById(id), Optional.empty(), "Строка не найдена");
     }
 }
