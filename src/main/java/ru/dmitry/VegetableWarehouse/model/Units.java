@@ -29,4 +29,6 @@ public class Units extends BaseEntity {
 
         @OneToMany(mappedBy = "units", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         private List<Goods> goodses;
+
+
 }
