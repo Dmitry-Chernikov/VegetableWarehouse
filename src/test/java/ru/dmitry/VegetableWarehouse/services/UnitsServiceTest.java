@@ -37,7 +37,7 @@ class UnitsServiceTest {
     @Autowired
     //@InjectMocks //создаёт макет реализации, дополнительно вводит в него фиктивные реализации
     private UnitsService unitsService = new UnitsService(unitsRepository, mapper);
-    private long id = 27;
+    private long id = 0;
 
 
     @BeforeEach // Выполнять пред каждым
