@@ -6,7 +6,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@ApiModel("Атрибуты сущьности таблицы \"Клиенты\"")
+@ApiModel("Атрибуты сущности таблицы \"Клиенты\"")
 public class ClientsDto extends AbstractDto{
     @ApiModelProperty(value = "Наименование получателя")
     private String nameClient;

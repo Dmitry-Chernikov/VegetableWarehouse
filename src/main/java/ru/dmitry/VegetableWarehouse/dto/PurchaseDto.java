@@ -8,21 +8,21 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ApiModel("Атрибуты сущьности таблицы \"Расходная накладная\"")
+@ApiModel("Атрибуты сущности таблицы \"Расходная накладная\"")
 public class PurchaseDto extends AbstractDto{
-    @ApiModelProperty(value = "Уникальный идентификатор приходной товарной наклодной")
+    @ApiModelProperty(value = "Уникальный идентификатор приходной товарной наклонной")
     private String barcode;
     @ApiModelProperty(value = "Имя товара")
     private String nameTypeVegetable;
     @ApiModelProperty(value = "Количество товара")
     private double countProduct;
-    @ApiModelProperty(value = "Измеряемая велечина")
+    @ApiModelProperty(value = "Измеряемая величина")
     private String designationUnit;
     @ApiModelProperty(value = "Наименование поставщика")
     private String suppliersName;
     @ApiModelProperty(value = "ФИО сдавшего товар")
     private String name;
-    @ApiModelProperty(value = "ФИО прнинявшего товар")
+    @ApiModelProperty(value = "ФИО принявшего товар")
     private String fullName;
     @ApiModelProperty(value = "Дата прихода товара на склад")
     private Date operationDate;

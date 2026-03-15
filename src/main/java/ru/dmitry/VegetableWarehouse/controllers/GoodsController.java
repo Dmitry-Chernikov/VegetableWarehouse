@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = {"/"})
 @RequiredArgsConstructor
-@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Товары\" и используеться CRUD для базы данных.")
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Товары\" и используется CRUD для базы данных.")
 public class GoodsController {
 
     private final GoodsService goodsService;

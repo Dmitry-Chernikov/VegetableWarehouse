@@ -14,12 +14,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = {"/"})
 @RequiredArgsConstructor
-@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Продукты\" и используеться CRUD для базы данных.")
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Продукты\" и используется CRUD для базы данных.")
 public class ProductsController {
 
     private final ProductsService productsService;
 
-        @ApiOperation("Метод возвращает все продуткты тыблицы \"Продукты\"")
+        @ApiOperation("Метод возвращает все продукты таблицы \"Продукты\"")
     @GetMapping(path = "/products")
     public Iterable<ProductsDto> getAllProducts() {
         return productsService.findAll();
@@ -32,7 +32,7 @@ public class ProductsController {
         return productsDto.<ResponseEntity<ProductsDto>>map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-        @ApiOperation("Метод добовляет в таблицу \"Продукты\" один продукт")
+        @ApiOperation("Метод добавляет в таблицу \"Продукты\" один продукт")
     @PostMapping(path = "/products")
     public ProductsDto createProducts(@RequestBody ProductsDto productsDto) {
         return productsService.save(productsDto);

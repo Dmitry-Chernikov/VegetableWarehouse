@@ -6,7 +6,7 @@ import lombok.*;
 
 @Getter
 @Setter
-@ApiModel("Атрибуты сущьности таблицы \"Поставщики\"")
+@ApiModel("Атрибуты сущности таблицы \"Поставщики\"")
 public class SuppliersDto extends AbstractDto{
     @ApiModelProperty(value = "Наименование поставщика")
     private String name;

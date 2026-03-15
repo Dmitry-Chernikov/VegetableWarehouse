@@ -1,13 +1,18 @@
 package ru.dmitry.VegetableWarehouse.model;
 
 //import ch.qos.logback.core.joran.spi.NoAutoStart;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-@MappedSuperclass //аннотация используется, чтобы указать, что текущие атрибуты аннотированного типа наследуются любой Entity сущностью класса-наследника
+@MappedSuperclass //Аннотация используется, чтобы указать, что текущие атрибуты аннотированного типа наследуются любой Entity сущностью класса-наследника
 //@NoArgsConstructor //создаёт конструктор по умолчанию, генерирует конструктор без параметров.
 //@EqualsAndHashCode // lombok сгенерирует методы equals(Object other) и hashCode()
 //@AllArgsConstructor //генерирует конструктор с одним параметром для каждого поля в классе

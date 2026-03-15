@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ApiModel("Атрибуты сущьности таблицы \"Товары\"")
+@ApiModel("Атрибуты сущности таблицы \"Товары\"")
 public class GoodsDto extends AbstractDto{
     @ApiModelProperty(value = "Наименование продукта")
     private String nameTypeVegetable;
@@ -20,6 +20,6 @@ public class GoodsDto extends AbstractDto{
     private String designationUnit;
     @ApiModelProperty(value = "Наименование производителя")
     private String manufactureName;
-    @ApiModelProperty(value = "Страна происхожден")
+    @ApiModelProperty(value = "Страна происхождение")
     private String manufactureCountry;
 }

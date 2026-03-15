@@ -14,7 +14,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = {"/"})
 @RequiredArgsConstructor
-@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Расходные накладные\" и используеться CRUD для базы данных.")
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Расходные накладные\" и используется CRUD для базы данных.")
 public class PurchaseController {
 
     private final PurchaseService purchaseService;
@@ -32,7 +32,7 @@ public class PurchaseController {
         return purchaseDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-        @ApiOperation("Метод добвляет в таблице \"Расходные накладные\" накладную")
+        @ApiOperation("Метод добавляет в таблице \"Расходные накладные\" накладную")
     @PostMapping(path = "/purchase")
     public PurchaseDto createPurchase(@RequestBody PurchaseDto purchaseDto) {
         return purchaseService.save(purchaseDto);

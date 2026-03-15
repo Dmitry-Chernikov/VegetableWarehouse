@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@ApiModel("Атрибуты сущьности таблицы \"База продуктов\"")
+@ApiModel("Атрибуты сущности таблицы \"База продуктов\"")
 public class BaseProductsDto extends AbstractDto{
         @ApiModelProperty(value = "Уникальный идентификатор товара в базе штрих-код")
     private String barcode;

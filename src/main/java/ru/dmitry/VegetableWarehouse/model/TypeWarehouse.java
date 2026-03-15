@@ -1,8 +1,13 @@
 package ru.dmitry.VegetableWarehouse.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
@@ -29,7 +34,7 @@ public class TypeWarehouse extends BaseEntity{
          */
 
         /**
-         * Хранилище ангарнойго типа
+         * Хранилище ангарного типа
          * Hangar,
          */
 

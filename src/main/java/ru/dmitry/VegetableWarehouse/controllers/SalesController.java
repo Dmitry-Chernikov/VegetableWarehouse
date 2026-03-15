@@ -15,7 +15,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = {"/"})
 @RequiredArgsConstructor
-@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Приходные накладные\" и используеться CRUD для базы данных.")
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Приходные накладные\" и используется CRUD для базы данных.")
 public class SalesController {
 
     private final SalesService salesService;
@@ -26,14 +26,14 @@ public class SalesController {
         return salesService.findAll();
     }
 
-        @ApiOperation("Метод возвращает одну накладную из таблицы \"Приходные накладные\"овощебазы по id")
+        @ApiOperation("Метод возвращает одну накладную из таблицы \"Приходные накладные\" овощебазы по id")
     @GetMapping(path = "/sales/{id}")
     public ResponseEntity<SalesDto> getSalesById(@PathVariable("id") Long id) {
         Optional<SalesDto> salesDto = Optional.ofNullable(salesService.findById(id));
         return salesDto.<ResponseEntity<SalesDto>>map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-        @ApiOperation("Метод добовляет в таблице \"Приходные накладные\" одну накладную")
+        @ApiOperation("Метод добавляет в таблице \"Приходные накладные\" одну накладную")
     @PostMapping(path = "/sales")
     public SalesDto createSales(@RequestBody SalesDto salesDto) {
         return salesService.save(salesDto);

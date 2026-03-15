@@ -14,12 +14,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = {"/"})
 @RequiredArgsConstructor
-@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Поставщики\" и используеться CRUD для базы данных.")
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Поставщики\" и используется CRUD для базы данных.")
 public class SuppliersController {
 
     private final SuppliersService suppliersService;
 
-        @ApiOperation("Метод возвращает всех поставщиков овощебазы которые храняться в таблице \"Поставщики\"")
+        @ApiOperation("Метод возвращает всех поставщиков овощебазы которые хранятся в таблице \"Поставщики\"")
     @GetMapping("/suppliers")
     public Iterable<SuppliersDto> getAllSuppliers() {
         return suppliersService.findAll();
@@ -32,7 +32,7 @@ public class SuppliersController {
         return suppliersDto.map(dto -> new ResponseEntity<>(dto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-         @ApiOperation("Метод добовляет в таблице \"Поставщики\" одного поставщика")
+         @ApiOperation("Метод добавляет в таблице \"Поставщики\" одного поставщика")
     @PostMapping(path = "/suppliers")
     public SuppliersDto createSuppliers(@RequestBody SuppliersDto suppliersDto) {
         return suppliersService.save(suppliersDto);

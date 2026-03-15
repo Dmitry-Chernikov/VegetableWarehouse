@@ -15,12 +15,12 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = {"/"})
 @RequiredArgsConstructor
-@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Типы складов\" и используеться CRUD для базы данных.")
+@Api(description = "Контроллер реализует REST стандарт для работы с таблицей \"Типы складов\" и используется CRUD для базы данных.")
 public class TypeWarehouseController {
 
     private final TypeWarehouseService typeWarehouseService;
 
-        @ApiOperation("Метод возвращает все имеющися склады овощебазы которые храняться в таблице \"Типы складов\"")
+        @ApiOperation("Метод возвращает все имеющиеся склады овощебазы которые хранятся в таблице \"Типы складов\"")
     @GetMapping(path = "/typeWarehouse")
     public List<TypeWarehouseDto> getAllTypeWarehouse() {
         return typeWarehouseService.findAll();
@@ -33,7 +33,7 @@ public class TypeWarehouseController {
         return typeWarehouseDto.map(warehouseDto -> new ResponseEntity<>(warehouseDto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-        @ApiOperation("Метод добовляет тип склада в таблицу \"Типы складов\"")
+        @ApiOperation("Метод добавляет тип склада в таблицу \"Типы складов\"")
     @PostMapping(path = "/typeWarehouse")
     public TypeWarehouseDto createTypeWarehouse(@RequestBody TypeWarehouseDto typeWarehouseDto) {
         return typeWarehouseService.save(typeWarehouseDto);

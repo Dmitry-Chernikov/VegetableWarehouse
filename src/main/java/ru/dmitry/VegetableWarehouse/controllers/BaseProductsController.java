@@ -2,11 +2,18 @@ package ru.dmitry.VegetableWarehouse.controllers;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import ru.dmitry.VegetableWarehouse.dto.BaseProductsDto;
 import ru.dmitry.VegetableWarehouse.services.BaseProductsService;
 
@@ -23,7 +30,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = {"/"})
 @RequiredArgsConstructor
-@Api(tags = "Контроллер для работы с сущьностью База продуктов", description = "Контроллер реализует REST стандарт для работы с таблицей \"База продуктов\" и используеться CRUD для базы данных.")
+@Api(tags = "Контроллер для работы с сущностью База продуктов", description = "Контроллер реализует REST стандарт для работы с таблицей \"База продуктов\" и используется CRUD для базы данных.")
 public class BaseProductsController {
 
     private final BaseProductsService baseProductsService;
@@ -41,7 +48,7 @@ public class BaseProductsController {
         return baseProductsDto.map(productsDto -> new ResponseEntity<>(productsDto, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
-        @ApiOperation("Метод создаёт в таблице База продуктоа продукт")
+        @ApiOperation("Метод создаёт в таблице \"База продуктов\" продукт")
     @PostMapping(path = "/baseProducts")
     public BaseProductsDto createBaseProducts(@RequestBody BaseProductsDto baseProductsDto) {
         return baseProductsService.save(baseProductsDto);

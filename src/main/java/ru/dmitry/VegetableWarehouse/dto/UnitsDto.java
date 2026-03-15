@@ -6,10 +6,10 @@ import lombok.*;
 
 @Getter
 @Setter
-@ApiModel("Атрибуты сущьности таблицы \"Еденица измерения\"")
+@ApiModel("Атрибуты сущности таблицы \"Единица измерения\"")
 public class UnitsDto extends AbstractDto {
-    @ApiModelProperty(value = "Измеряемая велечина")
+    @ApiModelProperty(value = "Измеряемая величина")
     private String measurementUnit;
-    @ApiModelProperty(value = "Обозначение еденицы измерения")
+    @ApiModelProperty(value = "Обозначение единицы измерения")
     private String designationUnit;
 }

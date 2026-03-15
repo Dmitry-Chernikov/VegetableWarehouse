@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-@ApiModel("Атрибуты сущьности таблицы \"Сотрудники\"")
+@ApiModel("Атрибуты сущности таблицы \"Сотрудники\"")
 public class EmployeeDto extends AbstractDto{
     @ApiModelProperty(value = "ФИО сотрудника")
     private String fullName;
